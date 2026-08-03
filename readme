@@ -1,0 +1,3 @@
+to compile shaders use 
+chmod +x compile.sh
+./compile.sh

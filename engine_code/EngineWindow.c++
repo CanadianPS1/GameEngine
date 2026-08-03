@@ -1,0 +1,32 @@
+#include "EngineWindow.hpp"
+#include <GLFW/glfw3.h>
+#include <iostream>
+#include <stdexcept>
+namespace engine{
+    EngineWindow::EngineWindow(int w, int h, std::string name) : width{w}, height{h}, windowName{name}{
+        initWindow();
+    }
+    EngineWindow::~EngineWindow(){
+        glfwDestroyWindow(window);
+        glfwTerminate();
+    }
+    void EngineWindow::initWindow(){
+        glfwInit();
+        glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+        window = glfwCreateWindow(width, height, windowName.c_str(), nullptr, nullptr);
+        glfwSetWindowUserPointer(window, this);
+        glfwSetFramebufferSizeCallback(window, frameBufferResizedCallBack);
+        glfwShowWindow(window);
+        glfwFocusWindow(window);
+    }
+    void EngineWindow::createWindowSurface(VkInstance instance, VkSurfaceKHR *surface){
+        if(glfwCreateWindowSurface(instance, window, nullptr, surface) != VK_SUCCESS) throw std::runtime_error("failed to create window surface");
+    }
+    void EngineWindow::frameBufferResizedCallBack(GLFWwindow *window, int width, int height){
+        auto etWindow = reinterpret_cast<EngineWindow *>(glfwGetWindowUserPointer(window));
+        etWindow->frameBufferResized = true;
+        etWindow->width = width;
+        etWindow->height = height;
+    }
+}

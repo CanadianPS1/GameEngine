@@ -1,0 +1,38 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/Engine.dir/link.d"
+  "CMakeFiles/Engine.dir/engine_code/EngineBuffer.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/EngineBuffer.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o"
+  "CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o.d"
+  "CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/Main.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/Main.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o.d"
+  "Engine"
+  "Engine.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/Engine.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
