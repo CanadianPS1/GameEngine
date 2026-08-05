@@ -17,10 +17,10 @@ Engine: \
   CMakeFiles/Engine.dir/engine_code/Main.c++.o \
   CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o \
   /usr/lib/libvulkan.so \
-  /usr/lib/libglfw.so.3.4 \
+  /usr/lib/libglfw.so.3.5 \
   /usr/lib/libssl.so \
   /usr/lib/libcrypto.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.a \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
@@ -35,7 +35,7 @@ Engine: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.a \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so \
@@ -58,6 +58,7 @@ Engine: \
   /usr/lib/libbrotlidec.so.1 \
   /usr/lib32/libzstd.so.1 \
   /usr/lib/libzstd.so.1 \
+  /usr/lib/ld-linux-x86-64.so.2 \
   /usr/lib32/libbrotlicommon.so.1 \
   /usr/lib/libbrotlicommon.so.1
 
@@ -97,13 +98,13 @@ CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o:
 
 /usr/lib/libvulkan.so:
 
-/usr/lib/libglfw.so.3.4:
+/usr/lib/libglfw.so.3.5:
 
 /usr/lib/libssl.so:
 
 /usr/lib/libcrypto.so:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.a:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so:
 
@@ -133,7 +134,7 @@ CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.a:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so:
 
@@ -178,6 +179,8 @@ CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o:
 /usr/lib32/libzstd.so.1:
 
 /usr/lib/libzstd.so.1:
+
+/usr/lib/ld-linux-x86-64.so.2:
 
 /usr/lib32/libbrotlicommon.so.1:
 

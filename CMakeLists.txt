@@ -11,6 +11,11 @@ file(GLOB_RECURSE SOURCE_FILES
     "engine_code/*.cpp"
     "include/tiny_obj_loader.h"
 )
+execute_process(
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/compile.sh
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    RESULT_VARIABLE RESULT
+)
 add_executable(Engine ${SOURCE_FILES})
 target_include_directories(Engine
     PRIVATE
