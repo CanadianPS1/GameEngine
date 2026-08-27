@@ -17,7 +17,7 @@ namespace engine{
         private:
             void createPipelineLayout(VkDescriptorSetLayout globalSetLayout);
             void createPipeline(VkRenderPass renderPass);
-            EngineDevice& etDevice;
+            EngineDevice& engineDevice;
             std::unique_ptr<EnginePipeline> etPipeline;
             VkPipelineLayout pipelineLayout;
     };

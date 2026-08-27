@@ -4,23 +4,23 @@
 #include <array>
 #include <stdexcept>
 namespace engine{
-    EngineRenderer::EngineRenderer(EngineWindow &window, EngineDevice& device) : etWindow{window}, etDevice{device}{
+    EngineRenderer::EngineRenderer(EngineWindow &window, EngineDevice& device) : engineWindow{window}, engineDevice{device}{
         recreateSwapChain();
         createCommandBuffers();
     }
     EngineRenderer::~EngineRenderer(){freeCommandBuffers();}
     void EngineRenderer::recreateSwapChain(){
-        auto extent = etWindow.getExtent();
+        auto extent = engineWindow.getExtent();
         while(extent.width == 0 || extent.height == 0){
-            extent = etWindow.getExtent();
+            extent = engineWindow.getExtent();
             glfwWaitEvents();
         }
-        vkDeviceWaitIdle(etDevice.device());
-        if(etSwapChain == nullptr) etSwapChain = std::make_unique<EngineSwapChain>(etDevice, extent);
+        vkDeviceWaitIdle(engineDevice.device());
+        if(engineSwapChain == nullptr) engineSwapChain = std::make_unique<EngineSwapChain>(engineDevice, extent);
         else{ 
-            std::shared_ptr<EngineSwapChain> oldSwapChain = std::move(etSwapChain);
-            etSwapChain = std::make_unique<EngineSwapChain>(etDevice, extent, oldSwapChain);
-            if(!oldSwapChain->compareSwapFormats(*etSwapChain.get())) 
+            std::shared_ptr<EngineSwapChain> oldSwapChain = std::move(engineSwapChain);
+            engineSwapChain = std::make_unique<EngineSwapChain>(engineDevice, extent, oldSwapChain);
+            if(!oldSwapChain->compareSwapFormats(*engineSwapChain.get())) 
                 throw std::runtime_error("Swap chain image (or depth) format has changed");
         }
     }
@@ -29,18 +29,18 @@ namespace engine{
         VkCommandBufferAllocateInfo allocInfo{};
         allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
         allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-        allocInfo.commandPool = etDevice.getCommandPool();
+        allocInfo.commandPool = engineDevice.getCommandPool();
         allocInfo.commandBufferCount = static_cast<uint32_t>(commandBuffers.size());
-        if(vkAllocateCommandBuffers(etDevice.device(), &allocInfo, commandBuffers.data()) != VK_SUCCESS)
+        if(vkAllocateCommandBuffers(engineDevice.device(), &allocInfo, commandBuffers.data()) != VK_SUCCESS)
             throw std::runtime_error("failed to allocate command buffers");
     }   
     void EngineRenderer::freeCommandBuffers(){
-        vkFreeCommandBuffers(etDevice.device(), etDevice.getCommandPool(), static_cast<uint32_t>(commandBuffers.size()), commandBuffers.data());
+        vkFreeCommandBuffers(engineDevice.device(), engineDevice.getCommandPool(), static_cast<uint32_t>(commandBuffers.size()), commandBuffers.data());
         commandBuffers.clear();
     }
     VkCommandBuffer EngineRenderer::beginFrame(){
         assert(!isFrameStarted && "cannot call beginframe while already in progress");
-        auto result = etSwapChain->acquireNextImage(&currentImageIndex);
+        auto result = engineSwapChain->acquireNextImage(&currentImageIndex);
         if(result == VK_ERROR_OUT_OF_DATE_KHR){
             recreateSwapChain();
             return nullptr;
@@ -60,9 +60,9 @@ namespace engine{
         auto commandBuffer = getCurrentCommandBuffer();
         if(vkEndCommandBuffer(commandBuffer) != VK_SUCCESS)
             throw std::runtime_error("failed to crecord command buffer");
-        auto result = etSwapChain->submitCommandBuffers(&commandBuffer,&currentImageIndex);
-        if(result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || etWindow.wasWindowResized()){
-            etWindow.resetWindowResizedFlag();
+        auto result = engineSwapChain->submitCommandBuffers(&commandBuffer,&currentImageIndex);
+        if(result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || engineWindow.wasWindowResized()){
+            engineWindow.resetWindowResizedFlag();
             recreateSwapChain();
         }
         // if(result != VK_SUCCESS)
@@ -75,10 +75,10 @@ namespace engine{
         assert(commandBuffer == getCurrentCommandBuffer() && "cant begin render pass on command buffer from a diffrent frame");
         VkRenderPassBeginInfo renderPassInfo{};
         renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-        renderPassInfo.renderPass = etSwapChain->getRenderPass();
-        renderPassInfo.framebuffer = etSwapChain->getFrameBuffer(currentImageIndex);
+        renderPassInfo.renderPass = engineSwapChain->getRenderPass();
+        renderPassInfo.framebuffer = engineSwapChain->getFrameBuffer(currentImageIndex);
         renderPassInfo.renderArea.offset = {0,0};
-        renderPassInfo.renderArea.extent = etSwapChain->getSwapChainExtent();
+        renderPassInfo.renderArea.extent = engineSwapChain->getSwapChainExtent();
 
         std::array<VkClearValue, 2> clearValues{};
         clearValues[0].color = {0.01f, 0.01f, 0.01f, 1.0f};
@@ -89,11 +89,11 @@ namespace engine{
         VkViewport viewport{};
         viewport.x = 0.0f;
         viewport.y = 0.0f;
-        viewport.width = static_cast<float>(etSwapChain->getSwapChainExtent().width);
-        viewport.height = static_cast<float>(etSwapChain->getSwapChainExtent().height);
+        viewport.width = static_cast<float>(engineSwapChain->getSwapChainExtent().width);
+        viewport.height = static_cast<float>(engineSwapChain->getSwapChainExtent().height);
         viewport.minDepth = 0.0f;
         viewport.maxDepth = 1.0f;
-        VkRect2D scissor{{0,0}, etSwapChain->getSwapChainExtent()};
+        VkRect2D scissor{{0,0}, engineSwapChain->getSwapChainExtent()};
         vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
         vkCmdSetScissor(commandBuffer, 0, 1, &scissor);
     }

@@ -1,6 +1,5 @@
 #include "EngineWindow.hpp"
 #include <GLFW/glfw3.h>
-#include <iostream>
 #include <stdexcept>
 namespace engine{
     EngineWindow::EngineWindow(int w, int h, std::string name) : width{w}, height{h}, windowName{name}{
@@ -24,9 +23,9 @@ namespace engine{
         if(glfwCreateWindowSurface(instance, window, nullptr, surface) != VK_SUCCESS) throw std::runtime_error("failed to create window surface");
     }
     void EngineWindow::frameBufferResizedCallBack(GLFWwindow *window, int width, int height){
-        auto etWindow = reinterpret_cast<EngineWindow *>(glfwGetWindowUserPointer(window));
-        etWindow->frameBufferResized = true;
-        etWindow->width = width;
-        etWindow->height = height;
+        auto engineWindow = reinterpret_cast<EngineWindow *>(glfwGetWindowUserPointer(window));
+        engineWindow->frameBufferResized = true;
+        engineWindow->width = width;
+        engineWindow->height = height;
     }
 }

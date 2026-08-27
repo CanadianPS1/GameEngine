@@ -15,11 +15,11 @@ namespace engine{
         glm::mat4 modelMatrix{1.f};
         glm::mat4 normalMatrix{1.f};
     };
-    SimpleRenderSystem::SimpleRenderSystem(EngineDevice& device, VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout) : etDevice{device}{
+    SimpleRenderSystem::SimpleRenderSystem(EngineDevice& device, VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout) : engineDevice{device}{
         createPipelineLayout(globalSetLayout);
         createPipeline(renderPass);
     }
-    SimpleRenderSystem::~SimpleRenderSystem(){vkDestroyPipelineLayout(etDevice.device(), pipelineLayout, nullptr);}
+    SimpleRenderSystem::~SimpleRenderSystem(){vkDestroyPipelineLayout(engineDevice.device(), pipelineLayout, nullptr);}
     void SimpleRenderSystem::createPipelineLayout(VkDescriptorSetLayout globalSetLayout){
         VkPushConstantRange pushConstantRange{};
         pushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
@@ -32,7 +32,7 @@ namespace engine{
         pipelineLayoutInfo.pSetLayouts = descriptorSetLayouts.data();;
         pipelineLayoutInfo.pushConstantRangeCount = 1;
         pipelineLayoutInfo.pPushConstantRanges = &pushConstantRange;
-        if(vkCreatePipelineLayout(etDevice.device(), &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS)
+        if(vkCreatePipelineLayout(engineDevice.device(), &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS)
             throw std::runtime_error("failed to create pipeline layout");
     }
     void SimpleRenderSystem::createPipeline(VkRenderPass renderPass){
@@ -42,7 +42,7 @@ namespace engine{
         pipelineConfig.renderPass = renderPass;
         pipelineConfig.pipelineLayout = pipelineLayout;
         etPipeline = std::make_unique<EnginePipeline>(
-            etDevice,
+            engineDevice,
             "../shaders/simple_shader.vert.spv",
             "../shaders/simple_shader.frag.spv",
             pipelineConfig

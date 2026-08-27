@@ -37,7 +37,7 @@ namespace engine{
         private:
             void createVertexBuffers(const std::vector<Vertex> &vertices);
             void createIndexBuffers(const std::vector<uint32_t> &indices);
-            EngineDevice& etDevice;
+            EngineDevice& engineDevice;
             std::unique_ptr<EngineBuffer> vertexBuffer;
             uint32_t vertexCount;
             bool hasIndexBuffer = false;

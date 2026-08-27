@@ -27,7 +27,7 @@ namespace engine {
             VkDeviceSize getBufferSize() const {return bufferSize;}
         private:
             static VkDeviceSize getAlignment(VkDeviceSize instanceSize, VkDeviceSize minOffsetAlignment);
-            EngineDevice& etDevice;
+            EngineDevice& engineDevice;
             void* mapped = nullptr;
             VkBuffer buffer = VK_NULL_HANDLE;
             VkDeviceMemory memory = VK_NULL_HANDLE;

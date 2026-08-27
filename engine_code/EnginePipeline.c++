@@ -6,13 +6,13 @@
 #include <cassert>
 #include "EngineModel.hpp"
 namespace engine{
-    EnginePipeline::EnginePipeline(EngineDevice &device, const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo) : etDevice{device}{
+    EnginePipeline::EnginePipeline(EngineDevice &device, const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo) : engineDevice{device}{
         createGraphicsPipeline(vertFilepath, fragFilepath, configInfo);
     }
     EnginePipeline::~EnginePipeline(){
-        vkDestroyShaderModule(etDevice.device(), vertShaderModule, nullptr);
-        vkDestroyShaderModule(etDevice.device(), fragShaderModule, nullptr);
-        vkDestroyPipeline(etDevice.device(), graphicsPipeline, nullptr);
+        vkDestroyShaderModule(engineDevice.device(), vertShaderModule, nullptr);
+        vkDestroyShaderModule(engineDevice.device(), fragShaderModule, nullptr);
+        vkDestroyPipeline(engineDevice.device(), graphicsPipeline, nullptr);
     }
     std::vector<char> EnginePipeline::readFile(const std::string& filepath){
         std::ifstream file{filepath, std::ios::ate | std::ios::binary};
@@ -73,7 +73,7 @@ namespace engine{
         pipelineInfo.subpass = configInfo.subpass;
         pipelineInfo.basePipelineIndex = -1;
         pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
-        if(vkCreateGraphicsPipelines(etDevice.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS)
+        if(vkCreateGraphicsPipelines(engineDevice.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS)
             throw std::runtime_error("failed to create graphics pipeline");
     }
     void EnginePipeline::createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule){
@@ -81,7 +81,7 @@ namespace engine{
         createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
         createInfo.codeSize = code.size();
         createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
-        if(vkCreateShaderModule(etDevice.device(), &createInfo, nullptr, shaderModule) != VK_SUCCESS) 
+        if(vkCreateShaderModule(engineDevice.device(), &createInfo, nullptr, shaderModule) != VK_SUCCESS) 
             throw std::runtime_error("failed to create shader module");
     }
     void EnginePipeline::defultPipelineConfigInfo(PipelineConfigInfo& configInfo){

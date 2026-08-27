@@ -7,23 +7,23 @@ namespace engine{
         return instanceSize;
     }
     EngineBuffer::EngineBuffer(EngineDevice &device, VkDeviceSize instanceSize, uint32_t instanceCount, VkBufferUsageFlags usageFlags, VkMemoryPropertyFlags memoryPropertyFlags,
-    VkDeviceSize minOffsetAlignment) : etDevice{device}, instanceSize{instanceSize}, instanceCount{instanceCount}, usageFlags{usageFlags}, memoryPropertyFlags{memoryPropertyFlags}{
+    VkDeviceSize minOffsetAlignment) : engineDevice{device}, instanceSize{instanceSize}, instanceCount{instanceCount}, usageFlags{usageFlags}, memoryPropertyFlags{memoryPropertyFlags}{
         alignmentSize = getAlignment(instanceSize, minOffsetAlignment);
         bufferSize = alignmentSize * instanceCount;
         device.createBuffer(bufferSize, usageFlags, memoryPropertyFlags, buffer, memory);
     }
     EngineBuffer::~EngineBuffer(){
         unmap();
-        vkDestroyBuffer(etDevice.device(), buffer, nullptr);
-        vkFreeMemory(etDevice.device(), memory, nullptr);
+        vkDestroyBuffer(engineDevice.device(), buffer, nullptr);
+        vkFreeMemory(engineDevice.device(), memory, nullptr);
     }
     VkResult EngineBuffer::map(VkDeviceSize size, VkDeviceSize offset){
         assert(buffer && memory && "Called map on buffer before create");
-        return vkMapMemory(etDevice.device(), memory, offset, size, 0, &mapped);
+        return vkMapMemory(engineDevice.device(), memory, offset, size, 0, &mapped);
     }
     void EngineBuffer::unmap(){
         if(mapped){
-            vkUnmapMemory(etDevice.device(), memory);
+            vkUnmapMemory(engineDevice.device(), memory);
             mapped = nullptr;
         }
     }
@@ -42,7 +42,7 @@ namespace engine{
         mappedRange.memory = memory;
         mappedRange.offset = offset;
         mappedRange.size = size;
-        return vkFlushMappedMemoryRanges(etDevice.device(), 1, &mappedRange);
+        return vkFlushMappedMemoryRanges(engineDevice.device(), 1, &mappedRange);
     }
     VkResult EngineBuffer::invalidate(VkDeviceSize size, VkDeviceSize offset){
         VkMappedMemoryRange mappedRange = {};
@@ -50,7 +50,7 @@ namespace engine{
         mappedRange.memory = memory;
         mappedRange.offset = offset;
         mappedRange.size = size;
-        return vkInvalidateMappedMemoryRanges(etDevice.device(), 1, &mappedRange);
+        return vkInvalidateMappedMemoryRanges(engineDevice.device(), 1, &mappedRange);
     }
     VkDescriptorBufferInfo EngineBuffer::descriptorInfo(VkDeviceSize size, VkDeviceSize offset){return VkDescriptorBufferInfo{buffer, offset, size,};}
     void EngineBuffer::writeToIndex(void *data, int index){writeToBuffer(data, instanceSize, index * alignmentSize);}

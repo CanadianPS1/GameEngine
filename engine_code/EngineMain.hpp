@@ -31,9 +31,9 @@ namespace engine{
             void run();
         private:
             void loadGameObjects();
-            EngineWindow etWindow{WIDTH, HEIGHT, "NAME"};
-            EngineDevice etDevice{etWindow};
-            EngineRenderer etRenderer{etWindow, etDevice};
+            EngineWindow engineWindow{WIDTH, HEIGHT, "NAME"};
+            EngineDevice engineDevice{engineWindow};
+            EngineRenderer engineRenderer{engineWindow, engineDevice};
             std::unique_ptr<EngineDescriptorPool> globalPool{};
             std::vector<EngineGameObject> gameObjects;
     };

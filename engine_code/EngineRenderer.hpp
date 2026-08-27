@@ -16,8 +16,8 @@ namespace engine{
             void endFrame();
             void beginSwapChainRenderPass(VkCommandBuffer commandBuffer);
             void endSwapChainRenderPass(VkCommandBuffer commandBuffer);
-            VkRenderPass getSwapChainRenderPass() const {return etSwapChain->getRenderPass();}
-            float getAspectRatio() const {return etSwapChain->extentAspectRatio();}
+            VkRenderPass getSwapChainRenderPass() const {return engineSwapChain->getRenderPass();}
+            float getAspectRatio() const {return engineSwapChain->extentAspectRatio();}
             bool isFrameInProgress() const {return isFrameStarted;}
             VkCommandBuffer getCurrentCommandBuffer() const {
                 assert(isFrameStarted && "Cannot get command buffer when frame not in progress");
@@ -31,9 +31,9 @@ namespace engine{
             void createCommandBuffers();
             void freeCommandBuffers();
             void recreateSwapChain();
-            EngineWindow& etWindow;
-            EngineDevice& etDevice;
-            std::unique_ptr<EngineSwapChain> etSwapChain;
+            EngineWindow& engineWindow;
+            EngineDevice& engineDevice;
+            std::unique_ptr<EngineSwapChain> engineSwapChain;
             std::vector<VkCommandBuffer> commandBuffers;
             uint32_t currentImageIndex;
             int currentFrameIndex{0};

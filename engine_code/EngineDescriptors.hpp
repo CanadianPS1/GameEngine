@@ -9,20 +9,20 @@ namespace engine{
         public:
             class Builder{
                 public:
-                    Builder(EngineDevice &etDevice) : etDevice{etDevice}{}
+                    Builder(EngineDevice &engineDevice) : engineDevice{engineDevice}{}
                     Builder &addBinding(uint32_t binding, VkDescriptorType descriptorType, VkShaderStageFlags stageFlags, uint32_t count = 1);
                     std::unique_ptr<EngineDescriptorSetLayout> build() const;
                 private:
-                    EngineDevice &etDevice;
+                    EngineDevice &engineDevice;
                 std::unordered_map<uint32_t, VkDescriptorSetLayoutBinding> bindings{};
             };
-            EngineDescriptorSetLayout(EngineDevice &etDevice, std::unordered_map<uint32_t, VkDescriptorSetLayoutBinding> bindings);
+            EngineDescriptorSetLayout(EngineDevice &engineDevice, std::unordered_map<uint32_t, VkDescriptorSetLayoutBinding> bindings);
             ~EngineDescriptorSetLayout();
             EngineDescriptorSetLayout(const EngineDescriptorSetLayout &) = delete;
             EngineDescriptorSetLayout &operator=(const EngineDescriptorSetLayout &) = delete;
             VkDescriptorSetLayout getDescriptorSetLayout() const { return descriptorSetLayout; }
         private:
-            EngineDevice &etDevice;
+            EngineDevice &engineDevice;
             VkDescriptorSetLayout descriptorSetLayout;
             std::unordered_map<uint32_t, VkDescriptorSetLayoutBinding> bindings;
         friend class EngineDescriptorWriter;
@@ -31,18 +31,18 @@ namespace engine{
         public:
             class Builder{
                 public:
-                    Builder(EngineDevice &etDevice) : etDevice{etDevice}{}
+                    Builder(EngineDevice &engineDevice) : engineDevice{engineDevice}{}
                     Builder &addPoolSize(VkDescriptorType descriptorType, uint32_t count);
                     Builder &setPoolFlags(VkDescriptorPoolCreateFlags flags);
                     Builder &setMaxSets(uint32_t count);
                     std::unique_ptr<EngineDescriptorPool> build() const;
                 private:
-                    EngineDevice &etDevice;
+                    EngineDevice &engineDevice;
                     std::vector<VkDescriptorPoolSize> poolSizes{};
                     uint32_t maxSets = 1000;
                     VkDescriptorPoolCreateFlags poolFlags = 0;
             };
-            EngineDescriptorPool(EngineDevice &etDevice, uint32_t maxSets, VkDescriptorPoolCreateFlags poolFlags, const std::vector<VkDescriptorPoolSize> &poolSizes);
+            EngineDescriptorPool(EngineDevice &engineDevice, uint32_t maxSets, VkDescriptorPoolCreateFlags poolFlags, const std::vector<VkDescriptorPoolSize> &poolSizes);
             ~EngineDescriptorPool();
             EngineDescriptorPool(const EngineDescriptorPool &) = delete;
             EngineDescriptorPool &operator=(const EngineDescriptorPool &) = delete;
@@ -50,7 +50,7 @@ namespace engine{
             void freeDescriptors(std::vector<VkDescriptorSet> &descriptors) const;
             void resetPool();
         private:
-            EngineDevice &etDevice;
+            EngineDevice &engineDevice;
             VkDescriptorPool descriptorPool;
         friend class EngineDescriptorWriter;
     };
