@@ -22,6 +22,10 @@ namespace engine{
             EngineGameObject &operator=(const EngineGameObject &) = delete;
             EngineGameObject(EngineGameObject&&) = default;
             EngineGameObject &operator=(EngineGameObject&&) noexcept = default;
+            bool operator==(const EngineGameObject& other) const {
+                if(other.name == name) return true;
+                return false;
+            }
             id_t getId(){return id;}
             std::shared_ptr<EngineModel> model{};
             glm::vec3 color{};

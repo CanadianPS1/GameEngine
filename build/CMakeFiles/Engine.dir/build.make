@@ -114,19 +114,19 @@ CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDescriptors.c++ -o CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.s
 
-CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o: CMakeFiles/Engine.dir/flags.make
-CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.c++.cpp
-CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o: CMakeFiles/Engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o -MF CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o.d -o CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o -c /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.c++.cpp
+CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o: CMakeFiles/Engine.dir/flags.make
+CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.c++
+CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o: CMakeFiles/Engine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o -MF CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o.d -o CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o -c /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.c++
 
-CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.c++.cpp > CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.i
+CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.c++ > CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.i
 
-CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.c++.cpp -o CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.s
+CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.c++ -o CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.s
 
 CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o: CMakeFiles/Engine.dir/flags.make
 CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineGameObject.c++
@@ -198,10 +198,24 @@ CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineRenderer.c++ -o CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.s
 
+CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o: CMakeFiles/Engine.dir/flags.make
+CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSceen.c++
+CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o: CMakeFiles/Engine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o -MF CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o.d -o CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o -c /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSceen.c++
+
+CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSceen.c++ > CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.i
+
+CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSceen.c++ -o CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.s
+
 CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o: CMakeFiles/Engine.dir/flags.make
 CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSwapChain.c++
 CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o: CMakeFiles/Engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o -MF CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o.d -o CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o -c /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSwapChain.c++
 
 CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.i: cmake_force
@@ -215,7 +229,7 @@ CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.s: cmake_force
 CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o: CMakeFiles/Engine.dir/flags.make
 CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.c++
 CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o: CMakeFiles/Engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o -MF CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o.d -o CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o -c /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.c++
 
 CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.i: cmake_force
@@ -229,7 +243,7 @@ CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.s: cmake_force
 CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o: CMakeFiles/Engine.dir/flags.make
 CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/KeyboardMovementController.c++
 CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o: CMakeFiles/Engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o -MF CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o.d -o CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o -c /home/gunch/Documents/GitHub/GameEngine/engine_code/KeyboardMovementController.c++
 
 CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.i: cmake_force
@@ -243,7 +257,7 @@ CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.s: cmake_force
 CMakeFiles/Engine.dir/engine_code/Main.c++.o: CMakeFiles/Engine.dir/flags.make
 CMakeFiles/Engine.dir/engine_code/Main.c++.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/Main.c++
 CMakeFiles/Engine.dir/engine_code/Main.c++.o: CMakeFiles/Engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Engine.dir/engine_code/Main.c++.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Engine.dir/engine_code/Main.c++.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Engine.dir/engine_code/Main.c++.o -MF CMakeFiles/Engine.dir/engine_code/Main.c++.o.d -o CMakeFiles/Engine.dir/engine_code/Main.c++.o -c /home/gunch/Documents/GitHub/GameEngine/engine_code/Main.c++
 
 CMakeFiles/Engine.dir/engine_code/Main.c++.i: cmake_force
@@ -257,7 +271,7 @@ CMakeFiles/Engine.dir/engine_code/Main.c++.s: cmake_force
 CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o: CMakeFiles/Engine.dir/flags.make
 CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/SimpleRenderSystem.c++
 CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o: CMakeFiles/Engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o -MF CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o.d -o CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o -c /home/gunch/Documents/GitHub/GameEngine/engine_code/SimpleRenderSystem.c++
 
 CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.i: cmake_force
@@ -273,12 +287,13 @@ Engine_OBJECTS = \
 "CMakeFiles/Engine.dir/engine_code/EngineBuffer.c++.o" \
 "CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o" \
 "CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.o" \
-"CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o" \
+"CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o" \
 "CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o" \
 "CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o" \
 "CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o" \
 "CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o" \
 "CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.o" \
+"CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o" \
 "CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o" \
 "CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o" \
 "CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o" \
@@ -291,12 +306,13 @@ Engine_EXTERNAL_OBJECTS =
 Engine: CMakeFiles/Engine.dir/engine_code/EngineBuffer.c++.o
 Engine: CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o
 Engine: CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.o
-Engine: CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o
+Engine: CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o
 Engine: CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o
 Engine: CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o
 Engine: CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o
 Engine: CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o
 Engine: CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.o
+Engine: CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o
 Engine: CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o
 Engine: CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o
 Engine: CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o
@@ -309,7 +325,7 @@ Engine: /usr/lib/libglfw.so.3.5
 Engine: /usr/lib/libssl.so
 Engine: /usr/lib/libcrypto.so
 Engine: CMakeFiles/Engine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable Engine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable Engine"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Engine.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

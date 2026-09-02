@@ -201,29 +201,29 @@ engine_code/EngineDescriptors.c++.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.s
 .PHONY : engine_code/EngineDescriptors.c++.s
 
-engine_code/EngineDevice.c++.o: engine_code/EngineDevice.c++.cpp.o
-.PHONY : engine_code/EngineDevice.c++.o
+engine_code/EngineDevice.o: engine_code/EngineDevice.c++.o
+.PHONY : engine_code/EngineDevice.o
 
 # target to build an object file
-engine_code/EngineDevice.c++.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o
-.PHONY : engine_code/EngineDevice.c++.cpp.o
+engine_code/EngineDevice.c++.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o
+.PHONY : engine_code/EngineDevice.c++.o
 
-engine_code/EngineDevice.c++.i: engine_code/EngineDevice.c++.cpp.i
-.PHONY : engine_code/EngineDevice.c++.i
+engine_code/EngineDevice.i: engine_code/EngineDevice.c++.i
+.PHONY : engine_code/EngineDevice.i
 
 # target to preprocess a source file
-engine_code/EngineDevice.c++.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.i
-.PHONY : engine_code/EngineDevice.c++.cpp.i
+engine_code/EngineDevice.c++.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.i
+.PHONY : engine_code/EngineDevice.c++.i
 
-engine_code/EngineDevice.c++.s: engine_code/EngineDevice.c++.cpp.s
-.PHONY : engine_code/EngineDevice.c++.s
+engine_code/EngineDevice.s: engine_code/EngineDevice.c++.s
+.PHONY : engine_code/EngineDevice.s
 
 # target to generate assembly for a file
-engine_code/EngineDevice.c++.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.s
-.PHONY : engine_code/EngineDevice.c++.cpp.s
+engine_code/EngineDevice.c++.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.s
+.PHONY : engine_code/EngineDevice.c++.s
 
 engine_code/EngineGameObject.o: engine_code/EngineGameObject.c++.o
 .PHONY : engine_code/EngineGameObject.o
@@ -344,6 +344,30 @@ engine_code/EngineRenderer.s: engine_code/EngineRenderer.c++.s
 engine_code/EngineRenderer.c++.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.s
 .PHONY : engine_code/EngineRenderer.c++.s
+
+engine_code/EngineSceen.o: engine_code/EngineSceen.c++.o
+.PHONY : engine_code/EngineSceen.o
+
+# target to build an object file
+engine_code/EngineSceen.c++.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o
+.PHONY : engine_code/EngineSceen.c++.o
+
+engine_code/EngineSceen.i: engine_code/EngineSceen.c++.i
+.PHONY : engine_code/EngineSceen.i
+
+# target to preprocess a source file
+engine_code/EngineSceen.c++.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.i
+.PHONY : engine_code/EngineSceen.c++.i
+
+engine_code/EngineSceen.s: engine_code/EngineSceen.c++.s
+.PHONY : engine_code/EngineSceen.s
+
+# target to generate assembly for a file
+engine_code/EngineSceen.c++.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.s
+.PHONY : engine_code/EngineSceen.c++.s
 
 engine_code/EngineSwapChain.o: engine_code/EngineSwapChain.c++.o
 .PHONY : engine_code/EngineSwapChain.o
@@ -483,9 +507,9 @@ help:
 	@echo "... engine_code/EngineDescriptors.o"
 	@echo "... engine_code/EngineDescriptors.i"
 	@echo "... engine_code/EngineDescriptors.s"
-	@echo "... engine_code/EngineDevice.c++.o"
-	@echo "... engine_code/EngineDevice.c++.i"
-	@echo "... engine_code/EngineDevice.c++.s"
+	@echo "... engine_code/EngineDevice.o"
+	@echo "... engine_code/EngineDevice.i"
+	@echo "... engine_code/EngineDevice.s"
 	@echo "... engine_code/EngineGameObject.o"
 	@echo "... engine_code/EngineGameObject.i"
 	@echo "... engine_code/EngineGameObject.s"
@@ -501,6 +525,9 @@ help:
 	@echo "... engine_code/EngineRenderer.o"
 	@echo "... engine_code/EngineRenderer.i"
 	@echo "... engine_code/EngineRenderer.s"
+	@echo "... engine_code/EngineSceen.o"
+	@echo "... engine_code/EngineSceen.i"
+	@echo "... engine_code/EngineSceen.s"
 	@echo "... engine_code/EngineSwapChain.o"
 	@echo "... engine_code/EngineSwapChain.i"
 	@echo "... engine_code/EngineSwapChain.s"

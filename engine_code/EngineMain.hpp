@@ -1,11 +1,12 @@
 #pragma once
-#include "EngineWindow.hpp"
-#include "EngineDevice.hpp"
-#include "EngineRenderer.hpp"
 #include <vector>
 #include <vulkan/vulkan_core.h>
-#include "EngineGameObject.hpp"
 #include "EngineDescriptors.hpp"
+#include "EngineGameObject.hpp"
+#include "EngineRenderer.hpp"
+#include "EngineWindow.hpp"
+#include "EngineDevice.hpp"
+#include "EngineSceen.hpp"
 namespace engine{
     struct GlobalUbo{
         glm::mat4 projectionView{1.f};
@@ -21,6 +22,7 @@ namespace engine{
     };
     class EngineMain{
         public:
+            static std::vector<Sceen> Sceens;
             static constexpr int WIDTH = 1400;
             static constexpr int HEIGHT = 788;
             static const std::string NAME;
@@ -30,7 +32,8 @@ namespace engine{
             EngineMain &operator=(const EngineMain &) = delete;
             void run();
         private:
-            void loadGameObjects();
+            void LoadGameObjects(Sceen& sceen);
+            void UnloadGameObjects();
             EngineWindow engineWindow{WIDTH, HEIGHT, "NAME"};
             EngineDevice engineDevice{engineWindow};
             EngineRenderer engineRenderer{engineWindow, engineDevice};

@@ -5,12 +5,13 @@ Engine: \
   CMakeFiles/Engine.dir/engine_code/EngineBuffer.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.o \
-  CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o \
+  CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o \
   CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.o \
+  CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o \
   CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o \
@@ -74,7 +75,7 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o:
 
 CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.o:
 
-CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.cpp.o:
+CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o:
 
 CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o:
 
@@ -85,6 +86,8 @@ CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o:
 CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o:
 
 CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.o:
+
+CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o:
 
 CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o:
 
