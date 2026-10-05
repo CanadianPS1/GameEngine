@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/gunch/Documents/GitHub/GameEngine/build/_deps/glm-subbuild/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
