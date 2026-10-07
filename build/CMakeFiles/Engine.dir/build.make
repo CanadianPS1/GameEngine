@@ -337,10 +337,12 @@ Engine: CMakeFiles/Engine.dir/engine_code/test.cpp.o
 Engine: CMakeFiles/Engine.dir/build.make
 Engine: CMakeFiles/Engine.dir/compiler_depend.ts
 Engine: /usr/lib/libvulkan.so
-Engine: /usr/lib/libglfw.so.3.5
+Engine: _deps/glfw-build/src/libglfw3.a
 Engine: /usr/lib/libssl.so
 Engine: /usr/lib/libcrypto.so
-Engine: /usr/lib/libglm.a
+Engine: _deps/glm-build/glm/libglm.a
+Engine: /usr/lib/librt.a
+Engine: /usr/lib/libm.so
 Engine: CMakeFiles/Engine.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable Engine"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Engine.dir/link.txt --verbose=$(VERBOSE)

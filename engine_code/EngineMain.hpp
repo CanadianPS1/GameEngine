@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <functional>
 #include <vulkan/vulkan_core.h>
 #include "EngineDescriptors.hpp"
 #include "EngineGameObject.hpp"

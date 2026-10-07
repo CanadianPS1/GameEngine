@@ -4,6 +4,7 @@
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <memory>
 #include <chrono>
+#include <functional>
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
 #include <vulkan/vulkan_core.h>
