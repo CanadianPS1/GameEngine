@@ -31,6 +31,8 @@ namespace engine{
             glm::vec3 color{};
             TransformComponent transform{};
             std::string name;
+            void SetLocation(glm::vec3);
+            void SetScale(glm::vec3);
         private:
             EngineGameObject(id_t objId) : id{objId}{}
             id_t id;

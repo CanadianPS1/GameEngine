@@ -48,5 +48,6 @@ namespace engine{
             },
         };
     }
-
+    void EngineGameObject::SetLocation(glm::vec3 transformation){transform.translation = transformation;}
+    void EngineGameObject::SetScale(glm::vec3 scale){transform.scale = scale;}
 }

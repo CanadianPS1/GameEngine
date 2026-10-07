@@ -1,13 +1,16 @@
+#include <cstddef>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 #include <utility>
 #include "EngineSceen.hpp"
+#include "EngineGameObject.hpp"
 namespace engine{
     engine::Sceen::Sceen(std::string tempName){name = tempName;}
     engine::Sceen::~Sceen(){
         gameObjects.clear();
     }
-    std::optional<EngineGameObject> Sceen::CreateObejct(std::string modelPath, std::string modelName, std::optional<glm::vec3> threeDementionalTranslation, 
+    EngineGameObject& Sceen::CreateObejct(std::string modelPath, std::string modelName, std::optional<glm::vec3> threeDementionalTranslation, 
     std::optional<glm::vec3> threeDementionalScale, std::optional<glm::vec2> twoDementionalTranslation, std::optional<glm::vec2> twoDementionalScale){
         for(int i = 0; i < gameObjects.size(); i++) if(gameObjects[i].name == modelName) std::nullopt;
         std::shared_ptr<EngineModel> engineModel = EngineModel::createModelFromFile(*Sceen::engineDevice, modelPath);
@@ -21,7 +24,7 @@ namespace engine{
         // else if(twoDementionalScale) object.transform.scale = *twoDementionalScale;
         // else std::nullopt;
         gameObjects.push_back(std::move(object));
-        return object;
+        return gameObjects.back();
     }
     bool Sceen::AddObject(EngineGameObject object){
         try{
@@ -38,5 +41,4 @@ namespace engine{
             return true;
         }catch(const char* msg){return false;}
     }
-
 }

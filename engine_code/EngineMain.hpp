@@ -30,14 +30,21 @@ namespace engine{
             ~EngineMain();
             EngineMain(const EngineMain &) = delete;
             EngineMain &operator=(const EngineMain &) = delete;
+            std::vector<std::function<void()>> updateMethods;
+            std::vector<std::function<void()>> startMethods;
+            void MakeMethodOnUpdate(std::function<void()> method);
+            void MakeMethodOnStart(std::function<void()> method);
+            void SetInitialMethods();
             void run();
+            static void LoadGameObjects(Sceen& sceen);
+            static void UnloadGameObjects();
         private:
-            void LoadGameObjects(Sceen& sceen);
-            void UnloadGameObjects();
             EngineWindow engineWindow{WIDTH, HEIGHT, "NAME"};
             EngineDevice engineDevice{engineWindow};
             EngineRenderer engineRenderer{engineWindow, engineDevice};
             std::unique_ptr<EngineDescriptorPool> globalPool{};
             std::vector<EngineGameObject> gameObjects;
+            static EngineMain* instance;
+            EngineMain* GetSelf();
     };
 }

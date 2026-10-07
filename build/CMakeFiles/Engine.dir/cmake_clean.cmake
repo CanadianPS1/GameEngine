@@ -30,6 +30,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Engine.dir/engine_code/Main.c++.o.d"
   "CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o"
   "CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/test.cpp.o"
+  "CMakeFiles/Engine.dir/engine_code/test.cpp.o.d"
   "Engine"
   "Engine.pdb"
 )

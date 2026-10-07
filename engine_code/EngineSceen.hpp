@@ -13,12 +13,11 @@ namespace engine{
         static EngineDevice* engineDevice;
         bool AddObject(EngineGameObject object);
         bool RemoveObject(std::optional<EngineGameObject> object, std::optional<std::string> name);
-        std::optional<EngineGameObject> CreateObejct(std::string modelPath, std::string modelName, std::optional<glm::vec3> threeDementionalTranslation = std::nullopt, 
+        EngineGameObject& CreateObejct(std::string modelPath, std::string modelName, std::optional<glm::vec3> threeDementionalTranslation = std::nullopt, 
         std::optional<glm::vec3> threeDementionalScale = std::nullopt, std::optional<glm::vec2> twoDementionalTranslation = std::nullopt, 
         std::optional<glm::vec2> twoDementionalScale = std::nullopt);
         ~Sceen();
         Sceen(const Sceen &) = delete;
         Sceen &operator=(const Sceen &) = delete;
-            
     };
 }

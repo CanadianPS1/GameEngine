@@ -1,11 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"/home/gunch/Documents/GitHub/GameEngine/build/cmake_install.cmake",
-		"/home/gunch/Documents/GitHub/GameEngine/build/_deps/glfw-build/cmake_install.cmake",
-		"/home/gunch/Documents/GitHub/GameEngine/build/_deps/glfw-build/src/cmake_install.cmake",
-		"/home/gunch/Documents/GitHub/GameEngine/build/_deps/glm-build/cmake_install.cmake",
-		"/home/gunch/Documents/GitHub/GameEngine/build/_deps/glm-build/glm/cmake_install.cmake"
+		"/home/gunch/Documents/GitHub/GameEngine/build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

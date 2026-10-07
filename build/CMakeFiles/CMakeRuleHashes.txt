@@ -1,6 +1,4 @@
 # Hashes of file build rules.
-3af9cc9c110f99adb000b4765647ea7a _deps/glfw-build/CMakeFiles/uninstall
-96732f5e55b210eee8420196b932d88c _deps/glfw-build/src/CMakeFiles/update_mappings
 b48926f86b15461c8b4cb3dc0139cbde _deps/glfw-build/src/fractional-scale-v1-client-protocol-code.h
 de6767382ae27c3362510792a715be87 _deps/glfw-build/src/fractional-scale-v1-client-protocol.h
 daac840056f3d975a1ca6a71253c6319 _deps/glfw-build/src/idle-inhibit-unstable-v1-client-protocol-code.h
