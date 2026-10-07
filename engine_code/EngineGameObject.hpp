@@ -14,9 +14,9 @@ namespace engine{
     class EngineGameObject{
         public:
             using id_t = unsigned int;
-            static EngineGameObject createGameObject(){
+            static EngineGameObject* createGameObject(){
                 static id_t currentId = 0;
-                return EngineGameObject{currentId++};
+                return new EngineGameObject{currentId++};
             }
             EngineGameObject(const EngineGameObject &) = delete;
             EngineGameObject &operator=(const EngineGameObject &) = delete;

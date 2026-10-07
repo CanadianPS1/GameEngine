@@ -3,6 +3,7 @@
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <memory>
+#include <iostream>
 #include <chrono>
 #include <functional>
 #include <glm/glm.hpp>
@@ -21,8 +22,10 @@
 #include "EngineSceen.hpp"
 #include "EngineMain.hpp"
 namespace engine{
+    static int num = 0;
     EngineMain* EngineMain::instance = nullptr;
     EngineDevice* Sceen::engineDevice = nullptr;
+    std::vector<EngineGameObject>* EngineMain::*gameObjects = nullptr;
     EngineMain::EngineMain(){ 
         instance = GetSelf();
         globalPool = EngineDescriptorPool::Builder(engineDevice)
@@ -53,7 +56,7 @@ namespace engine{
         EngineCamera camera{};
         camera.setViewTarget(glm::vec3(-1.f, -2.f, 2.f), glm::vec3(0.f, 0.f, 2.5f));
         auto viewerObject = EngineGameObject::createGameObject();
-        viewerObject.transform.rotation = {-0.5f, 0.f, 0.f};
+        viewerObject->transform.rotation = {-0.5f, 0.f, 0.f};
         KeyboardMovementController cameraController{};
         Sceen::engineDevice = &engineDevice;
         //EngineGameObject& engineRef = gameObjects.back();
@@ -67,8 +70,9 @@ namespace engine{
             auto newTime = std::chrono::high_resolution_clock::now();
             float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
             currentTime = newTime;
+            cameraController.moveInPlaneXZ(engineWindow.getGLFWwindow(), frameTime, *viewerObject);
             if(updateMethods.size() > 0) for(std::function<void()> method : updateMethods) method();
-            camera.setViewYXZ(viewerObject.transform.translation, viewerObject.transform.rotation);
+            camera.setViewYXZ(viewerObject->transform.translation, viewerObject->transform.rotation);
             float aspect = engineRenderer.getAspectRatio();
             camera.setPerspectiveProjection(glm::radians(20.f), aspect, 1, 30);
             if(auto commandBuffer = engineRenderer.beginFrame()){
@@ -79,6 +83,7 @@ namespace engine{
                 uboBuffers[frameIndex]->writeToBuffer(&ubo);
                 uboBuffers[frameIndex]->flush();
                 engineRenderer.beginSwapChainRenderPass(commandBuffer);
+                std::vector<EngineGameObject> gameObjects2;
                 simpleRenderSystem.renderGameObjects(gameObjects, frameInfo);
                 engineRenderer.endSwapChainRenderPass(commandBuffer);
                 engineRenderer.endFrame();
@@ -86,7 +91,7 @@ namespace engine{
         }
         vkDeviceWaitIdle(engineDevice.device());
     }
-    void EngineMain::LoadGameObjects(Sceen& sceen){for(int i = 0; i < sceen.gameObjects.size(); i++) instance->gameObjects.push_back(std::move(sceen.gameObjects[i]));}
+    void EngineMain::LoadGameObjects(Sceen& sceen){instance->gameObjects = sceen.gameObjects;}
     void EngineMain::UnloadGameObjects(){instance->gameObjects.clear();}
     void EngineMain::MakeMethodOnStart(std::function<void()> method){startMethods.push_back(method);}
     void EngineMain::MakeMethodOnUpdate(std::function<void()> method){updateMethods.push_back(method);}

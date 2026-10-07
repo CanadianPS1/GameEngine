@@ -13,7 +13,7 @@ namespace engine{
             ~SimpleRenderSystem();
             SimpleRenderSystem(const SimpleRenderSystem &) = delete;
             SimpleRenderSystem &operator=(const SimpleRenderSystem &) = delete;
-            void renderGameObjects(std::vector<EngineGameObject> &gameObjects, FrameInfo& frameInfo);
+            void renderGameObjects(std::vector<EngineGameObject*> gameObjects, FrameInfo& frameInfo);
         private:
             void createPipelineLayout(VkDescriptorSetLayout globalSetLayout);
             void createPipeline(VkRenderPass renderPass);

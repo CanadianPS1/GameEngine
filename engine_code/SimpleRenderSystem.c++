@@ -2,6 +2,7 @@
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
+#include <iostream>
 #include "SimpleRenderSystem.hpp"
 #include "EnginePipeline.hpp"
 #include <GLFW/glfw3.h>
@@ -48,17 +49,17 @@ namespace engine{
             pipelineConfig
         );
     }
-    void SimpleRenderSystem::renderGameObjects(std::vector<EngineGameObject> &gameObjects, FrameInfo& frameInfo){
+    void SimpleRenderSystem::renderGameObjects(std::vector<EngineGameObject*> gameObjects, FrameInfo& frameInfo){
         etPipeline->bind(frameInfo.commandBuffer);
         vkCmdBindDescriptorSets(frameInfo.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &frameInfo.globalDescriptorSet, 0, nullptr);
         for(auto& obj : gameObjects){
             SimplePushConstantData push{};
-            push.modelMatrix = obj.transform.mat4();
-            push.normalMatrix = obj.transform.normalMatrix();
+            push.modelMatrix = obj->transform.mat4();
+            push.normalMatrix = obj->transform.normalMatrix();
             vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
             0, sizeof(SimplePushConstantData), &push);
-            obj.model->bind(frameInfo.commandBuffer);
-            obj.model->draw(frameInfo.commandBuffer);
+            obj->model->bind(frameInfo.commandBuffer);
+            obj->model->draw(frameInfo.commandBuffer);
         }
     }
 }

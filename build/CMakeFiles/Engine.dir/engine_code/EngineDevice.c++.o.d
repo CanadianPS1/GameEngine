@@ -3,7 +3,7 @@ CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o: \
  /usr/include/stdc-predef.h \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.hpp \
- /home/gunch/Documents/GitHub/GameEngine/build/_deps/glfw-src/include/GLFW/glfw3.h \
+ /usr/include/GLFW/glfw3.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/libc-header-start.h \

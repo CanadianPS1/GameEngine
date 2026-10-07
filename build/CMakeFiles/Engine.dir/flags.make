@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DVK_USE_PLATFORM_XCB_KHR
 
-CXX_INCLUDES = -I/home/gunch/Documents/GitHub/GameEngine/engine_code -I/home/gunch/Documents/GitHub/GameEngine/build/_deps/glfw-src/include -I/home/gunch/Documents/GitHub/GameEngine/build/_deps/glm-src
+CXX_INCLUDES = -I/home/gunch/Documents/GitHub/GameEngine/engine_code
 
 CXX_FLAGS = -std=gnu++20
 

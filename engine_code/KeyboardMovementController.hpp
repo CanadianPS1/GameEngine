@@ -13,7 +13,7 @@ namespace engine{
                 int lookUp = GLFW_KEY_UP;
                 int lookDown = GLFW_KEY_DOWN;
             };
-            void moveInPlaneXZ(GLFWwindow* window, float dt, EngineGameObject &gameObject, glm::vec3& location);
+            void moveInPlaneXZ(GLFWwindow* window, float dt, EngineGameObject &gameObject);
             KeyMappings keys{};
             float moveSpeed{1.5f};
             float lookSpeed{1.5};

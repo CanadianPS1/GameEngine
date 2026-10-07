@@ -44,7 +44,7 @@ namespace engine{
             EngineDevice engineDevice{engineWindow};
             EngineRenderer engineRenderer{engineWindow, engineDevice};
             std::unique_ptr<EngineDescriptorPool> globalPool{};
-            std::vector<EngineGameObject> gameObjects;
+            std::vector<EngineGameObject*> gameObjects;
             static EngineMain* instance;
             EngineMain* GetSelf();
     };

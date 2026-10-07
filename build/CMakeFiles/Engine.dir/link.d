@@ -19,12 +19,10 @@ Engine: \
   CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o \
   CMakeFiles/Engine.dir/engine_code/test.cpp.o \
   /usr/lib/libvulkan.so \
-  _deps/glfw-build/src/libglfw3.a \
+  /usr/lib/libglfw.so.3.5 \
   /usr/lib/libssl.so \
   /usr/lib/libcrypto.so \
-  _deps/glm-build/glm/libglm.a \
-  /usr/lib/librt.a \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libdl.a \
+  /usr/lib/libglm.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
@@ -107,17 +105,13 @@ CMakeFiles/Engine.dir/engine_code/test.cpp.o:
 
 /usr/lib/libvulkan.so:
 
-_deps/glfw-build/src/libglfw3.a:
+/usr/lib/libglfw.so.3.5:
 
 /usr/lib/libssl.so:
 
 /usr/lib/libcrypto.so:
 
-_deps/glm-build/glm/libglm.a:
-
-/usr/lib/librt.a:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libdl.a:
+/usr/lib/libglm.a:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so:
 

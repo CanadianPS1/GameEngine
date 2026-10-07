@@ -1,7 +1,7 @@
 **PROJECT START**
 
 A project has on update methods (every frame) and on start methods
-inorder for the engine to know whats what you need to declare a innitial method under its class and set your methods to there values
+inorder for the engine to know what's what you need to declare a innitial method under its class and set your methods to there values
 
 ie.
     #include "engine_code/EngineMain.hpp"
@@ -13,13 +13,13 @@ ie.
     }
 
 although the names of your methods dont matter what does is that they are void with no peramiters
-you can have as many on start or update methods as you would like, if you deside you want no update AND start methods then you must still declare the SetInitialMethods method
+you can have as many on start or update methods as you would like, if you decide you want no update AND start methods then you must still declare the SetInitialMethods method
 
 
 **CREATING 3D OBJECTS**
 
 Every obejct must be contained in a Sceen, a Sceen is just a collection of game objects that can be 2D or 3D Sceens, Sceens are used to load sets of game objects 
-the Sceen constructer has 1 peramiter which is the name of the Sceen
+the Sceen constructer has 1 paramiter which is the name of the Sceen
 
 this is how you create a Sceen
 
@@ -34,17 +34,19 @@ once you have a Sceen you can create a 3D object
 
     void start(){
         engine::Sceen sceen1("sceen1");
-        engine::EngineGameObject forest = sceen1.CreateObejct("../assets/scenes/Forest.obj", "Forest", glm::vec3{0.0f, 7.0f, 13.f}, glm::vec3{0.5f, 0.5f, 0.5f});
+        engine::EngineGameObject* forest = sceen1.CreateObejct("../assets/scenes/Forest.obj", "Forest", glm::vec3{0.0f, 7.0f, 13.f}, glm::vec3{0.5f, 0.5f, 0.5f});
         engine::EngineMain::LoadGameObjects(sceen1);
     }
     void engine::EngineMain::SetInitialMethods(){
         MakeMethodOnStart(start);
     }
 
-Creating an object has many peramiters but the ones needed to create a 3D object are
+Creating an object has many paramiters but the ones needed to create a 3D object are
     The path to the file
     The name of the object
     its position
     its scale
+    its rotation
 
 **ACTIONS WITH 3D OBJECTS**
+
