@@ -223,13 +223,35 @@ CMakeFiles/Engine.dir/engine_code/EngineBuffer.c++.o: /home/gunch/Documents/GitH
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h
 
 CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineCamera.c++ \
+  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineCamera.hpp \
+  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.hpp \
+  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineGameObject.hpp \
+  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineModel.hpp \
+  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.hpp \
+  /usr/include/GL/gl.h \
+  /usr/include/GL/glext.h \
+  /usr/include/GLFW/glfw3.h \
+  /usr/include/KHR/khrplatform.h \
   /usr/include/alloca.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/asm-generic/errno-base.h \
+  /usr/include/asm-generic/errno.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm/bitsperlong.h \
+  /usr/include/asm/errno.h \
+  /usr/include/asm/posix_types.h \
+  /usr/include/asm/posix_types_64.h \
+  /usr/include/asm/types.h \
   /usr/include/assert.h \
   /usr/include/bits/atomic_wide_counter.h \
   /usr/include/bits/byteswap.h \
+  /usr/include/bits/cpu-set.h \
   /usr/include/bits/endian.h \
   /usr/include/bits/endianness.h \
+  /usr/include/bits/errno.h \
   /usr/include/bits/floatn-common.h \
   /usr/include/bits/floatn.h \
   /usr/include/bits/flt-eval-method.h \
@@ -239,6 +261,7 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: /home/gunch/Documents/GitH
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/libm-simd-decl-stubs.h \
   /usr/include/bits/local_lim.h \
+  /usr/include/bits/locale.h \
   /usr/include/bits/long-double.h \
   /usr/include/bits/math-vector.h \
   /usr/include/bits/mathcalls-helper-functions.h \
@@ -250,73 +273,126 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: /home/gunch/Documents/GitH
   /usr/include/bits/pthread_stack_min-dynamic.h \
   /usr/include/bits/pthreadtypes-arch.h \
   /usr/include/bits/pthreadtypes.h \
+  /usr/include/bits/sched.h \
   /usr/include/bits/select.h \
+  /usr/include/bits/setjmp.h \
   /usr/include/bits/stdint-intn.h \
   /usr/include/bits/stdint-least.h \
   /usr/include/bits/stdint-uintn.h \
+  /usr/include/bits/stdio_lim.h \
   /usr/include/bits/stdlib-float.h \
   /usr/include/bits/struct_mutex.h \
   /usr/include/bits/struct_rwlock.h \
   /usr/include/bits/thread-shared-types.h \
+  /usr/include/bits/time.h \
   /usr/include/bits/time64.h \
   /usr/include/bits/timesize.h \
+  /usr/include/bits/timex.h \
   /usr/include/bits/types.h \
+  /usr/include/bits/types/FILE.h \
+  /usr/include/bits/types/__FILE.h \
+  /usr/include/bits/types/__fpos64_t.h \
+  /usr/include/bits/types/__fpos_t.h \
   /usr/include/bits/types/__locale_t.h \
+  /usr/include/bits/types/__mbstate_t.h \
   /usr/include/bits/types/__sigset_t.h \
   /usr/include/bits/types/clock_t.h \
   /usr/include/bits/types/clockid_t.h \
+  /usr/include/bits/types/cookie_io_functions_t.h \
+  /usr/include/bits/types/error_t.h \
   /usr/include/bits/types/locale_t.h \
+  /usr/include/bits/types/mbstate_t.h \
   /usr/include/bits/types/sigset_t.h \
+  /usr/include/bits/types/struct_FILE.h \
+  /usr/include/bits/types/struct___jmp_buf_tag.h \
+  /usr/include/bits/types/struct_iovec.h \
+  /usr/include/bits/types/struct_itimerspec.h \
+  /usr/include/bits/types/struct_sched_param.h \
   /usr/include/bits/types/struct_timespec.h \
   /usr/include/bits/types/struct_timeval.h \
+  /usr/include/bits/types/struct_tm.h \
   /usr/include/bits/types/time_t.h \
   /usr/include/bits/types/timer_t.h \
+  /usr/include/bits/types/wint_t.h \
   /usr/include/bits/typesizes.h \
   /usr/include/bits/uintn-identity.h \
+  /usr/include/bits/uio-ext.h \
   /usr/include/bits/uio_lim.h \
   /usr/include/bits/waitflags.h \
   /usr/include/bits/waitstatus.h \
   /usr/include/bits/wchar.h \
+  /usr/include/bits/wctype-wchar.h \
   /usr/include/bits/wordsize.h \
   /usr/include/bits/xopen_lim.h \
   /usr/include/c++/16/array \
+  /usr/include/c++/16/backward/auto_ptr.h \
   /usr/include/c++/16/backward/binders.h \
   /usr/include/c++/16/bit \
+  /usr/include/c++/16/bits/align.h \
   /usr/include/c++/16/bits/alloc_traits.h \
+  /usr/include/c++/16/bits/allocated_ptr.h \
   /usr/include/c++/16/bits/allocator.h \
+  /usr/include/c++/16/bits/atomic_base.h \
+  /usr/include/c++/16/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/16/bits/atomic_wait.h \
+  /usr/include/c++/16/bits/basic_ios.h \
+  /usr/include/c++/16/bits/basic_ios.tcc \
+  /usr/include/c++/16/bits/basic_string.h \
+  /usr/include/c++/16/bits/basic_string.tcc \
   /usr/include/c++/16/bits/binders.h \
+  /usr/include/c++/16/bits/char_traits.h \
+  /usr/include/c++/16/bits/charconv.h \
   /usr/include/c++/16/bits/concept_check.h \
   /usr/include/c++/16/bits/cpp_type_traits.h \
+  /usr/include/c++/16/bits/cxxabi_forced.h \
+  /usr/include/c++/16/bits/cxxabi_init_exception.h \
   /usr/include/c++/16/bits/enable_special_members.h \
   /usr/include/c++/16/bits/erase_if.h \
   /usr/include/c++/16/bits/exception.h \
   /usr/include/c++/16/bits/exception_defines.h \
+  /usr/include/c++/16/bits/exception_ptr.h \
   /usr/include/c++/16/bits/functexcept.h \
   /usr/include/c++/16/bits/functional_hash.h \
   /usr/include/c++/16/bits/hash_bytes.h \
   /usr/include/c++/16/bits/hashtable.h \
   /usr/include/c++/16/bits/hashtable_policy.h \
   /usr/include/c++/16/bits/invoke.h \
+  /usr/include/c++/16/bits/ios_base.h \
   /usr/include/c++/16/bits/iterator_concepts.h \
+  /usr/include/c++/16/bits/locale_classes.h \
+  /usr/include/c++/16/bits/locale_classes.tcc \
+  /usr/include/c++/16/bits/locale_facets.h \
+  /usr/include/c++/16/bits/locale_facets.tcc \
+  /usr/include/c++/16/bits/localefwd.h \
   /usr/include/c++/16/bits/max_size_type.h \
   /usr/include/c++/16/bits/memory_resource.h \
   /usr/include/c++/16/bits/memoryfwd.h \
   /usr/include/c++/16/bits/move.h \
+  /usr/include/c++/16/bits/nested_exception.h \
   /usr/include/c++/16/bits/new_allocator.h \
   /usr/include/c++/16/bits/new_except.h \
   /usr/include/c++/16/bits/new_throw.h \
   /usr/include/c++/16/bits/node_handle.h \
+  /usr/include/c++/16/bits/ostream.h \
+  /usr/include/c++/16/bits/ostream_insert.h \
+  /usr/include/c++/16/bits/postypes.h \
   /usr/include/c++/16/bits/predefined_ops.h \
   /usr/include/c++/16/bits/ptr_traits.h \
   /usr/include/c++/16/bits/range_access.h \
+  /usr/include/c++/16/bits/ranges_algobase.h \
   /usr/include/c++/16/bits/ranges_base.h \
   /usr/include/c++/16/bits/ranges_cmp.h \
+  /usr/include/c++/16/bits/ranges_uninitialized.h \
   /usr/include/c++/16/bits/ranges_util.h \
   /usr/include/c++/16/bits/refwrap.h \
   /usr/include/c++/16/bits/requires_hosted.h \
+  /usr/include/c++/16/bits/shared_ptr.h \
+  /usr/include/c++/16/bits/shared_ptr_atomic.h \
+  /usr/include/c++/16/bits/shared_ptr_base.h \
   /usr/include/c++/16/bits/specfun.h \
   /usr/include/c++/16/bits/std_abs.h \
   /usr/include/c++/16/bits/std_function.h \
+  /usr/include/c++/16/bits/stdexcept_except.h \
   /usr/include/c++/16/bits/stdexcept_throw.h \
   /usr/include/c++/16/bits/stdexcept_throwfwd.h \
   /usr/include/c++/16/bits/stl_algobase.h \
@@ -327,8 +403,15 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: /home/gunch/Documents/GitH
   /usr/include/c++/16/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/16/bits/stl_iterator_base_types.h \
   /usr/include/c++/16/bits/stl_pair.h \
+  /usr/include/c++/16/bits/stl_raw_storage_iter.h \
+  /usr/include/c++/16/bits/stl_tempbuf.h \
   /usr/include/c++/16/bits/stl_uninitialized.h \
   /usr/include/c++/16/bits/stl_vector.h \
+  /usr/include/c++/16/bits/streambuf.tcc \
+  /usr/include/c++/16/bits/streambuf_iterator.h \
+  /usr/include/c++/16/bits/string_view.tcc \
+  /usr/include/c++/16/bits/stringfwd.h \
+  /usr/include/c++/16/bits/unique_ptr.h \
   /usr/include/c++/16/bits/unordered_map.h \
   /usr/include/c++/16/bits/uses_allocator.h \
   /usr/include/c++/16/bits/uses_allocator_args.h \
@@ -336,25 +419,46 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: /home/gunch/Documents/GitH
   /usr/include/c++/16/bits/vector.tcc \
   /usr/include/c++/16/bits/version.h \
   /usr/include/c++/16/cassert \
+  /usr/include/c++/16/cctype \
+  /usr/include/c++/16/cerrno \
   /usr/include/c++/16/cfloat \
   /usr/include/c++/16/climits \
+  /usr/include/c++/16/clocale \
   /usr/include/c++/16/cmath \
   /usr/include/c++/16/compare \
   /usr/include/c++/16/concepts \
   /usr/include/c++/16/cstddef \
   /usr/include/c++/16/cstdint \
+  /usr/include/c++/16/cstdio \
+  /usr/include/c++/16/cstdlib \
+  /usr/include/c++/16/cwchar \
+  /usr/include/c++/16/cwctype \
   /usr/include/c++/16/debug/assertions.h \
   /usr/include/c++/16/debug/debug.h \
+  /usr/include/c++/16/exception \
   /usr/include/c++/16/ext/aligned_buffer.h \
   /usr/include/c++/16/ext/alloc_traits.h \
+  /usr/include/c++/16/ext/atomicity.h \
+  /usr/include/c++/16/ext/concurrence.h \
   /usr/include/c++/16/ext/numeric_traits.h \
+  /usr/include/c++/16/ext/string_conversions.h \
   /usr/include/c++/16/ext/type_traits.h \
   /usr/include/c++/16/functional \
   /usr/include/c++/16/initializer_list \
+  /usr/include/c++/16/ios \
+  /usr/include/c++/16/iosfwd \
   /usr/include/c++/16/limits \
+  /usr/include/c++/16/memory \
   /usr/include/c++/16/new \
   /usr/include/c++/16/numbers \
+  /usr/include/c++/16/pstl/execution_defs.h \
+  /usr/include/c++/16/pstl/glue_memory_defs.h \
   /usr/include/c++/16/pstl/pstl_config.h \
+  /usr/include/c++/16/stdexcept \
+  /usr/include/c++/16/streambuf \
+  /usr/include/c++/16/string \
+  /usr/include/c++/16/string_view \
+  /usr/include/c++/16/system_error \
   /usr/include/c++/16/tr1/bessel_function.tcc \
   /usr/include/c++/16/tr1/beta_function.tcc \
   /usr/include/c++/16/tr1/ell_integral.tcc \
@@ -372,11 +476,20 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: /home/gunch/Documents/GitH
   /usr/include/c++/16/typeinfo \
   /usr/include/c++/16/unordered_map \
   /usr/include/c++/16/vector \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/atomic_word.h \
   /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++allocator.h \
   /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++config.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++locale.h \
   /usr/include/c++/16/x86_64-pc-linux-gnu/bits/cpu_defines.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/ctype_base.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/ctype_inline.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/error_constants.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr-default.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr.h \
   /usr/include/c++/16/x86_64-pc-linux-gnu/bits/os_defines.h \
+  /usr/include/ctype.h \
   /usr/include/endian.h \
+  /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
   /usr/include/glm/common.hpp \
@@ -424,6 +537,8 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: /home/gunch/Documents/GitH
   /usr/include/glm/detail/type_vec4.hpp \
   /usr/include/glm/detail/type_vec4.inl \
   /usr/include/glm/exponential.hpp \
+  /usr/include/glm/ext/matrix_clip_space.hpp \
+  /usr/include/glm/ext/matrix_clip_space.inl \
   /usr/include/glm/ext/matrix_double2x2.hpp \
   /usr/include/glm/ext/matrix_double2x2_precision.hpp \
   /usr/include/glm/ext/matrix_double2x3.hpp \
@@ -460,6 +575,12 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: /home/gunch/Documents/GitH
   /usr/include/glm/ext/matrix_float4x3_precision.hpp \
   /usr/include/glm/ext/matrix_float4x4.hpp \
   /usr/include/glm/ext/matrix_float4x4_precision.hpp \
+  /usr/include/glm/ext/matrix_projection.hpp \
+  /usr/include/glm/ext/matrix_projection.inl \
+  /usr/include/glm/ext/matrix_transform.hpp \
+  /usr/include/glm/ext/matrix_transform.inl \
+  /usr/include/glm/ext/scalar_constants.hpp \
+  /usr/include/glm/ext/scalar_constants.inl \
   /usr/include/glm/ext/scalar_int_sized.hpp \
   /usr/include/glm/ext/scalar_uint_sized.hpp \
   /usr/include/glm/ext/vector_bool2.hpp \
@@ -495,6 +616,10 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: /home/gunch/Documents/GitH
   /usr/include/glm/fwd.hpp \
   /usr/include/glm/geometric.hpp \
   /usr/include/glm/glm.hpp \
+  /usr/include/glm/gtc/constants.hpp \
+  /usr/include/glm/gtc/constants.inl \
+  /usr/include/glm/gtc/matrix_transform.hpp \
+  /usr/include/glm/gtc/matrix_transform.inl \
   /usr/include/glm/integer.hpp \
   /usr/include/glm/mat2x2.hpp \
   /usr/include/glm/mat2x3.hpp \
@@ -516,16 +641,49 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: /home/gunch/Documents/GitH
   /usr/include/gnu/stubs-64.h \
   /usr/include/gnu/stubs.h \
   /usr/include/limits.h \
+  /usr/include/linux/errno.h \
   /usr/include/linux/limits.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/sched/types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/linux/types.h \
+  /usr/include/locale.h \
   /usr/include/math.h \
+  /usr/include/pthread.h \
+  /usr/include/sched.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
+  /usr/include/stdio.h \
   /usr/include/stdlib.h \
   /usr/include/sys/cdefs.h \
   /usr/include/sys/select.h \
+  /usr/include/sys/single_threaded.h \
   /usr/include/sys/types.h \
+  /usr/include/sys/uio.h \
+  /usr/include/time.h \
+  /usr/include/vk_video/vulkan_video_codec_av1std.h \
+  /usr/include/vk_video/vulkan_video_codec_av1std_decode.h \
+  /usr/include/vk_video/vulkan_video_codec_av1std_encode.h \
+  /usr/include/vk_video/vulkan_video_codec_h264std.h \
+  /usr/include/vk_video/vulkan_video_codec_h264std_decode.h \
+  /usr/include/vk_video/vulkan_video_codec_h264std_encode.h \
+  /usr/include/vk_video/vulkan_video_codec_h265std.h \
+  /usr/include/vk_video/vulkan_video_codec_h265std_decode.h \
+  /usr/include/vk_video/vulkan_video_codec_h265std_encode.h \
+  /usr/include/vk_video/vulkan_video_codec_vp9std.h \
+  /usr/include/vk_video/vulkan_video_codec_vp9std_decode.h \
+  /usr/include/vk_video/vulkan_video_codecs_common.h \
+  /usr/include/vulkan/vk_platform.h \
+  /usr/include/vulkan/vulkan.h \
+  /usr/include/vulkan/vulkan_core.h \
+  /usr/include/vulkan/vulkan_xcb.h \
+  /usr/include/wchar.h \
+  /usr/include/wctype.h \
+  /usr/include/xcb/xcb.h \
+  /usr/include/xcb/xproto.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/float.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdarg.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h
@@ -1538,6 +1696,248 @@ CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o: /home/gunch/Documents/
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h
 
+CMakeFiles/Engine.dir/engine_code/EngineInputController.c++.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineInputController.c++ \
+  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineInputController.hpp \
+  /usr/include/GL/gl.h \
+  /usr/include/GL/glext.h \
+  /usr/include/GLFW/glfw3.h \
+  /usr/include/KHR/khrplatform.h \
+  /usr/include/alloca.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/asm-generic/errno-base.h \
+  /usr/include/asm-generic/errno.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm/bitsperlong.h \
+  /usr/include/asm/errno.h \
+  /usr/include/asm/posix_types.h \
+  /usr/include/asm/posix_types_64.h \
+  /usr/include/asm/types.h \
+  /usr/include/bits/atomic_wide_counter.h \
+  /usr/include/bits/byteswap.h \
+  /usr/include/bits/cpu-set.h \
+  /usr/include/bits/endian.h \
+  /usr/include/bits/endianness.h \
+  /usr/include/bits/errno.h \
+  /usr/include/bits/floatn-common.h \
+  /usr/include/bits/floatn.h \
+  /usr/include/bits/libc-header-start.h \
+  /usr/include/bits/locale.h \
+  /usr/include/bits/long-double.h \
+  /usr/include/bits/pthread_stack_min-dynamic.h \
+  /usr/include/bits/pthreadtypes-arch.h \
+  /usr/include/bits/pthreadtypes.h \
+  /usr/include/bits/sched.h \
+  /usr/include/bits/select.h \
+  /usr/include/bits/setjmp.h \
+  /usr/include/bits/stdint-intn.h \
+  /usr/include/bits/stdint-least.h \
+  /usr/include/bits/stdint-uintn.h \
+  /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/stdlib-float.h \
+  /usr/include/bits/struct_mutex.h \
+  /usr/include/bits/struct_rwlock.h \
+  /usr/include/bits/thread-shared-types.h \
+  /usr/include/bits/time.h \
+  /usr/include/bits/time64.h \
+  /usr/include/bits/timesize.h \
+  /usr/include/bits/timex.h \
+  /usr/include/bits/types.h \
+  /usr/include/bits/types/FILE.h \
+  /usr/include/bits/types/__FILE.h \
+  /usr/include/bits/types/__fpos64_t.h \
+  /usr/include/bits/types/__fpos_t.h \
+  /usr/include/bits/types/__locale_t.h \
+  /usr/include/bits/types/__mbstate_t.h \
+  /usr/include/bits/types/__sigset_t.h \
+  /usr/include/bits/types/clock_t.h \
+  /usr/include/bits/types/clockid_t.h \
+  /usr/include/bits/types/cookie_io_functions_t.h \
+  /usr/include/bits/types/error_t.h \
+  /usr/include/bits/types/locale_t.h \
+  /usr/include/bits/types/mbstate_t.h \
+  /usr/include/bits/types/sigset_t.h \
+  /usr/include/bits/types/struct_FILE.h \
+  /usr/include/bits/types/struct___jmp_buf_tag.h \
+  /usr/include/bits/types/struct_itimerspec.h \
+  /usr/include/bits/types/struct_sched_param.h \
+  /usr/include/bits/types/struct_timespec.h \
+  /usr/include/bits/types/struct_timeval.h \
+  /usr/include/bits/types/struct_tm.h \
+  /usr/include/bits/types/time_t.h \
+  /usr/include/bits/types/timer_t.h \
+  /usr/include/bits/types/wint_t.h \
+  /usr/include/bits/typesizes.h \
+  /usr/include/bits/uintn-identity.h \
+  /usr/include/bits/waitflags.h \
+  /usr/include/bits/waitstatus.h \
+  /usr/include/bits/wchar.h \
+  /usr/include/bits/wctype-wchar.h \
+  /usr/include/bits/wordsize.h \
+  /usr/include/c++/16/array \
+  /usr/include/c++/16/backward/binders.h \
+  /usr/include/c++/16/bit \
+  /usr/include/c++/16/bits/alloc_traits.h \
+  /usr/include/c++/16/bits/allocator.h \
+  /usr/include/c++/16/bits/basic_ios.h \
+  /usr/include/c++/16/bits/basic_ios.tcc \
+  /usr/include/c++/16/bits/basic_string.h \
+  /usr/include/c++/16/bits/basic_string.tcc \
+  /usr/include/c++/16/bits/binders.h \
+  /usr/include/c++/16/bits/char_traits.h \
+  /usr/include/c++/16/bits/charconv.h \
+  /usr/include/c++/16/bits/concept_check.h \
+  /usr/include/c++/16/bits/cpp_type_traits.h \
+  /usr/include/c++/16/bits/cxxabi_forced.h \
+  /usr/include/c++/16/bits/cxxabi_init_exception.h \
+  /usr/include/c++/16/bits/enable_special_members.h \
+  /usr/include/c++/16/bits/erase_if.h \
+  /usr/include/c++/16/bits/exception.h \
+  /usr/include/c++/16/bits/exception_defines.h \
+  /usr/include/c++/16/bits/exception_ptr.h \
+  /usr/include/c++/16/bits/functexcept.h \
+  /usr/include/c++/16/bits/functional_hash.h \
+  /usr/include/c++/16/bits/hash_bytes.h \
+  /usr/include/c++/16/bits/hashtable.h \
+  /usr/include/c++/16/bits/hashtable_policy.h \
+  /usr/include/c++/16/bits/invoke.h \
+  /usr/include/c++/16/bits/ios_base.h \
+  /usr/include/c++/16/bits/istream.tcc \
+  /usr/include/c++/16/bits/iterator_concepts.h \
+  /usr/include/c++/16/bits/locale_classes.h \
+  /usr/include/c++/16/bits/locale_classes.tcc \
+  /usr/include/c++/16/bits/locale_facets.h \
+  /usr/include/c++/16/bits/locale_facets.tcc \
+  /usr/include/c++/16/bits/localefwd.h \
+  /usr/include/c++/16/bits/max_size_type.h \
+  /usr/include/c++/16/bits/memory_resource.h \
+  /usr/include/c++/16/bits/memoryfwd.h \
+  /usr/include/c++/16/bits/move.h \
+  /usr/include/c++/16/bits/nested_exception.h \
+  /usr/include/c++/16/bits/new_allocator.h \
+  /usr/include/c++/16/bits/new_except.h \
+  /usr/include/c++/16/bits/new_throw.h \
+  /usr/include/c++/16/bits/node_handle.h \
+  /usr/include/c++/16/bits/ostream.h \
+  /usr/include/c++/16/bits/ostream.tcc \
+  /usr/include/c++/16/bits/ostream_insert.h \
+  /usr/include/c++/16/bits/ostream_print.h \
+  /usr/include/c++/16/bits/postypes.h \
+  /usr/include/c++/16/bits/predefined_ops.h \
+  /usr/include/c++/16/bits/ptr_traits.h \
+  /usr/include/c++/16/bits/range_access.h \
+  /usr/include/c++/16/bits/ranges_base.h \
+  /usr/include/c++/16/bits/ranges_cmp.h \
+  /usr/include/c++/16/bits/ranges_util.h \
+  /usr/include/c++/16/bits/refwrap.h \
+  /usr/include/c++/16/bits/requires_hosted.h \
+  /usr/include/c++/16/bits/std_abs.h \
+  /usr/include/c++/16/bits/std_function.h \
+  /usr/include/c++/16/bits/stdexcept_except.h \
+  /usr/include/c++/16/bits/stdexcept_throw.h \
+  /usr/include/c++/16/bits/stdexcept_throwfwd.h \
+  /usr/include/c++/16/bits/stl_algobase.h \
+  /usr/include/c++/16/bits/stl_bvector.h \
+  /usr/include/c++/16/bits/stl_construct.h \
+  /usr/include/c++/16/bits/stl_function.h \
+  /usr/include/c++/16/bits/stl_iterator.h \
+  /usr/include/c++/16/bits/stl_iterator_base_funcs.h \
+  /usr/include/c++/16/bits/stl_iterator_base_types.h \
+  /usr/include/c++/16/bits/stl_pair.h \
+  /usr/include/c++/16/bits/stl_uninitialized.h \
+  /usr/include/c++/16/bits/stl_vector.h \
+  /usr/include/c++/16/bits/streambuf.tcc \
+  /usr/include/c++/16/bits/streambuf_iterator.h \
+  /usr/include/c++/16/bits/string_view.tcc \
+  /usr/include/c++/16/bits/stringfwd.h \
+  /usr/include/c++/16/bits/unordered_map.h \
+  /usr/include/c++/16/bits/uses_allocator.h \
+  /usr/include/c++/16/bits/uses_allocator_args.h \
+  /usr/include/c++/16/bits/utility.h \
+  /usr/include/c++/16/bits/vector.tcc \
+  /usr/include/c++/16/bits/version.h \
+  /usr/include/c++/16/cctype \
+  /usr/include/c++/16/cerrno \
+  /usr/include/c++/16/clocale \
+  /usr/include/c++/16/compare \
+  /usr/include/c++/16/concepts \
+  /usr/include/c++/16/cstddef \
+  /usr/include/c++/16/cstdio \
+  /usr/include/c++/16/cstdlib \
+  /usr/include/c++/16/cwchar \
+  /usr/include/c++/16/cwctype \
+  /usr/include/c++/16/debug/assertions.h \
+  /usr/include/c++/16/debug/debug.h \
+  /usr/include/c++/16/exception \
+  /usr/include/c++/16/ext/aligned_buffer.h \
+  /usr/include/c++/16/ext/alloc_traits.h \
+  /usr/include/c++/16/ext/atomicity.h \
+  /usr/include/c++/16/ext/numeric_traits.h \
+  /usr/include/c++/16/ext/string_conversions.h \
+  /usr/include/c++/16/ext/type_traits.h \
+  /usr/include/c++/16/functional \
+  /usr/include/c++/16/initializer_list \
+  /usr/include/c++/16/ios \
+  /usr/include/c++/16/iosfwd \
+  /usr/include/c++/16/iostream \
+  /usr/include/c++/16/istream \
+  /usr/include/c++/16/limits \
+  /usr/include/c++/16/new \
+  /usr/include/c++/16/numbers \
+  /usr/include/c++/16/ostream \
+  /usr/include/c++/16/pstl/pstl_config.h \
+  /usr/include/c++/16/stdexcept \
+  /usr/include/c++/16/streambuf \
+  /usr/include/c++/16/string \
+  /usr/include/c++/16/string_view \
+  /usr/include/c++/16/system_error \
+  /usr/include/c++/16/tuple \
+  /usr/include/c++/16/type_traits \
+  /usr/include/c++/16/typeinfo \
+  /usr/include/c++/16/unordered_map \
+  /usr/include/c++/16/vector \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/atomic_word.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++allocator.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++config.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++locale.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/cpu_defines.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/ctype_base.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/ctype_inline.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/error_constants.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr-default.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr.h \
+  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/os_defines.h \
+  /usr/include/ctype.h \
+  /usr/include/endian.h \
+  /usr/include/errno.h \
+  /usr/include/features-time64.h \
+  /usr/include/features.h \
+  /usr/include/gnu/stubs-64.h \
+  /usr/include/gnu/stubs.h \
+  /usr/include/linux/errno.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/sched/types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/linux/types.h \
+  /usr/include/locale.h \
+  /usr/include/pthread.h \
+  /usr/include/sched.h \
+  /usr/include/stdc-predef.h \
+  /usr/include/stdint.h \
+  /usr/include/stdio.h \
+  /usr/include/stdlib.h \
+  /usr/include/sys/cdefs.h \
+  /usr/include/sys/select.h \
+  /usr/include/sys/single_threaded.h \
+  /usr/include/sys/types.h \
+  /usr/include/time.h \
+  /usr/include/wchar.h \
+  /usr/include/wctype.h \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdarg.h \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h
+
 CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineMain.c++ \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineCamera.hpp \
@@ -1545,6 +1945,7 @@ CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o: /home/gunch/Documents/GitHub
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineFrameInfo.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineGameObject.hpp \
+  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineInputController.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineMain.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineModel.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EnginePipeline.hpp \
@@ -1649,7 +2050,6 @@ CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o: /home/gunch/Documents/GitHub
   /usr/include/bits/wctype-wchar.h \
   /usr/include/bits/wordsize.h \
   /usr/include/bits/xopen_lim.h \
-  /usr/include/c++/16/algorithm \
   /usr/include/c++/16/array \
   /usr/include/c++/16/backward/auto_ptr.h \
   /usr/include/c++/16/backward/binders.h \
@@ -1718,7 +2118,6 @@ CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o: /home/gunch/Documents/GitHub
   /usr/include/c++/16/bits/predefined_ops.h \
   /usr/include/c++/16/bits/ptr_traits.h \
   /usr/include/c++/16/bits/range_access.h \
-  /usr/include/c++/16/bits/ranges_algo.h \
   /usr/include/c++/16/bits/ranges_algobase.h \
   /usr/include/c++/16/bits/ranges_base.h \
   /usr/include/c++/16/bits/ranges_cmp.h \
@@ -1797,7 +2196,6 @@ CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o: /home/gunch/Documents/GitHub
   /usr/include/c++/16/initializer_list \
   /usr/include/c++/16/ios \
   /usr/include/c++/16/iosfwd \
-  /usr/include/c++/16/iostream \
   /usr/include/c++/16/istream \
   /usr/include/c++/16/limits \
   /usr/include/c++/16/locale \
@@ -1807,7 +2205,6 @@ CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o: /home/gunch/Documents/GitHub
   /usr/include/c++/16/optional \
   /usr/include/c++/16/ostream \
   /usr/include/c++/16/pstl/execution_defs.h \
-  /usr/include/c++/16/pstl/glue_algorithm_defs.h \
   /usr/include/c++/16/pstl/glue_memory_defs.h \
   /usr/include/c++/16/pstl/pstl_config.h \
   /usr/include/c++/16/ratio \
@@ -5712,9 +6109,11 @@ CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o: /home/gunch/Document
 
 CMakeFiles/Engine.dir/engine_code/test.cpp.o: /home/gunch/Documents/GitHub/GameEngine/engine_code/test.cpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
+  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineCamera.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDescriptors.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineGameObject.hpp \
+  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineInputController.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineMain.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineModel.hpp \
   /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineRenderer.hpp \
@@ -6225,6 +6624,7 @@ Engine: /usr/lib/Scrt1.o \
   CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o \
+  CMakeFiles/Engine.dir/engine_code/EngineInputController.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o \
   CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o \
@@ -6247,6 +6647,8 @@ CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.o:
 CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o:
 
 CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o:
+
+CMakeFiles/Engine.dir/engine_code/EngineInputController.c++.o:
 
 CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o:
 
@@ -6289,6 +6691,8 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o:
 /usr/lib/crti.o:
 
 /usr/lib/Scrt1.o:
+
+/usr/include/c++/16/algorithm:
 
 CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o:
 
@@ -6348,21 +6752,19 @@ CMakeFiles/Engine.dir/engine_code/EngineBuffer.c++.o:
 
 /usr/include/glm/ext/quaternion_common.hpp:
 
-/usr/include/c++/16/tr1/exp_integral.tcc:
-
-/usr/include/glm/gtx/dual_quaternion.inl:
-
-/usr/include/c++/16/bits/enable_special_members.h:
-
-/usr/include/c++/16/tr1/bessel_function.tcc:
+/usr/include/c++/16/bits/cxxabi_init_exception.h:
 
 /usr/include/c++/16/cstdint:
 
-/usr/include/c++/16/climits:
+/usr/include/c++/16/bits/basic_ios.h:
 
-/usr/include/c++/16/cfloat:
+/usr/include/c++/16/bits/allocated_ptr.h:
 
-/usr/include/c++/16/bits/functexcept.h:
+/usr/include/c++/16/cmath:
+
+/usr/lib/libgcc_s.so.1:
+
+/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineGameObject.c++:
 
 /usr/include/glm/detail/func_geometric.inl:
 
@@ -6376,9 +6778,21 @@ CMakeFiles/Engine.dir/engine_code/EngineBuffer.c++.o:
 
 /usr/include/bits/mathcalls-narrow.h:
 
+/usr/include/glm/detail/type_mat3x2.hpp:
+
+/usr/include/bits/libm-simd-decl-stubs.h:
+
+/usr/include/c++/16/tr1/bessel_function.tcc:
+
+/usr/include/c++/16/bits/ios_base.h:
+
 /usr/include/glm/mat3x2.hpp:
 
 /usr/include/bits/iscanonical.h:
+
+/usr/include/c++/16/bits/functexcept.h:
+
+/usr/include/vk_video/vulkan_video_codec_av1std.h:
 
 /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineCamera.c++:
 
@@ -6395,6 +6809,8 @@ CMakeFiles/Engine.dir/engine_code/EngineBuffer.c++.o:
 /usr/include/time.h:
 
 /usr/include/glm/detail/type_mat2x4.inl:
+
+/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineFrameInfo.hpp:
 
 /usr/include/sys/types.h:
 
@@ -6414,11 +6830,13 @@ CMakeFiles/Engine.dir/engine_code/EngineBuffer.c++.o:
 
 /usr/include/bits/types/FILE.h:
 
-/usr/include/c++/16/tr1/beta_function.tcc:
-
 CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o:
 
 /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++io.h:
+
+/usr/include/c++/16/backward/auto_ptr.h:
+
+/usr/include/glm/ext/matrix_float3x4_precision.hpp:
 
 /usr/include/glm/ext/vector_bool1_precision.hpp:
 
@@ -6468,12 +6886,6 @@ CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o:
 
 /usr/include/glm/ext/scalar_int_sized.hpp:
 
-/usr/include/c++/16/cmath:
-
-/usr/lib/libgcc_s.so.1:
-
-/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineGameObject.c++:
-
 /usr/include/c++/16/limits:
 
 /usr/include/bits/types/__sigset_t.h:
@@ -6483,14 +6895,6 @@ CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o:
 /usr/include/c++/16/ext/type_traits.h:
 
 /usr/include/bits/thread-shared-types.h:
-
-/usr/include/c++/16/iosfwd:
-
-/usr/include/c++/16/tr1/ell_integral.tcc:
-
-/usr/include/glm/detail/func_common.inl:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/ctype_base.h:
 
 /usr/include/vulkan/vulkan_xcb.h:
 
@@ -6510,15 +6914,7 @@ CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o:
 
 /usr/include/c++/16/bits/unordered_map.h:
 
-/usr/include/glm/ext/vector_uint2_sized.hpp:
-
-/usr/include/glm/ext/vector_float4.hpp:
-
 /usr/include/glm/ext/matrix_float2x2.hpp:
-
-/usr/include/c++/16/bits/specfun.h:
-
-/usr/include/glm/detail/type_mat4x3.inl:
 
 /usr/include/c++/16/cstdio:
 
@@ -6538,9 +6934,9 @@ CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o:
 
 /usr/include/c++/16/bits/version.h:
 
-/usr/include/c++/16/bits/basic_ios.tcc:
-
 /usr/include/c++/16/pstl/glue_algorithm_defs.h:
+
+/usr/include/c++/16/bits/basic_ios.tcc:
 
 /usr/include/c++/16/fstream:
 
@@ -6576,8 +6972,6 @@ CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o:
 
 /usr/include/glm/detail/type_mat2x2.hpp:
 
-/usr/include/vk_video/vulkan_video_codec_av1std.h:
-
 /usr/include/c++/16/bits/unicode-data.h:
 
 /usr/include/asm/errno.h:
@@ -6595,6 +6989,12 @@ CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o:
 /usr/include/glm/ext/matrix_float2x4_precision.hpp:
 
 /usr/include/c++/16/bits/locale_facets_nonio.tcc:
+
+/home/gunch/Documents/GitHub/GameEngine/engine_code/Main.c++:
+
+/usr/include/bits/wctype-wchar.h:
+
+/usr/include/bits/stdint-intn.h:
 
 /usr/include/glm/gtc/epsilon.inl:
 
@@ -6636,21 +7036,13 @@ CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o:
 
 /usr/include/bits/types/struct_iovec.h:
 
-/usr/include/bits/floatn-common.h:
-
-/usr/include/c++/16/bits/invoke.h:
-
 /usr/include/glm/ext/matrix_float4x3.hpp:
+
+/usr/include/bits/pthreadtypes-arch.h:
 
 /usr/include/c++/16/clocale:
 
 /usr/include/asm-generic/errno-base.h:
-
-/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.c++:
-
-/usr/include/bits/mathcalls-helper-functions.h:
-
-/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.hpp:
 
 /usr/include/bits/long-double.h:
 
@@ -6673,10 +7065,6 @@ CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o:
 /usr/include/bits/floatn.h:
 
 /usr/include/c++/16/bits/vector.tcc:
-
-/usr/include/glm/detail/type_quat.hpp:
-
-/usr/include/c++/16/bits/exception_defines.h:
 
 /usr/include/bits/stdint-least.h:
 
@@ -6714,9 +7102,9 @@ CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o:
 
 /usr/include/strings.h:
 
-/usr/include/glm/detail/compute_common.hpp:
-
 /usr/include/c++/16/system_error:
+
+/usr/include/glm/detail/compute_common.hpp:
 
 /usr/include/asm-generic/errno.h:
 
@@ -6725,6 +7113,8 @@ CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o:
 /usr/include/asm/posix_types.h:
 
 /usr/include/bits/time.h:
+
+/usr/include/c++/16/bits/exception_ptr.h:
 
 /usr/include/c++/16/bits/stl_set.h:
 
@@ -6770,6 +7160,14 @@ CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o:
 
 /usr/include/c++/16/ext/atomicity.h:
 
+/usr/include/glm/ext/vector_relational.inl:
+
+/usr/include/c++/16/bits/atomic_lockfree_defines.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/glm/ext/scalar_uint_sized.hpp:
+
 /usr/include/bits/errno.h:
 
 /usr/include/KHR/khrplatform.h:
@@ -6791,8 +7189,6 @@ CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o:
 /usr/include/c++/16/bits/iterator_concepts.h:
 
 /usr/include/xcb/xcb.h:
-
-/usr/include/bits/types/__locale_t.h:
 
 /usr/include/c++/16/bits/range_access.h:
 
@@ -6826,15 +7222,29 @@ CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o:
 
 /usr/include/bits/timex.h:
 
+/usr/include/c++/16/bits/invoke.h:
+
+/usr/include/bits/floatn-common.h:
+
+/usr/include/glm/gtx/dual_quaternion.inl:
+
+/usr/include/c++/16/bits/enable_special_members.h:
+
+/usr/include/c++/16/tr1/exp_integral.tcc:
+
 /usr/include/bits/types/locale_t.h:
 
 /usr/include/vk_video/vulkan_video_codec_av1std_decode.h:
 
 /usr/include/bits/types/mbstate_t.h:
 
-/usr/include/c++/16/bits/std_function.h:
+/usr/include/c++/16/bits/chrono_io.h:
+
+/usr/include/c++/16/bits/exception.h:
 
 /usr/include/stdint.h:
+
+/usr/include/c++/16/bits/std_function.h:
 
 /usr/include/c++/16/bits/std_abs.h:
 
@@ -6900,11 +7310,11 @@ CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o:
 
 /usr/include/c++/16/bits/allocator.h:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h:
-
 /usr/include/c++/16/debug/assertions.h:
 
 /usr/include/c++/16/pstl/execution_defs.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h:
 
@@ -6926,6 +7336,8 @@ CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o:
 
 /usr/include/wctype.h:
 
+/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineGameObject.hpp:
+
 /usr/include/c++/16/bits/concept_check.h:
 
 /usr/include/c++/16/bits/cpp_type_traits.h:
@@ -6938,8 +7350,6 @@ CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o:
 
 /usr/include/c++/16/cwctype:
 
-/usr/include/bits/pthreadtypes-arch.h:
-
 /usr/include/c++/16/bits/utility.h:
 
 /usr/include/c++/16/bits/erase_if.h:
@@ -6951,6 +7361,22 @@ CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o:
 /usr/include/c++/16/tr1/riemann_zeta.tcc:
 
 /usr/include/bits/types/timer_t.h:
+
+/usr/include/c++/16/bits/ranges_algo.h:
+
+/usr/include/c++/16/bits/ostream_insert.h:
+
+/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineInputController.c++:
+
+/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.c++:
+
+/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.hpp:
+
+/usr/include/bits/mathcalls-helper-functions.h:
+
+/usr/include/c++/16/bits/specfun.h:
+
+/usr/include/glm/detail/type_mat4x3.inl:
 
 /usr/include/string.h:
 
@@ -6990,9 +7416,87 @@ CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o:
 
 /usr/include/glm/ext/vector_double3.hpp:
 
+/usr/include/c++/16/bits/locale_classes.tcc:
+
+/usr/include/c++/16/bits/locale_facets.tcc:
+
+/usr/include/c++/16/bits/nested_exception.h:
+
+/usr/lib/libc.so.6:
+
+/usr/include/bits/fp-fast.h:
+
+/usr/include/c++/16/bits/stl_raw_storage_iter.h:
+
+/usr/include/c++/16/bits/shared_ptr_atomic.h:
+
+/usr/include/c++/16/bits/stdexcept_except.h:
+
+/usr/lib/libc.so:
+
+/usr/include/asm-generic/types.h:
+
+/usr/include/glm/mat2x4.hpp:
+
+/usr/include/GLFW/glfw3.h:
+
+/usr/include/c++/16/bits/streambuf.tcc:
+
+/usr/include/glm/ext/matrix_transform.hpp:
+
+/usr/include/bits/timesize.h:
+
+/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineMain.hpp:
+
+/usr/include/c++/16/bits/unique_ptr.h:
+
+/usr/include/glm/ext/scalar_constants.inl:
+
+/usr/include/glm/ext/vector_uint3_sized.hpp:
+
+/usr/include/c++/16/cfloat:
+
+/usr/include/c++/16/climits:
+
+/usr/include/glm/ext/quaternion_double.hpp:
+
+/usr/include/c++/16/exception:
+
+/usr/include/c++/16/ext/concurrence.h:
+
+/usr/include/glm/ext/vector_float4.hpp:
+
+/usr/include/glm/ext/vector_uint2_sized.hpp:
+
+/usr/include/c++/16/ios:
+
+/usr/include/c++/16/memory:
+
+/usr/lib/libvulkan.so:
+
+/usr/include/glm/mat2x3.hpp:
+
+/usr/include/c++/16/pstl/glue_memory_defs.h:
+
+/usr/include/c++/16/tr1/beta_function.tcc:
+
+/usr/include/c++/16/iosfwd:
+
+/usr/include/c++/16/tr1/ell_integral.tcc:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/ctype_base.h:
+
+/usr/include/glm/detail/func_common.inl:
+
 /usr/include/c++/16/tr1/modified_bessel_func.tcc:
 
 /usr/include/c++/16/tr1/poly_laguerre.tcc:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/ctype_inline.h:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/error_constants.h:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr.h:
 
 /usr/include/glm/common.hpp:
 
@@ -7031,12 +7535,6 @@ CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o:
 /usr/include/glm/detail/type_mat2x3.inl:
 
 /usr/include/glm/detail/type_vec2.hpp:
-
-/usr/include/bits/libm-simd-decl-stubs.h:
-
-/usr/include/glm/detail/type_mat3x2.hpp:
-
-/usr/include/c++/16/bits/allocated_ptr.h:
 
 /usr/include/glm/detail/type_mat3x2.inl:
 
@@ -7077,6 +7575,8 @@ CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o:
 /usr/include/c++/16/unordered_set:
 
 /usr/include/glm/detail/type_vec3.inl:
+
+/usr/include/glm/ext/matrix_clip_space.hpp:
 
 /usr/include/glm/ext/matrix_double2x2.hpp:
 
@@ -7150,6 +7650,12 @@ CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o:
 
 /usr/include/glm/ext/matrix_float3x2.hpp:
 
+/usr/include/glm/ext/quaternion_transform.hpp:
+
+/usr/include/c++/16/bits/atomic_base.h:
+
+/usr/include/glm/ext/matrix_float3x2_precision.hpp:
+
 /usr/include/glm/ext/matrix_float3x3.hpp:
 
 /usr/include/glm/ext/matrix_transform.inl:
@@ -7161,10 +7667,6 @@ CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o:
 /usr/include/bits/types/struct___jmp_buf_tag.h:
 
 /usr/include/glm/ext/matrix_float3x4.hpp:
-
-/usr/include/glm/ext/matrix_float3x4_precision.hpp:
-
-/usr/include/c++/16/backward/auto_ptr.h:
 
 /usr/include/glm/ext/matrix_float4x2.hpp:
 
@@ -7190,13 +7692,13 @@ CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o:
 
 /usr/include/glm/ext/matrix_float4x4_precision.hpp:
 
-/usr/include/bits/endian.h:
+/usr/include/glm/ext/matrix_projection.hpp:
 
-/usr/include/glm/ext/scalar_uint_sized.hpp:
+/usr/include/glm/ext/matrix_projection.inl:
 
-/usr/include/glm/ext/vector_relational.inl:
+/usr/include/c++/16/bits/chrono.h:
 
-/usr/include/c++/16/bits/atomic_lockfree_defines.h:
+/usr/include/glm/ext/scalar_constants.hpp:
 
 /usr/include/c++/16/cerrno:
 
@@ -7234,9 +7736,9 @@ CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o:
 
 /usr/include/glm/ext/vector_double4_precision.hpp:
 
-/usr/include/c++/16/bits/node_handle.h:
-
 /usr/include/vulkan/vk_platform.h:
+
+/usr/include/c++/16/bits/node_handle.h:
 
 /usr/include/glm/ext/vector_float2.hpp:
 
@@ -7249,6 +7751,12 @@ CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o:
 /usr/include/glm/ext/vector_float3.hpp:
 
 /usr/include/glm/ext/vector_float3_precision.hpp:
+
+/usr/include/c++/16/bits/ostream.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h:
+
+/usr/include/glm/ext/vector_int2.hpp:
 
 /usr/include/c++/16/bits/algorithmfwd.h:
 
@@ -7266,12 +7774,6 @@ CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o:
 
 /usr/include/glm/ext/vector_uint2.hpp:
 
-/usr/include/glm/ext/scalar_constants.inl:
-
-/usr/include/glm/ext/vector_uint3_sized.hpp:
-
-/usr/include/c++/16/bits/unique_ptr.h:
-
 CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o:
 
 /usr/include/glm/ext/vector_uint4.hpp:
@@ -7280,21 +7782,25 @@ CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o:
 
 /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineUtils.hpp:
 
+/usr/include/glm/gtc/constants.hpp:
+
+/home/gunch/Documents/GitHub/GameEngine/engine_code/test.cpp:
+
+/usr/include/glm/gtc/constants.inl:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/atomic_word.h:
+
+/usr/include/glm/gtc/matrix_transform.hpp:
+
+/usr/include/c++/16/bits/streambuf_iterator.h:
+
+/usr/include/glm/detail/func_trigonometric.inl:
+
+/usr/include/glm/ext/matrix_float4x4.hpp:
+
+/usr/include/glm/integer.hpp:
+
 /usr/include/glm/mat2x2.hpp:
-
-/usr/lib/libvulkan.so:
-
-/usr/include/glm/mat2x3.hpp:
-
-/usr/include/c++/16/memory:
-
-/usr/lib/libc.so:
-
-/usr/include/asm-generic/types.h:
-
-/usr/include/glm/mat2x4.hpp:
-
-/usr/include/c++/16/bits/stdexcept_except.h:
 
 /usr/include/glm/exponential.hpp:
 
@@ -7306,10 +7812,6 @@ CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o:
 
 /usr/include/glm/packing.hpp:
 
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/atomic_word.h:
-
-/usr/include/glm/gtc/matrix_transform.hpp:
-
 /usr/include/glm/trigonometric.hpp:
 
 /usr/include/glm/vec2.hpp:
@@ -7317,6 +7819,10 @@ CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o:
 /usr/include/glm/vec3.hpp:
 
 /usr/include/glm/vector_relational.hpp:
+
+/usr/include/c++/16/bits/ranges_uninitialized.h:
+
+/usr/include/glm/detail/type_float.hpp:
 
 /usr/include/limits.h:
 
@@ -7329,90 +7835,6 @@ CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o:
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/float.h:
 
 /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDescriptors.c++:
-
-/home/gunch/Documents/GitHub/GameEngine/engine_code/Main.c++:
-
-/usr/include/bits/stdint-intn.h:
-
-/usr/include/bits/wctype-wchar.h:
-
-/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineFrameInfo.hpp:
-
-/usr/include/glm/ext/quaternion_transform.hpp:
-
-/usr/include/glm/ext/matrix_float3x2_precision.hpp:
-
-/usr/include/c++/16/bits/atomic_base.h:
-
-/usr/include/c++/16/bits/basic_ios.h:
-
-/usr/include/c++/16/bits/cxxabi_init_exception.h:
-
-/usr/include/c++/16/bits/exception_ptr.h:
-
-/usr/include/c++/16/bits/exception.h:
-
-/usr/include/c++/16/bits/chrono_io.h:
-
-/usr/include/c++/16/bits/ios_base.h:
-
-/usr/include/c++/16/bits/locale_classes.tcc:
-
-/usr/include/c++/16/bits/locale_facets.tcc:
-
-/usr/include/c++/16/bits/nested_exception.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h:
-
-/usr/include/glm/ext/vector_int2.hpp:
-
-/usr/include/c++/16/bits/ostream.h:
-
-/usr/include/glm/detail/type_float.hpp:
-
-/usr/include/c++/16/bits/ranges_uninitialized.h:
-
-/usr/lib/libc.so.6:
-
-/usr/include/bits/fp-fast.h:
-
-/usr/include/c++/16/bits/stl_raw_storage_iter.h:
-
-/usr/include/c++/16/bits/shared_ptr_atomic.h:
-
-/usr/include/GLFW/glfw3.h:
-
-/usr/include/c++/16/bits/streambuf.tcc:
-
-/usr/include/glm/ext/matrix_transform.hpp:
-
-/usr/include/glm/detail/func_trigonometric.inl:
-
-/usr/include/glm/ext/matrix_float4x4.hpp:
-
-/usr/include/glm/integer.hpp:
-
-/usr/include/c++/16/bits/streambuf_iterator.h:
-
-/usr/include/bits/timesize.h:
-
-/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineMain.hpp:
-
-/usr/include/glm/ext/quaternion_double.hpp:
-
-/usr/include/c++/16/exception:
-
-/usr/include/c++/16/ext/concurrence.h:
-
-/usr/include/c++/16/ios:
-
-/usr/include/c++/16/pstl/glue_memory_defs.h:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/ctype_inline.h:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/error_constants.h:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr.h:
 
 /usr/include/c++/16/bits/istream.tcc:
 
@@ -7432,23 +7854,9 @@ CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o:
 
 /usr/include/c++/16/set:
 
-/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineGameObject.hpp:
+/usr/include/bits/types/__locale_t.h:
 
-/usr/include/glm/ext/matrix_clip_space.hpp:
-
-/usr/include/glm/ext/matrix_projection.hpp:
-
-/usr/include/glm/ext/matrix_projection.inl:
-
-/usr/include/c++/16/bits/chrono.h:
-
-/usr/include/glm/ext/scalar_constants.hpp:
-
-/usr/include/glm/gtc/constants.hpp:
-
-/home/gunch/Documents/GitHub/GameEngine/engine_code/test.cpp:
-
-/usr/include/glm/gtc/constants.inl:
+/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineInputController.hpp:
 
 /home/gunch/Documents/GitHub/GameEngine/engine_code/EnginePipeline.hpp:
 
@@ -7457,8 +7865,6 @@ CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o:
 /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineRenderer.hpp:
 
 /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSceen.hpp:
-
-/usr/include/c++/16/algorithm:
 
 /usr/include/c++/16/bits/codecvt.h:
 
@@ -7473,10 +7879,6 @@ CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o:
 /usr/include/c++/16/bits/locale_facets_nonio.h:
 
 /usr/include/c++/16/bits/parse_numbers.h:
-
-/usr/include/c++/16/bits/ostream_insert.h:
-
-/usr/include/c++/16/bits/ranges_algo.h:
 
 /usr/include/glm/detail/type_vec4.hpp:
 
@@ -7517,3 +7919,7 @@ CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.o:
 /usr/include/c++/16/bits/intcmp.h:
 
 /usr/include/c++/16/bits/stl_map.h:
+
+/usr/include/c++/16/bits/exception_defines.h:
+
+/usr/include/glm/detail/type_quat.hpp:

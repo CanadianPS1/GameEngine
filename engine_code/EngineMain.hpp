@@ -39,8 +39,8 @@ namespace engine{
             void run();
             static void LoadGameObjects(Sceen& sceen);
             static void UnloadGameObjects();
-        private:
             EngineWindow engineWindow{WIDTH, HEIGHT, "NAME"};
+        private:
             EngineDevice engineDevice{engineWindow};
             EngineRenderer engineRenderer{engineWindow, engineDevice};
             std::unique_ptr<EngineDescriptorPool> globalPool{};

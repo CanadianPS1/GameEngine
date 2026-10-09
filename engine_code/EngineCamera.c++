@@ -2,6 +2,7 @@
 #include <cassert>
 #include <limits>
 namespace engine{
+    EngineCamera* EngineCamera::mainCamera = nullptr;
     void EngineCamera::setOrthographicProjection(float left, float right, float top, float bottom, float near, float far){
         projectionMatrix = glm::mat4{1.0f};
         projectionMatrix[0][0] = 2.f / (right - left);
@@ -64,4 +65,16 @@ namespace engine{
         viewMatrix[3][1] = -glm::dot(v, position);
         viewMatrix[3][2] = -glm::dot(w, position);
     }
+    EngineCamera* EngineCamera::CreateCamera(bool twoDementional, glm::vec3 position, glm::vec3 target, glm::vec3 rotation,
+    float fealdOfView, float nearClipingPlain, float farClipingPlain){
+        EngineCamera* camera = new EngineCamera(twoDementional);
+        camera->setViewTarget(position, target);
+        camera->fov = fealdOfView;
+        camera->near = nearClipingPlain;
+        camera->far = farClipingPlain;
+        camera->viewerObject->transform.rotation = rotation;
+        return camera;
+    }
+    void EngineCamera::SetMainCamera(EngineCamera *camera){mainCamera = camera;}
+    EngineCamera::EngineCamera(bool twoD) : twoDementional(twoD){}
 }

@@ -11,17 +11,18 @@ namespace engine{
         gameObjects.clear();
     }
     EngineGameObject* Sceen::CreateObject(std::string modelPath, std::string modelName, std::optional<glm::vec3> threeDementionalTranslation, 
-    std::optional<glm::vec3> threeDementionalScale, std::optional<glm::vec2> twoDementionalTranslation, std::optional<glm::vec2> twoDementionalScale){
+    std::optional<glm::vec3> threeDementionalScale, std::optional<glm::vec3> threeDementionalRotation, std::optional<glm::vec2> twoDementionalTranslation, 
+    std::optional<glm::vec2> twoDementionalScale, std::optional<glm::vec2> twoDementionalRotation){
         std::shared_ptr<EngineModel> engineModel = EngineModel::createModelFromFile(*Sceen::engineDevice, modelPath);
         EngineGameObject* object = EngineGameObject::createGameObject();
         object->model = engineModel;
         object->name = modelName;
         if(threeDementionalTranslation) object->transform.translation = *threeDementionalTranslation;
         // else if(twoDementionalTranslation) object.transform.translation = *twoDementionalTranslation;
-        // else std::nullopt;
         if(threeDementionalScale) object->transform.scale = *threeDementionalScale;
         // else if(twoDementionalScale) object.transform.scale = *twoDementionalScale;
-        // else std::nullopt;
+        if(threeDementionalRotation) object->transform.rotation = *threeDementionalRotation;
+        // else if(twoDementionalRotation) object.transform.rotation = *twoDementionalRotation;
         gameObjects.push_back(object);
         return gameObjects.back();
     }

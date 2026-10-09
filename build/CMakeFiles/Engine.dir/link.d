@@ -7,6 +7,7 @@ Engine: \
   CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o \
+  CMakeFiles/Engine.dir/engine_code/EngineInputController.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o \
   CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o \
@@ -80,6 +81,8 @@ CMakeFiles/Engine.dir/engine_code/EngineDescriptors.c++.o:
 CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o:
 
 CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o:
+
+CMakeFiles/Engine.dir/engine_code/EngineInputController.c++.o:
 
 CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o:
 

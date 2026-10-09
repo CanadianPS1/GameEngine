@@ -1,9 +1,7 @@
-#include <algorithm>
 #include <type_traits>
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <memory>
-#include <iostream>
 #include <chrono>
 #include <functional>
 #include <glm/glm.hpp>
@@ -12,6 +10,7 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/detail/qualifier.hpp>
 #include "KeyboardMovementController.hpp"
+#include "EngineInputController.hpp"
 #include "SimpleRenderSystem.hpp"
 #include "EngineDescriptors.hpp"
 #include "EngineGameObject.hpp"
@@ -53,33 +52,30 @@ namespace engine{
                 .build(globalDescriptorSets[i]);
         }
         SimpleRenderSystem simpleRenderSystem{engineDevice, engineRenderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout()};
-        EngineCamera camera{};
-        camera.setViewTarget(glm::vec3(-1.f, -2.f, 2.f), glm::vec3(0.f, 0.f, 2.5f));
-        auto viewerObject = EngineGameObject::createGameObject();
-        viewerObject->transform.rotation = {-0.5f, 0.f, 0.f};
         KeyboardMovementController cameraController{};
         Sceen::engineDevice = &engineDevice;
-        //EngineGameObject& engineRef = gameObjects.back();
         KeyboardMovementController engineController{};
-        //GameState state = GameState::Login;
         try{SetInitialMethods();}catch(std::string e){};
         auto currentTime = std::chrono::high_resolution_clock::now();
         if(startMethods.size() > 0) for(std::function<void()> method : startMethods) method();
+        InputController::window = engineWindow.getGLFWwindow();
         while(!engineWindow.shouldClose()){
             glfwPollEvents();
             auto newTime = std::chrono::high_resolution_clock::now();
             float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
             currentTime = newTime;
-            cameraController.moveInPlaneXZ(engineWindow.getGLFWwindow(), frameTime, *viewerObject);
+            cameraController.moveInPlaneXZ(engineWindow.getGLFWwindow(), frameTime, *EngineCamera::mainCamera->viewerObject);
             if(updateMethods.size() > 0) for(std::function<void()> method : updateMethods) method();
-            camera.setViewYXZ(viewerObject->transform.translation, viewerObject->transform.rotation);
+            InputController::CallKeyMethods();
+            if(EngineCamera::mainCamera != nullptr) EngineCamera::mainCamera->setViewYXZ(EngineCamera::mainCamera->viewerObject->transform.translation, EngineCamera::mainCamera->viewerObject->transform.rotation);
             float aspect = engineRenderer.getAspectRatio();
-            camera.setPerspectiveProjection(glm::radians(20.f), aspect, 1, 30);
+            if(EngineCamera::mainCamera != nullptr) EngineCamera::mainCamera->setPerspectiveProjection(glm::radians(EngineCamera::mainCamera->fov), 
+                aspect, EngineCamera::mainCamera->near, EngineCamera::mainCamera->far);
             if(auto commandBuffer = engineRenderer.beginFrame()){
                 int frameIndex = engineRenderer.getFrameIndex();
-                FrameInfo frameInfo{frameIndex, frameTime, commandBuffer, camera, globalDescriptorSets[frameIndex]};
+                FrameInfo frameInfo{frameIndex, frameTime, commandBuffer, *EngineCamera::mainCamera, globalDescriptorSets[frameIndex]};
                 GlobalUbo ubo{};
-                ubo.projectionView = camera.getProjection() * camera.getView();
+                if(EngineCamera::mainCamera != nullptr) ubo.projectionView = EngineCamera::mainCamera->getProjection() * EngineCamera::mainCamera->getView();
                 uboBuffers[frameIndex]->writeToBuffer(&ubo);
                 uboBuffers[frameIndex]->flush();
                 engineRenderer.beginSwapChainRenderPass(commandBuffer);

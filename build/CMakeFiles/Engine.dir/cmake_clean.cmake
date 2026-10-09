@@ -10,6 +10,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Engine.dir/engine_code/EngineDevice.c++.o.d"
   "CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o"
   "CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/EngineInputController.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/EngineInputController.c++.o.d"
   "CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o"
   "CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o.d"
   "CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o"

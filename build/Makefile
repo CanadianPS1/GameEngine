@@ -249,6 +249,30 @@ engine_code/EngineGameObject.c++.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineGameObject.c++.s
 .PHONY : engine_code/EngineGameObject.c++.s
 
+engine_code/EngineInputController.o: engine_code/EngineInputController.c++.o
+.PHONY : engine_code/EngineInputController.o
+
+# target to build an object file
+engine_code/EngineInputController.c++.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineInputController.c++.o
+.PHONY : engine_code/EngineInputController.c++.o
+
+engine_code/EngineInputController.i: engine_code/EngineInputController.c++.i
+.PHONY : engine_code/EngineInputController.i
+
+# target to preprocess a source file
+engine_code/EngineInputController.c++.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineInputController.c++.i
+.PHONY : engine_code/EngineInputController.c++.i
+
+engine_code/EngineInputController.s: engine_code/EngineInputController.c++.s
+.PHONY : engine_code/EngineInputController.s
+
+# target to generate assembly for a file
+engine_code/EngineInputController.c++.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineInputController.c++.s
+.PHONY : engine_code/EngineInputController.c++.s
+
 engine_code/EngineMain.o: engine_code/EngineMain.c++.o
 .PHONY : engine_code/EngineMain.o
 
@@ -537,6 +561,9 @@ help:
 	@echo "... engine_code/EngineGameObject.o"
 	@echo "... engine_code/EngineGameObject.i"
 	@echo "... engine_code/EngineGameObject.s"
+	@echo "... engine_code/EngineInputController.o"
+	@echo "... engine_code/EngineInputController.i"
+	@echo "... engine_code/EngineInputController.s"
 	@echo "... engine_code/EngineMain.o"
 	@echo "... engine_code/EngineMain.i"
 	@echo "... engine_code/EngineMain.s"
