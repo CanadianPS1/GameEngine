@@ -16,6 +16,16 @@ if(NOT glfw3_FOUND)
 	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 	FetchContent_MakeAvailable(glfw)
 endif()
+find_package(stb QUIET)
+if(NOT stb_FOUND)
+	FetchContent_Declare(
+		stb
+		GIT_REPOSITORY https://github.com/nothings/stb.git
+		GIT_TAG master
+		GIT_SHALLOW TRUE
+	)
+	FetchContent_MakeAvailable(stb)
+endif()
 find_package(OpenSSL QUIET)
 if(NOT OpenSSL_FOUND)
 	FetchContent_Declare(
@@ -34,11 +44,24 @@ if(NOT glm_FOUND)
 	)
 	FetchContent_MakeAvailable(glm)
 endif()
+find_package(fastgltf 0.9.1 CONFIG QUIET)
+if(NOT fastgltf_FOUND)
+	set(FASTGLTF_ENABLE_TESTS OFF CACHE BOOL "" FORCE)
+	set(FASTGLTF_ENABLE_EXAMPLES OFF CACHE BOOL "" FORCE)
+	set(FASTGLTF_ENABLE_DOCS OFF CACHE BOOL "" FORCE)
+	set(FASTGLTF_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
+	FetchContent_Declare(
+		fastgltf
+		GIT_REPOSITORY https://github.com/spnda/fastgltf.git
+		GIT_TAG v0.9.1
+		GIT_SHALLOW TRUE
+	)
+	FetchContent_MakeAvailable(fastgltf)
+endif()
 file(GLOB_RECURSE SOURCE_FILES
 	"engine_code/*.c++"
 	"engine_code/*.hpp"
 	"engine_code/*.cpp"
-	"include/tiny_obj_loader.h"
 )
 execute_process(
 	COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/compile.sh
@@ -67,4 +90,5 @@ target_link_libraries(Engine
 		OpenSSL::SSL
 		OpenSSL::Crypto
 		glm::glm
+		fastgltf::fastgltf
 )

@@ -6,6 +6,7 @@
 #include <functional>
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
+#include <iostream>
 #include <vulkan/vulkan_core.h>
 #include <glm/gtc/constants.hpp>
 #include <glm/detail/qualifier.hpp>
@@ -79,7 +80,6 @@ namespace engine{
                 uboBuffers[frameIndex]->writeToBuffer(&ubo);
                 uboBuffers[frameIndex]->flush();
                 engineRenderer.beginSwapChainRenderPass(commandBuffer);
-                std::vector<EngineGameObject> gameObjects2;
                 simpleRenderSystem.renderGameObjects(gameObjects, frameInfo);
                 engineRenderer.endSwapChainRenderPass(commandBuffer);
                 engineRenderer.endFrame();

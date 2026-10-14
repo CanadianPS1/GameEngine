@@ -347,6 +347,38 @@ CMakeFiles/Engine.dir/engine_code/Main.c++.o: \
  /usr/include/glm/detail/type_half.hpp \
  /usr/include/glm/detail/type_half.inl /usr/include/glm/integer.hpp \
  /usr/include/glm/detail/func_integer.inl \
+ /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/core.hpp \
+ /usr/include/c++/16/fstream /usr/include/c++/16/istream \
+ /usr/include/c++/16/ostream /usr/include/c++/16/bits/ostream_print.h \
+ /usr/include/c++/16/bits/ostream.tcc \
+ /usr/include/c++/16/bits/istream.tcc /usr/include/c++/16/bits/codecvt.h \
+ /usr/include/c++/16/x86_64-pc-linux-gnu/bits/basic_file.h \
+ /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++io.h \
+ /usr/include/c++/16/bits/fstream.tcc \
+ /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/types.hpp \
+ /usr/include/c++/16/filesystem /usr/include/c++/16/bits/fs_fwd.h \
+ /usr/include/c++/16/bits/chrono.h /usr/include/c++/16/ratio \
+ /usr/include/c++/16/ctime /usr/include/c++/16/bits/parse_numbers.h \
+ /usr/include/c++/16/bits/fs_path.h /usr/include/c++/16/locale \
+ /usr/include/c++/16/bits/locale_facets_nonio.h \
+ /usr/include/c++/16/x86_64-pc-linux-gnu/bits/time_members.h \
+ /usr/include/c++/16/x86_64-pc-linux-gnu/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/16/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/16/bits/locale_conv.h /usr/include/c++/16/iomanip \
+ /usr/include/c++/16/bits/quoted_string.h /usr/include/c++/16/sstream \
+ /usr/include/c++/16/bits/sstream.tcc /usr/include/c++/16/codecvt \
+ /usr/include/c++/16/bits/fs_dir.h /usr/include/c++/16/bits/fs_ops.h \
+ /usr/include/c++/16/optional /usr/include/c++/16/utility \
+ /usr/include/c++/16/bits/stl_relops.h /usr/include/c++/16/bits/intcmp.h \
+ /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/util.hpp \
+ /usr/include/c++/16/cstring /usr/include/string.h /usr/include/strings.h \
+ /usr/include/c++/16/variant /usr/include/c++/16/bits/monostate.h \
+ /usr/include/c++/16/version \
+ /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/math.hpp \
+ /usr/include/c++/16/memory_resource /usr/include/c++/16/shared_mutex \
+ /usr/include/c++/16/bits/std_mutex.h /usr/include/c++/16/span \
+ /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/tools.hpp \
+ /usr/include/c++/16/iterator /usr/include/c++/16/bits/stream_iterator.h \
  /usr/include/glm/ext/matrix_transform.hpp \
  /usr/include/glm/gtc/constants.hpp \
  /usr/include/glm/ext/scalar_constants.hpp \
@@ -362,7 +394,4 @@ CMakeFiles/Engine.dir/engine_code/Main.c++.o: \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineRenderer.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSwapChain.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSceen.hpp \
- /usr/include/c++/16/optional /usr/include/c++/16/iostream \
- /usr/include/c++/16/ostream /usr/include/c++/16/bits/ostream_print.h \
- /usr/include/c++/16/bits/ostream.tcc /usr/include/c++/16/istream \
- /usr/include/c++/16/bits/istream.tcc
+ /usr/include/c++/16/iostream

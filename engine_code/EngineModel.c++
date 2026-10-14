@@ -1,16 +1,21 @@
-#include "EngineModel.hpp"
-#include "EngineUtils.hpp"
+#include <algorithm>
+#include <filesystem>
+#include <iostream>
 #include <cassert>
 #include <cstddef>
 #include <memory>
 #include <stdexcept>
 #include <vulkan/vulkan_core.h>
 #include <cstring>
-#include <unordered_map>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/hash.hpp>
-#define TINYOBJLOADER_IMPLEMENTATION
-#include "../include/tiny_obj_loader.h"
+#include <fastgltf/core.hpp>
+#include <fastgltf/types.hpp>
+#include <fastgltf/tools.hpp>
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb/stb_image.h>
+#include "EngineModel.hpp"
+#include "EngineUtils.hpp"
 namespace std{
     template<>
     struct hash<engine::EngineModel::Vertex>{
@@ -22,6 +27,7 @@ namespace std{
     };
 }
 namespace engine{
+    std::vector<EngineModel::DecodedTexture> EngineModel::textures;
     EngineModel::EngineModel(EngineDevice& device, const EngineModel::Builder &builder) : engineDevice{device}{
         createVertexBuffers(builder.vertices);
         createIndexBuffers(builder.indices);
@@ -82,49 +88,117 @@ namespace engine{
         return attributeDescriptions;
     }
     void EngineModel::Builder::loadModel(const std::string &filepath){
-        tinyobj::attrib_t attrib;
-        std::vector<tinyobj::shape_t> shapes;
-        std::vector<tinyobj::material_t> materials;
-        std::string warn, err;
-        if(!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, filepath.c_str()))
-            throw std::runtime_error(warn + err);
+        fastgltf::Parser parser;
+        auto file = fastgltf::MappedGltfFile::FromPath(filepath);
+        if(!file) throw std::runtime_error("Failed to open GLB");
+        fastgltf::Expected<fastgltf::Asset> result = parser.loadGltf(file.get(),std::filesystem::path(filepath).parent_path(),fastgltf::Options::LoadExternalBuffers | fastgltf::Options::GenerateMeshIndices);        
+        if(result.error() != fastgltf::Error::None) throw std::runtime_error(std::string(fastgltf::getErrorMessage(result.error())));
+        auto& asset = result.get();
         vertices.clear();
         indices.clear();
-        std::unordered_map<Vertex, uint32_t> uniqueVertices{};
-        for(const auto &shape : shapes){
-            for(const auto &index : shape.mesh.indices){
-                Vertex vertex{};
-                if(index.vertex_index >= 0){
-                    vertex.position = {
-                        attrib.vertices[3 * index.vertex_index + 0], 
-                        attrib.vertices[3 * index.vertex_index + 1], 
-                        attrib.vertices[3 * index.vertex_index + 2]
-                    };
-                    vertex.color = {
-                        attrib.colors[3 * index.vertex_index + 0], 
-                        attrib.colors[3 * index.vertex_index + 1], 
-                        attrib.colors[3 * index.vertex_index + 2]
-                    };
+        for(auto& mesh : asset.meshes){
+            for(auto& primitive : mesh.primitives){
+                auto positionIt = std::find_if(primitive.attributes.begin(),primitive.attributes.end(),[](const auto& attr){return attr.name == "POSITION";});
+                if(positionIt == primitive.attributes.end()) continue;
+                auto baseVertex = static_cast<uint32_t>(vertices.size());
+                auto& positionAccessor = asset.accessors[positionIt->accessorIndex];
+                fastgltf::math::nvec4 color ={1.f, 1.f, 1.f};
+                if(primitive.materialIndex.has_value()){
+                    color = asset.materials[*primitive.materialIndex].pbrData.baseColorFactor;
+                    auto& material = asset.materials[*primitive.materialIndex];
+                    if(material.pbrData.baseColorTexture.has_value()){
+                        std::size_t textureIndex = material.pbrData.baseColorTexture->textureIndex;
+                        std::optional<std::size_t> imageIndex = asset.textures[textureIndex].imageIndex;
+                        DecodedTexture texture = DecodeTexture(asset, asset.images[imageIndex.value()]);
+                        int x = 0, y = 0;
+                        std::size_t index = (y * texture.width + x) * 4;
+                        std::uint8_t r = texture.pixels[index];
+                        std::uint8_t g = texture.pixels[index + 1];
+                        std::uint8_t b = texture.pixels[index + 2];
+                        std::uint8_t a = texture.pixels[index + 3];
+                        textures.push_back(DecodeTexture(asset, asset.images[imageIndex.value()]));
+                    }
                 }
-                if(index.normal_index >= 0){
-                    vertex.normal = {
-                        attrib.normals[3 * index.normal_index + 0], 
-                        attrib.normals[3 * index.normal_index + 1], 
-                        attrib.normals[3 * index.normal_index + 2]
-                    };
+                for(std::size_t i = 0; i < positionAccessor.count; i++){
+                    vertices.emplace_back();
+                    vertices.back().color = {color.x(), color.y(), color.z()};
                 }
-                if(index.texcoord_index >= 0){
-                    vertex.uv = {
-                        attrib.texcoords[2 * index.texcoord_index + 0], 
-                        attrib.texcoords[2 * index.texcoord_index + 1], 
-                    };
+                auto colorIt = primitive.findAttribute("COLOR_0");
+                if(colorIt != primitive.attributes.end()){
+                    auto& accessor = asset.accessors[colorIt->accessorIndex];
+                    if(accessor.type == fastgltf::AccessorType::Vec3)
+                        fastgltf::iterateAccessorWithIndex<fastgltf::math::fvec3>(asset, accessor, [&](auto c, std::size_t i){
+                            vertices[baseVertex + i].color = {c.x() * color.x(), c.y() * color.y(), c.z() * color.z()};
+                        });
+                    else if(accessor.type == fastgltf::AccessorType::Vec4)
+                        fastgltf::iterateAccessorWithIndex<fastgltf::math::fvec4>(asset, accessor, [&](auto c, std::size_t i){
+                            vertices[baseVertex + i].color = {c.x() * color.x(), c.y() * color.y(), c.z() * color.z()};
+                        });
+                    
                 }
-                if(uniqueVertices.count(vertex) == 0){
-                    uniqueVertices[vertex] = static_cast<uint32_t>(vertices.size());
-                    vertices.push_back(vertex);
-                }
-                indices.push_back(uniqueVertices[vertex]);
+                fastgltf::iterateAccessorWithIndex<fastgltf::math::fvec3>(asset,positionAccessor,[&](auto pos,std::size_t i){
+                    vertices[baseVertex + i].position = {pos.x(),pos.y(),pos.z()};
+                });
+                auto normalIt = std::find_if(primitive.attributes.begin(),primitive.attributes.end(),[](const auto& attr){return attr.name == "NORMAL";});
+                if(normalIt != primitive.attributes.end())
+                    fastgltf::iterateAccessorWithIndex<fastgltf::math::fvec3>(asset,asset.accessors[normalIt->accessorIndex],[&](auto normal,std::size_t i){
+                        vertices[baseVertex + i].normal = {
+                            normal.x(),
+                            normal.y(),
+                            normal.z()
+                        };
+                    });
+                auto uvIt = std::find_if(primitive.attributes.begin(),primitive.attributes.end(),[](const auto& attr){return attr.name == "TEXCOORD_0";});
+                if(uvIt != primitive.attributes.end())
+                    fastgltf::iterateAccessorWithIndex<fastgltf::math::fvec2>(asset,asset.accessors[uvIt->accessorIndex],[&](auto uv,std::size_t i){
+                        vertices[baseVertex + i].uv = {
+                            uv.x(),
+                            uv.y()};
+                    });
+                
+                if(primitive.indicesAccessor.has_value())
+                    fastgltf::iterateAccessor<std::uint32_t>(asset,asset.accessors[*primitive.indicesAccessor],[&](uint32_t index){
+                        indices.push_back(baseVertex + index);
+                    });
             }
         }
+    }
+    EngineModel::DecodedTexture EngineModel::DecodeTexture(const fastgltf::Asset& asset, const fastgltf::Image& image) {
+        const std::byte* bytes = nullptr;
+        std::size_t size = 0;
+        std::visit(fastgltf::visitor{
+            [](const auto&){},[&](const fastgltf::sources::Array& src){
+                bytes = src.bytes.data();
+                size = src.bytes.size();
+            },[&](const fastgltf::sources::Vector& src){
+                bytes = src.bytes.data();
+                size = src.bytes.size();
+            },[&](const fastgltf::sources::BufferView& src){
+                const auto& view = asset.bufferViews[src.bufferViewIndex];
+                const auto& buffer = asset.buffers[view.bufferIndex];
+                std::visit(fastgltf::visitor{
+                    [](const auto&){},
+                    [&](const fastgltf::sources::Array& data){
+                        bytes = data.bytes.data() + view.byteOffset;
+                        size = view.byteLength;
+                    },[&](const fastgltf::sources::Vector& data){
+                        bytes = data.bytes.data() + view.byteOffset;
+                        size = view.byteLength;
+                    }
+                },buffer.data);
+            }
+        }, image.data);
+        if(!bytes || size == 0) throw std::runtime_error("Unsupported or empty texture source");
+        DecodedTexture texture{};
+        int channels;
+        auto* decoded = stbi_load_from_memory(
+            reinterpret_cast<const stbi_uc*>(bytes),
+            static_cast<int>(size),
+            &texture.width, &texture.height, &channels, STBI_rgb_alpha
+        );
+        if(!decoded) throw std::runtime_error("Failed to decode texture");
+        texture.pixels.assign(decoded, decoded + texture.width * texture.height * 4);
+        stbi_image_free(decoded);
+        return texture;
     }
 }

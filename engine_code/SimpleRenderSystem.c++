@@ -1,4 +1,5 @@
 #include "SimpleRenderSystem.hpp"
+#include "EngineModel.hpp"
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
@@ -42,17 +43,25 @@ namespace engine{
         EnginePipeline::defultPipelineConfigInfo(pipelineConfig);
         pipelineConfig.renderPass = renderPass;
         pipelineConfig.pipelineLayout = pipelineLayout;
-        etPipeline = std::make_unique<EnginePipeline>(
+        engineThreeDPipeline = std::make_unique<EnginePipeline>(
             engineDevice,
-            "../shaders/simple_shader.vert.spv",
-            "../shaders/simple_shader.frag.spv",
+            "../shaders/ThreeDVert.vert.spv",
+            "../shaders/Frag.frag.spv",
+            pipelineConfig
+        );
+        engineTwoDPipeline = std::make_unique<EnginePipeline>(
+            engineDevice,
+            "../shaders/TwoDVert.vert.spv",
+            "../shaders/Frag.frag.spv",
             pipelineConfig
         );
     }
     void SimpleRenderSystem::renderGameObjects(std::vector<EngineGameObject*> gameObjects, FrameInfo& frameInfo){
-        etPipeline->bind(frameInfo.commandBuffer);
+        engineTwoDPipeline->bind(frameInfo.commandBuffer);
         vkCmdBindDescriptorSets(frameInfo.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &frameInfo.globalDescriptorSet, 0, nullptr);
         for(auto& obj : gameObjects){
+            if(!obj->twoDementional) engineThreeDPipeline->bind(frameInfo.commandBuffer);
+            else engineTwoDPipeline->bind(frameInfo.commandBuffer);
             SimplePushConstantData push{};
             push.modelMatrix = obj->transform.mat4();
             push.normalMatrix = obj->transform.normalMatrix();

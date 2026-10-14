@@ -15,6 +15,7 @@ namespace engine{
     std::optional<glm::vec2> twoDementionalScale, std::optional<glm::vec2> twoDementionalRotation){
         std::shared_ptr<EngineModel> engineModel = EngineModel::createModelFromFile(*Sceen::engineDevice, modelPath);
         EngineGameObject* object = EngineGameObject::createGameObject();
+        if(!threeDementionalTranslation) object->twoDementional = true;
         object->model = engineModel;
         object->name = modelName;
         if(threeDementionalTranslation) object->transform.translation = *threeDementionalTranslation;

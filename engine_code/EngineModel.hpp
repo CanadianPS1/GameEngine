@@ -7,9 +7,17 @@
 #include <glm/glm.hpp>
 #include <memory>
 #include <vector>
+#include <fastgltf/core.hpp>
+#include <fastgltf/types.hpp>
+#include <fastgltf/tools.hpp>
 namespace engine{
     class EngineModel{
         public:
+            struct DecodedTexture {
+                int width;
+                int height;
+                std::vector<std::uint8_t> pixels;
+            };
             struct Vertex{
                 glm::vec3 position{};
                 glm::vec3 color{};
@@ -27,6 +35,8 @@ namespace engine{
                 std::vector<uint32_t> indices{};
                 void loadModel(const std::string &filepath);
             };
+            static DecodedTexture DecodeTexture(const fastgltf::Asset& asset, const fastgltf::Image& image);
+            static std::vector<DecodedTexture> textures;
             EngineModel(EngineDevice& device, const EngineModel::Builder &builder);
             ~EngineModel();
             EngineModel(const EngineModel &) = delete;

@@ -357,6 +357,8 @@ Engine: /usr/lib/libglfw.so.3.5
 Engine: /usr/lib/libssl.so
 Engine: /usr/lib/libcrypto.so
 Engine: /usr/lib/libglm.a
+Engine: _deps/fastgltf-build/libfastgltf.a
+Engine: /usr/lib/libsimdjson.so.34.0.0
 Engine: CMakeFiles/Engine.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable Engine"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Engine.dir/link.txt --verbose=$(VERBOSE)
