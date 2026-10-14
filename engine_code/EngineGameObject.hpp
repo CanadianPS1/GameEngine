@@ -14,7 +14,7 @@ namespace engine{
     class EngineGameObject{
         public:
             using id_t = unsigned int;
-            static EngineGameObject* createGameObject(){
+            static EngineGameObject* CreateGameObject(){
                 static id_t currentId = 0;
                 return new EngineGameObject{currentId++};
             }
