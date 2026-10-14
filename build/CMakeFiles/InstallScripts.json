@@ -1,7 +1,8 @@
 {
 	"InstallScripts" : 
 	[
-		"/home/gunch/Documents/GitHub/GameEngine/build/cmake_install.cmake"
+		"/home/gunch/Documents/GitHub/GameEngine/build/cmake_install.cmake",
+		"/home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

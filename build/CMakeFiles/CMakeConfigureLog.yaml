@@ -20589,3 +20589,594 @@ events:
         - "/usr/pkg"
         - "/opt"
 ...
+
+---
+events:
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:37 (find_package)"
+    name: "fastgltf"
+    configs:
+      -
+        filename: "fastgltf.cps"
+        kind: "cps"
+      -
+        filename: "fastgltfConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "fastgltf-config.cmake"
+        kind: "cmake"
+    version_request:
+      version: "0.9.1"
+      version_complete: "0.9.1"
+      exact: false
+    settings:
+      required: "optional"
+      quiet: true
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "fastgltf"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/pkgRedirects/fastgltfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/pkgRedirects/fastgltf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/pkgRedirects/lib/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/pkgRedirects/share/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/.local/fastgltfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/.local/fastgltf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/.local/lib/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/.local/share/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/fastgltfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/fastgltf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/fastgltfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/fastgltf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/var/lib/flatpak/exports/fastgltfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/var/lib/flatpak/exports/fastgltf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/var/lib/flatpak/exports/lib/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/var/lib/flatpak/exports/share/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/site_perl/fastgltfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/site_perl/fastgltf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/site_perl/lib/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/site_perl/share/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/vendor_perl/fastgltfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/vendor_perl/fastgltf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/vendor_perl/lib/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/vendor_perl/share/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/core_perl/fastgltfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/core_perl/fastgltf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/core_perl/lib/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/core_perl/share/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/fastgltfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/fastgltf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/lib/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/share/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/opt/fastgltfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/opt/fastgltf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/opt/lib/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/opt/share/cps/fastgltf.cps"
+        mode: "cps"
+        reason: "no_exist"
+    found: null
+    search_context:
+      ENV{PATH}:
+        - "/home/gunch/.local/bin"
+        - "/home/gunch/.local/bin"
+        - "/home/gunch/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/gunch/.spicetify"
+        - "/home/caio/.spicetify"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "build/_deps/fastgltf-src/cmake/dependencies.cmake:6 (find_package)"
+      - "build/_deps/fastgltf-src/CMakeLists.txt:40 (include)"
+    name: "simdjson"
+    configs:
+      -
+        filename: "simdjson.cps"
+        kind: "cps"
+      -
+        filename: "simdjsonConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "simdjson-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "optional"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "simdjson"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/pkgRedirects/simdjsonConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/pkgRedirects/simdjson-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/pkgRedirects/lib/cps/simdjson.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/pkgRedirects/share/cps/simdjson.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/.local/simdjsonConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/.local/simdjson-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/.local/lib/cps/simdjson.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/.local/share/cps/simdjson.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/simdjsonConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/simdjson-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/simdjson.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/simdjson.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/simdjsonConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/simdjson-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/simdjson.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/simdjson.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cmake/simdjson/simdjsonConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+    found:
+      path: "/usr/lib/cmake/simdjson/simdjson-config.cmake"
+      mode: "config"
+      version: "5.0.1"
+    search_context:
+      ENV{PATH}:
+        - "/home/gunch/.local/bin"
+        - "/home/gunch/.local/bin"
+        - "/home/gunch/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/gunch/.spicetify"
+        - "/home/caio/.spicetify"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+...
+
+---
+events:
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:19 (find_package)"
+    name: "stb"
+    configs:
+      -
+        filename: "stb.cps"
+        kind: "cps"
+      -
+        filename: "stbConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "stb-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "optional"
+      quiet: true
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "stb"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/pkgRedirects/stbConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/pkgRedirects/stb-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/pkgRedirects/lib/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/pkgRedirects/share/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/.local/stbConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/.local/stb-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/.local/lib/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/gunch/.local/share/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/stbConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/stb-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/stbConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/stb-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/var/lib/flatpak/exports/stbConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/var/lib/flatpak/exports/stb-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/var/lib/flatpak/exports/lib/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/var/lib/flatpak/exports/share/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/site_perl/stbConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/site_perl/stb-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/site_perl/lib/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/site_perl/share/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/vendor_perl/stbConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/vendor_perl/stb-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/vendor_perl/lib/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/vendor_perl/share/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/core_perl/stbConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/core_perl/stb-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/core_perl/lib/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/bin/core_perl/share/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/stbConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/stb-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/lib/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/share/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/opt/stbConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/opt/stb-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/opt/lib/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/opt/share/cps/stb.cps"
+        mode: "cps"
+        reason: "no_exist"
+    found: null
+    search_context:
+      ENV{PATH}:
+        - "/home/gunch/.local/bin"
+        - "/home/gunch/.local/bin"
+        - "/home/gunch/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/gunch/.spicetify"
+        - "/home/caio/.spicetify"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+...

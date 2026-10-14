@@ -24,6 +24,8 @@ Engine: \
   /usr/lib/libssl.so \
   /usr/lib/libcrypto.so \
   /usr/lib/libglm.a \
+  _deps/fastgltf-build/libfastgltf.a \
+  /usr/lib/libsimdjson.so.34.0.0 \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
@@ -115,6 +117,10 @@ CMakeFiles/Engine.dir/engine_code/test.cpp.o:
 /usr/lib/libcrypto.so:
 
 /usr/lib/libglm.a:
+
+_deps/fastgltf-build/libfastgltf.a:
+
+/usr/lib/libsimdjson.so.34.0.0:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so:
 

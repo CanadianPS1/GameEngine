@@ -31,9 +31,10 @@ namespace engine{
             glm::vec3 color{};
             TransformComponent transform{};
             std::string name;
-            
+            bool twoDementional = false;
         private:
             EngineGameObject(id_t objId) : id{objId}{}
+            EngineGameObject(id_t objId, bool twoD) : id{objId}, twoDementional{twoD}{}
             id_t id;
     };
 }

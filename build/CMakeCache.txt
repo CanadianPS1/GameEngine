@@ -299,6 +299,51 @@ Engine_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 Engine_SOURCE_DIR:STATIC=/home/gunch/Documents/GitHub/GameEngine
 
+//Have the library compile as C++20
+FASTGLTF_COMPILE_AS_CPP20:BOOL=OFF
+
+//Disables the memory allocation algorithm based on polymorphic
+// resources
+FASTGLTF_DISABLE_CUSTOM_MEMORY_POOL:BOOL=OFF
+
+//Enables the benchmark usage of assimp
+FASTGLTF_ENABLE_ASSIMP:BOOL=OFF
+
+//Enables the fastgltf::module target, which uses C++20 modules
+FASTGLTF_ENABLE_CPP_MODULES:BOOL=OFF
+
+//Enables the configuration of targets that build/generate documentation
+FASTGLTF_ENABLE_DOCS:BOOL=OFF
+
+//Enables example targets for fastgltf
+FASTGLTF_ENABLE_EXAMPLES:BOOL=OFF
+
+//Enables the benchmark usage of gltf-rs
+FASTGLTF_ENABLE_GLTF_RS:BOOL=OFF
+
+//Enables installation of library using CMake's install(). Should
+// be disabled when you want to use your own version of simdjson
+FASTGLTF_ENABLE_INSTALL:BOOL=OFF
+
+//Enable support for the experimental KHR_implicit_shapes extension
+FASTGLTF_ENABLE_KHR_IMPLICIT_SHAPES:BOOL=OFF
+
+//Enable support for the experimental KHR_physics_rigid_bodies
+// extension
+FASTGLTF_ENABLE_KHR_PHYSICS_RIGID_BODIES:BOOL=OFF
+
+//Enables test targets for fastgltf
+FASTGLTF_ENABLE_TESTS:BOOL=OFF
+
+//Default to 64-bit double precision floats for everything
+FASTGLTF_USE_64BIT_FLOAT:BOOL=OFF
+
+//Uses a custom SmallVector type optimised for small arrays
+FASTGLTF_USE_CUSTOM_SMALLVECTOR:BOOL=OFF
+
+//Use the std module when compiling using C++ modules
+FASTGLTF_USE_STD_MODULE:BOOL=OFF
+
 //Directory under which to collect all populated content
 FETCHCONTENT_BASE_DIR:PATH=/home/gunch/Documents/GitHub/GameEngine/build/_deps
 
@@ -310,6 +355,10 @@ FETCHCONTENT_FULLY_DISCONNECTED:BOOL=OFF
 FETCHCONTENT_QUIET:BOOL=ON
 
 //When not empty, overrides where to find pre-populated content
+// for fastgltf
+FETCHCONTENT_SOURCE_DIR_FASTGLTF:PATH=
+
+//When not empty, overrides where to find pre-populated content
 // for glfw
 FETCHCONTENT_SOURCE_DIR_GLFW:PATH=
 
@@ -317,14 +366,24 @@ FETCHCONTENT_SOURCE_DIR_GLFW:PATH=
 // for glm
 FETCHCONTENT_SOURCE_DIR_GLM:PATH=
 
+//When not empty, overrides where to find pre-populated content
+// for stb
+FETCHCONTENT_SOURCE_DIR_STB:PATH=
+
 //Enables UPDATE_DISCONNECTED behavior for all content population
 FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=OFF
+
+//Enables UPDATE_DISCONNECTED behavior just for population of fastgltf
+FETCHCONTENT_UPDATES_DISCONNECTED_FASTGLTF:BOOL=OFF
 
 //Enables UPDATE_DISCONNECTED behavior just for population of glfw
 FETCHCONTENT_UPDATES_DISCONNECTED_GLFW:BOOL=OFF
 
 //Enables UPDATE_DISCONNECTED behavior just for population of glm
 FETCHCONTENT_UPDATES_DISCONNECTED_GLM:BOOL=OFF
+
+//Enables UPDATE_DISCONNECTED behavior just for population of stb
+FETCHCONTENT_UPDATES_DISCONNECTED_STB:BOOL=OFF
 
 //Path to a file.
 FREETYPE_INCLUDE_DIR_freetype2:PATH=/usr/include/freetype2
@@ -888,6 +947,18 @@ boost_headers_DIR:PATH=/usr/lib/cmake/boost_headers-1.91.0
 //The directory containing a CMake configuration file for boost_system.
 boost_system_DIR:PATH=boost_system_DIR-NOTFOUND
 
+//Value Computed by CMake
+fastgltf_BINARY_DIR:STATIC=/home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-build
+
+//The directory containing a CMake configuration file for fastgltf.
+fastgltf_DIR:PATH=fastgltf_DIR-NOTFOUND
+
+//Value Computed by CMake
+fastgltf_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+fastgltf_SOURCE_DIR:STATIC=/home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src
+
 //The directory containing a CMake configuration file for glfw3.
 glfw3_DIR:PATH=/usr/lib/cmake/glfw3
 
@@ -926,6 +997,12 @@ pkgcfg_lib__OPENSSL_crypto:FILEPATH=/usr/lib/libcrypto.so
 
 //Path to a library.
 pkgcfg_lib__OPENSSL_ssl:FILEPATH=/usr/lib/libssl.so
+
+//The directory containing a CMake configuration file for simdjson.
+simdjson_DIR:PATH=/usr/lib/cmake/simdjson
+
+//The directory containing a CMake configuration file for stb.
+stb_DIR:PATH=stb_DIR-NOTFOUND
 
 
 ########################
@@ -1085,7 +1162,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

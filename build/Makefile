@@ -129,6 +129,19 @@ Engine/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/build
 .PHONY : Engine/fast
 
+#=============================================================================
+# Target rules for targets named fastgltf
+
+# Build rule for target.
+fastgltf: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 fastgltf
+.PHONY : fastgltf
+
+# fast build rule for target.
+fastgltf/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/fastgltf-build/CMakeFiles/fastgltf.dir/build.make _deps/fastgltf-build/CMakeFiles/fastgltf.dir/build
+.PHONY : fastgltf/fast
+
 engine_code/EngineBuffer.o: engine_code/EngineBuffer.c++.o
 .PHONY : engine_code/EngineBuffer.o
 
@@ -546,6 +559,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Engine"
+	@echo "... fastgltf"
 	@echo "... engine_code/EngineBuffer.o"
 	@echo "... engine_code/EngineBuffer.i"
 	@echo "... engine_code/EngineBuffer.s"

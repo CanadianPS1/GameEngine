@@ -340,8 +340,8 @@ CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o: \
  /usr/include/glm/detail/type_half.inl /usr/include/glm/integer.hpp \
  /usr/include/glm/detail/func_integer.inl /usr/include/GLFW/glfw3.h \
  /usr/include/GL/gl.h /usr/include/GL/glext.h \
- /usr/include/KHR/khrplatform.h /usr/include/vulkan/vulkan_core.h \
- /usr/include/vulkan/vk_platform.h \
+ /usr/include/KHR/khrplatform.h /usr/include/c++/16/iostream \
+ /usr/include/vulkan/vulkan_core.h /usr/include/vulkan/vk_platform.h \
  /usr/include/vk_video/vulkan_video_codec_h264std.h \
  /usr/include/vk_video/vulkan_video_codecs_common.h \
  /usr/include/vk_video/vulkan_video_codec_h264std_encode.h \
@@ -368,6 +368,26 @@ CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o: \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
+ /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/core.hpp \
+ /usr/include/c++/16/fstream \
+ /usr/include/c++/16/x86_64-pc-linux-gnu/bits/basic_file.h \
+ /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++io.h \
+ /usr/include/c++/16/bits/fstream.tcc \
+ /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/types.hpp \
+ /usr/include/c++/16/filesystem /usr/include/c++/16/bits/fs_fwd.h \
+ /usr/include/c++/16/bits/fs_path.h /usr/include/c++/16/iomanip \
+ /usr/include/c++/16/bits/quoted_string.h /usr/include/c++/16/codecvt \
+ /usr/include/c++/16/bits/fs_dir.h /usr/include/c++/16/bits/fs_ops.h \
+ /usr/include/c++/16/utility /usr/include/c++/16/bits/stl_relops.h \
+ /usr/include/c++/16/bits/intcmp.h \
+ /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/util.hpp \
+ /usr/include/c++/16/cstring /usr/include/string.h /usr/include/strings.h \
+ /usr/include/c++/16/variant /usr/include/c++/16/version \
+ /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/math.hpp \
+ /usr/include/c++/16/memory_resource /usr/include/c++/16/shared_mutex \
+ /usr/include/c++/16/bits/std_mutex.h \
+ /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/tools.hpp \
+ /usr/include/c++/16/iterator /usr/include/c++/16/bits/stream_iterator.h \
  /usr/include/glm/ext/matrix_transform.hpp \
  /usr/include/glm/ext/matrix_transform.inl \
  /usr/include/glm/gtc/matrix_transform.hpp \
