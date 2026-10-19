@@ -21,7 +21,7 @@ namespace engine{
             float near;
             float far;
             float fov;
-            EngineGameObject* viewerObject = EngineGameObject::createGameObject();
+            EngineGameObject* viewerObject = EngineGameObject::CreateGameObject();
         private:
             glm::mat4 projectionMatrix{1.f};
             glm::mat4 viewMatrix{1.f};
