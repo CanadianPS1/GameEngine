@@ -430,6 +430,30 @@ engine_code/EngineSwapChain.c++.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.s
 .PHONY : engine_code/EngineSwapChain.c++.s
 
+engine_code/EngineTexture.o: engine_code/EngineTexture.c++.o
+.PHONY : engine_code/EngineTexture.o
+
+# target to build an object file
+engine_code/EngineTexture.c++.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineTexture.c++.o
+.PHONY : engine_code/EngineTexture.c++.o
+
+engine_code/EngineTexture.i: engine_code/EngineTexture.c++.i
+.PHONY : engine_code/EngineTexture.i
+
+# target to preprocess a source file
+engine_code/EngineTexture.c++.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineTexture.c++.i
+.PHONY : engine_code/EngineTexture.c++.i
+
+engine_code/EngineTexture.s: engine_code/EngineTexture.c++.s
+.PHONY : engine_code/EngineTexture.s
+
+# target to generate assembly for a file
+engine_code/EngineTexture.c++.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/engine_code/EngineTexture.c++.s
+.PHONY : engine_code/EngineTexture.c++.s
+
 engine_code/EngineWindow.o: engine_code/EngineWindow.c++.o
 .PHONY : engine_code/EngineWindow.o
 
@@ -596,6 +620,9 @@ help:
 	@echo "... engine_code/EngineSwapChain.o"
 	@echo "... engine_code/EngineSwapChain.i"
 	@echo "... engine_code/EngineSwapChain.s"
+	@echo "... engine_code/EngineTexture.o"
+	@echo "... engine_code/EngineTexture.i"
+	@echo "... engine_code/EngineTexture.s"
 	@echo "... engine_code/EngineWindow.o"
 	@echo "... engine_code/EngineWindow.i"
 	@echo "... engine_code/EngineWindow.s"

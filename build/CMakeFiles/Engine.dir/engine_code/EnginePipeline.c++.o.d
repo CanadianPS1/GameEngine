@@ -184,10 +184,34 @@ CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o: \
  /usr/include/c++/16/bits/fstream.tcc /usr/include/c++/16/iostream \
  /usr/include/c++/16/cassert /usr/include/assert.h \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineModel.hpp \
- /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
- /usr/include/glm/glm.hpp /usr/include/glm/detail/_fixes.hpp \
- /usr/include/c++/16/cmath /usr/include/math.h \
- /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDescriptors.hpp \
+ /usr/include/c++/16/memory /usr/include/c++/16/bits/stl_tempbuf.h \
+ /usr/include/c++/16/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/16/bits/align.h /usr/include/c++/16/bits/unique_ptr.h \
+ /usr/include/c++/16/bits/shared_ptr.h \
+ /usr/include/c++/16/bits/shared_ptr_base.h \
+ /usr/include/c++/16/bits/allocated_ptr.h \
+ /usr/include/c++/16/bits/refwrap.h \
+ /usr/include/c++/16/ext/aligned_buffer.h \
+ /usr/include/c++/16/ext/concurrence.h \
+ /usr/include/c++/16/bits/shared_ptr_atomic.h \
+ /usr/include/c++/16/bits/atomic_base.h \
+ /usr/include/c++/16/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/16/bits/atomic_wait.h \
+ /usr/include/c++/16/backward/auto_ptr.h \
+ /usr/include/c++/16/bits/ranges_uninitialized.h \
+ /usr/include/c++/16/bits/ranges_algobase.h \
+ /usr/include/c++/16/pstl/glue_memory_defs.h \
+ /usr/include/c++/16/pstl/execution_defs.h \
+ /usr/include/c++/16/unordered_map \
+ /usr/include/c++/16/bits/unordered_map.h \
+ /usr/include/c++/16/bits/hashtable.h \
+ /usr/include/c++/16/bits/hashtable_policy.h \
+ /usr/include/c++/16/bits/enable_special_members.h \
+ /usr/include/c++/16/bits/node_handle.h /usr/include/glm/glm.hpp \
+ /usr/include/glm/detail/_fixes.hpp /usr/include/c++/16/cmath \
+ /usr/include/math.h /usr/include/bits/math-vector.h \
+ /usr/include/bits/libm-simd-decl-stubs.h \
  /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
  /usr/include/bits/fp-fast.h /usr/include/bits/mathcalls-macros.h \
  /usr/include/bits/mathcalls-helper-functions.h \
@@ -235,16 +259,8 @@ CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o: \
  /usr/include/glm/detail/type_vec3.hpp \
  /usr/include/glm/detail/type_vec3.inl \
  /usr/include/glm/detail/compute_vector_decl.hpp \
- /usr/include/c++/16/functional /usr/include/c++/16/bits/refwrap.h \
- /usr/include/c++/16/bits/std_function.h \
- /usr/include/c++/16/unordered_map \
- /usr/include/c++/16/bits/unordered_map.h \
- /usr/include/c++/16/bits/hashtable.h \
- /usr/include/c++/16/bits/hashtable_policy.h \
- /usr/include/c++/16/ext/aligned_buffer.h \
- /usr/include/c++/16/bits/enable_special_members.h \
- /usr/include/c++/16/bits/node_handle.h /usr/include/c++/16/array \
- /usr/include/c++/16/bits/binders.h \
+ /usr/include/c++/16/functional /usr/include/c++/16/bits/std_function.h \
+ /usr/include/c++/16/array /usr/include/c++/16/bits/binders.h \
  /usr/include/glm/detail/_vectorize.hpp \
  /usr/include/glm/ext/vector_bool3_precision.hpp \
  /usr/include/glm/ext/vector_float3.hpp \
@@ -336,23 +352,7 @@ CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o: \
  /usr/include/glm/packing.hpp /usr/include/glm/detail/func_packing.inl \
  /usr/include/glm/detail/type_half.hpp \
  /usr/include/glm/detail/type_half.inl /usr/include/glm/integer.hpp \
- /usr/include/glm/detail/func_integer.inl /usr/include/c++/16/memory \
- /usr/include/c++/16/bits/stl_tempbuf.h \
- /usr/include/c++/16/bits/stl_raw_storage_iter.h \
- /usr/include/c++/16/bits/align.h /usr/include/c++/16/bits/unique_ptr.h \
- /usr/include/c++/16/bits/shared_ptr.h \
- /usr/include/c++/16/bits/shared_ptr_base.h \
- /usr/include/c++/16/bits/allocated_ptr.h \
- /usr/include/c++/16/ext/concurrence.h \
- /usr/include/c++/16/bits/shared_ptr_atomic.h \
- /usr/include/c++/16/bits/atomic_base.h \
- /usr/include/c++/16/bits/atomic_lockfree_defines.h \
- /usr/include/c++/16/bits/atomic_wait.h \
- /usr/include/c++/16/backward/auto_ptr.h \
- /usr/include/c++/16/bits/ranges_uninitialized.h \
- /usr/include/c++/16/bits/ranges_algobase.h \
- /usr/include/c++/16/pstl/glue_memory_defs.h \
- /usr/include/c++/16/pstl/execution_defs.h \
+ /usr/include/glm/detail/func_integer.inl \
  /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/core.hpp \
  /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/types.hpp \
  /usr/include/c++/16/filesystem /usr/include/c++/16/bits/fs_fwd.h \
@@ -377,4 +377,6 @@ CMakeFiles/Engine.dir/engine_code/EnginePipeline.c++.o: \
  /usr/include/c++/16/memory_resource /usr/include/c++/16/shared_mutex \
  /usr/include/c++/16/bits/std_mutex.h /usr/include/c++/16/span \
  /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/tools.hpp \
- /usr/include/c++/16/iterator /usr/include/c++/16/bits/stream_iterator.h
+ /usr/include/c++/16/iterator /usr/include/c++/16/bits/stream_iterator.h \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineTexture.hpp

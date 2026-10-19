@@ -14,6 +14,7 @@ Engine: \
   CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o \
+  CMakeFiles/Engine.dir/engine_code/EngineTexture.c++.o \
   CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o \
   CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o \
   CMakeFiles/Engine.dir/engine_code/Main.c++.o \
@@ -97,6 +98,8 @@ CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.o:
 CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o:
 
 CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o:
+
+CMakeFiles/Engine.dir/engine_code/EngineTexture.c++.o:
 
 CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o:
 

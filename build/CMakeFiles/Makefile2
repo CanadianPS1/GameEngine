@@ -107,12 +107,12 @@ _deps/fastgltf-build/clean: _deps/fastgltf-build/CMakeFiles/fastgltf.dir/clean
 CMakeFiles/Engine.dir/all: _deps/fastgltf-build/CMakeFiles/fastgltf.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 "Built target Engine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Built target Engine"
 .PHONY : CMakeFiles/Engine.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Engine.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Engine.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles 0
 .PHONY : CMakeFiles/Engine.dir/rule
@@ -124,7 +124,7 @@ Engine: CMakeFiles/Engine.dir/rule
 # codegen rule for target.
 CMakeFiles/Engine.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 "Finished codegen for target Engine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Finished codegen for target Engine"
 .PHONY : CMakeFiles/Engine.dir/codegen
 
 # clean rule for target.
@@ -139,7 +139,7 @@ CMakeFiles/Engine.dir/clean:
 _deps/fastgltf-build/CMakeFiles/fastgltf.dir/all:
 	$(MAKE) $(MAKESILENT) -f _deps/fastgltf-build/CMakeFiles/fastgltf.dir/build.make _deps/fastgltf-build/CMakeFiles/fastgltf.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/fastgltf-build/CMakeFiles/fastgltf.dir/build.make _deps/fastgltf-build/CMakeFiles/fastgltf.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=19,20,21,22 "Built target fastgltf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=20,21,22,23 "Built target fastgltf"
 .PHONY : _deps/fastgltf-build/CMakeFiles/fastgltf.dir/all
 
 # Build rule for subdir invocation for target.
@@ -156,7 +156,7 @@ fastgltf: _deps/fastgltf-build/CMakeFiles/fastgltf.dir/rule
 # codegen rule for target.
 _deps/fastgltf-build/CMakeFiles/fastgltf.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/fastgltf-build/CMakeFiles/fastgltf.dir/build.make _deps/fastgltf-build/CMakeFiles/fastgltf.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=19,20,21,22 "Finished codegen for target fastgltf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles --progress-num=20,21,22,23 "Finished codegen for target fastgltf"
 .PHONY : _deps/fastgltf-build/CMakeFiles/fastgltf.dir/codegen
 
 # clean rule for target.

@@ -365,9 +365,9 @@ CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o: \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/KeyboardMovementController.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineGameObject.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineModel.hpp \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDescriptors.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.hpp \
- /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
  /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/core.hpp \
  /usr/include/c++/16/fstream \
  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/basic_file.h \
@@ -388,6 +388,13 @@ CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o: \
  /usr/include/c++/16/bits/std_mutex.h \
  /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/tools.hpp \
  /usr/include/c++/16/iterator /usr/include/c++/16/bits/stream_iterator.h \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineTexture.hpp \
+ /usr/include/vulkan/vulkan.h /usr/include/vulkan/vulkan_core.h \
+ /usr/include/xcb/xcb.h /usr/include/sys/uio.h \
+ /usr/include/bits/types/struct_iovec.h /usr/include/bits/uio-ext.h \
+ /usr/include/xcb/xproto.h /usr/include/xcb/xcb.h \
+ /usr/include/vulkan/vulkan_xcb.h \
  /usr/include/glm/ext/matrix_transform.hpp \
  /usr/include/glm/ext/matrix_transform.inl \
  /usr/include/glm/gtc/matrix_transform.hpp \
@@ -401,12 +408,6 @@ CMakeFiles/Engine.dir/engine_code/EngineMain.c++.o: \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EnginePipeline.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineFrameInfo.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineCamera.hpp \
- /usr/include/vulkan/vulkan.h /usr/include/vulkan/vulkan_core.h \
- /usr/include/xcb/xcb.h /usr/include/sys/uio.h \
- /usr/include/bits/types/struct_iovec.h /usr/include/bits/uio-ext.h \
- /usr/include/xcb/xproto.h /usr/include/xcb/xcb.h \
- /usr/include/vulkan/vulkan_xcb.h \
- /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDescriptors.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSwapChain.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSceen.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineMain.hpp \

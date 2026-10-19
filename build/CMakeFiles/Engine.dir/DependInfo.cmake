@@ -20,6 +20,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineRenderer.c++" "CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.o" "gcc" "CMakeFiles/Engine.dir/engine_code/EngineRenderer.c++.o.d"
   "/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSceen.c++" "CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o" "gcc" "CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o.d"
   "/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineSwapChain.c++" "CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o" "gcc" "CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o.d"
+  "/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineTexture.c++" "CMakeFiles/Engine.dir/engine_code/EngineTexture.c++.o" "gcc" "CMakeFiles/Engine.dir/engine_code/EngineTexture.c++.o.d"
   "/home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.c++" "CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o" "gcc" "CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o.d"
   "/home/gunch/Documents/GitHub/GameEngine/engine_code/KeyboardMovementController.c++" "CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o" "gcc" "CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o.d"
   "/home/gunch/Documents/GitHub/GameEngine/engine_code/Main.c++" "CMakeFiles/Engine.dir/engine_code/Main.c++.o" "gcc" "CMakeFiles/Engine.dir/engine_code/Main.c++.o.d"

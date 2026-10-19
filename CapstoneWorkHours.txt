@@ -1,6 +1,100 @@
-10/5/26 4 hours
-10/6/26 4 hours
-10/7/26 4 hours
-10/8/26 3 hours
-10/9/26 3 hours
-10/12/26 4 hours
+
+--Week 1--
+
+10/05/26 - 4 hours
+10/06/26 - 4 hours
+10/07/26 - 4 hours
+10/08/26 - 3 hours
+10/09/26 - 3 hours
+
+TOTAL: 18 hours
+
+--Week 2--
+
+10/12/26 - 4 hours
+10/13/26 - 4 hours
+10/14/26 - 3 hours
+10/15/26 - 6 hours
+10/16/26 -  hours
+
+TOTAL:
+
+--Week 3--
+
+10/19/26 -  hours
+10/20/26 -  hours
+10/21/26 -  hours
+10/22/26 -  hours
+10/23/26 -  hours
+
+TOTAL: 
+
+--Week 4--
+
+10/26/26 -  hours
+10/27/26 -  hours
+10/28/26 -  hours
+10/29/26 -  hours
+10/30/26 -  hours
+
+TOTAL: 
+
+--Week 5--
+
+11/2/26 -  hours
+11/3/26 -  hours
+11/4/26 -  hours
+11/5/26 -  hours
+11/6/26 -  hours
+
+TOTAL: 
+
+--Week 6--
+
+11/9/26 -  hours
+11/10/26 -  hours
+11/11/26 -  hours
+11/12/26 -  hours
+11/13/26 -  hours
+
+TOTAL: 
+
+--Week 7--
+
+11/16/26 -  hours
+11/17/26 -  hours
+11/18/26 -  hours
+11/19/26 -  hours
+11/20/26 -  hours
+
+TOTAL: 
+
+--Week 8--
+
+11/23/26 -  hours
+11/24/26 -  hours
+11/25/26 -  hours
+11/26/26 -  hours
+11/27/26 -  hours
+
+TOTAL: 
+
+--Week 9--
+
+11/30/26 -  hours
+12/1/26 -  hours
+12/2/26 -  hours
+12/3/26 -  hours
+12/4/26 -  hours
+
+TOTAL: 
+
+--Week 10--
+
+12/7/26 -  hours
+12/8/26 -  hours
+12/9/26 -  hours
+12/10/26 -  hours
+12/11/26 -  hours
+
+TOTAL:

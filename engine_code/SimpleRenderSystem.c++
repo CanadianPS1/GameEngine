@@ -17,17 +17,17 @@ namespace engine{
         glm::mat4 modelMatrix{1.f};
         glm::mat4 normalMatrix{1.f};
     };
-    SimpleRenderSystem::SimpleRenderSystem(EngineDevice& device, VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout) : engineDevice{device}{
-        createPipelineLayout(globalSetLayout);
+    SimpleRenderSystem::SimpleRenderSystem(EngineDevice& device, VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout, VkDescriptorSetLayout textureSetLayout) : engineDevice{device}{
+        createPipelineLayout(globalSetLayout, textureSetLayout);
         createPipeline(renderPass);
     }
     SimpleRenderSystem::~SimpleRenderSystem(){vkDestroyPipelineLayout(engineDevice.device(), pipelineLayout, nullptr);}
-    void SimpleRenderSystem::createPipelineLayout(VkDescriptorSetLayout globalSetLayout){
+    void SimpleRenderSystem::createPipelineLayout(VkDescriptorSetLayout globalSetLayout, VkDescriptorSetLayout textureSetLayout){
         VkPushConstantRange pushConstantRange{};
         pushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
         pushConstantRange.offset = 0;
         pushConstantRange.size = sizeof(SimplePushConstantData);
-        std::vector<VkDescriptorSetLayout> descriptorSetLayouts{globalSetLayout};
+        std::vector<VkDescriptorSetLayout> descriptorSetLayouts{globalSetLayout, textureSetLayout};
         VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
         pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
         pipelineLayoutInfo.setLayoutCount = static_cast<uint32_t>(descriptorSetLayouts.size());
@@ -68,7 +68,7 @@ namespace engine{
             vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
             0, sizeof(SimplePushConstantData), &push);
             obj->model->bind(frameInfo.commandBuffer);
-            obj->model->draw(frameInfo.commandBuffer);
+            obj->model->draw(frameInfo.commandBuffer, pipelineLayout);
         }
     }
 }

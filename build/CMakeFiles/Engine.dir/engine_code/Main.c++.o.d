@@ -203,7 +203,6 @@ CMakeFiles/Engine.dir/engine_code/Main.c++.o: \
  /usr/include/c++/16/pstl/execution_defs.h \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineGameObject.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineModel.hpp \
- /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
  /usr/include/glm/glm.hpp /usr/include/glm/detail/_fixes.hpp \
  /usr/include/c++/16/cmath /usr/include/math.h \
  /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
@@ -379,6 +378,8 @@ CMakeFiles/Engine.dir/engine_code/Main.c++.o: \
  /usr/include/c++/16/bits/std_mutex.h /usr/include/c++/16/span \
  /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/tools.hpp \
  /usr/include/c++/16/iterator /usr/include/c++/16/bits/stream_iterator.h \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineTexture.hpp \
  /usr/include/glm/ext/matrix_transform.hpp \
  /usr/include/glm/gtc/constants.hpp \
  /usr/include/glm/ext/scalar_constants.hpp \

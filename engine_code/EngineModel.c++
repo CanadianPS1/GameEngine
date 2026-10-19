@@ -27,16 +27,37 @@ namespace std{
     };
 }
 namespace engine{
-    std::vector<EngineModel::DecodedTexture> EngineModel::textures;
-    EngineModel::EngineModel(EngineDevice& device, const EngineModel::Builder &builder) : engineDevice{device}{
+    void EngineModel::setTextureDescriptors(EngineDescriptorSetLayout& layout, EngineDescriptorPool& pool){
+        textureSetLayout = &layout;
+        texturePool = &pool;
+    }
+    EngineDescriptorSetLayout* EngineModel::textureSetLayout = nullptr;
+    EngineDescriptorPool* EngineModel::texturePool = nullptr;
+    EngineModel::EngineModel(EngineDevice& device, const Builder& builder) : engineDevice{device}, primitives{builder.primitives}{
         createVertexBuffers(builder.vertices);
         createIndexBuffers(builder.indices);
+        auto createTexture = [&](uint32_t width, uint32_t height, const std::vector<std::uint8_t>& pixels){
+            auto texture = std::make_unique<EngineTexture>(engineDevice, width, height, pixels);
+            auto imageInfo = texture->descriptorInfo();
+            VkDescriptorSet descriptorSet{};
+            if(!texturePool->allocateDescriptor(textureSetLayout->getDescriptorSetLayout(), descriptorSet))
+                throw std::runtime_error("Failed to allocate texture descriptor");
+            EngineDescriptorWriter(*textureSetLayout, *texturePool)
+                .writeImage(0, &imageInfo)
+                .overwrite(descriptorSet);
+            textureDescriptorSets.push_back(descriptorSet);
+            textures.push_back(std::move(texture));
+        };
+        createTexture(1, 1, {255, 255, 255, 255});
+        for(const auto& texture : builder.textures) createTexture(texture.width, texture.height, texture.pixels);
     }
     EngineModel::~EngineModel(){}
-    std::unique_ptr<EngineModel> EngineModel::createModelFromFile(EngineDevice &device, const std::string &filepath){
+    std::shared_ptr<EngineModel> EngineModel::createModelFromFile(EngineDevice &device, const std::string &filepath){
+        if(!textureSetLayout || !texturePool)
+            throw std::runtime_error("Texture descriptors not initialized");
         Builder builder{};
         builder.loadModel(filepath);
-        return std::make_unique<EngineModel>(device, builder);
+        return std::make_shared<EngineModel>(device, builder);
     }
     void EngineModel::createVertexBuffers(const std::vector<Vertex> &vertices){
         vertexCount = static_cast<uint32_t>(vertices.size());
@@ -62,9 +83,13 @@ namespace engine{
         engineDevice.copyBuffer(stagingBuffer.getBuffer(), indexBuffer->getBuffer(), bufferSize);
 
     }
-    void EngineModel::draw(VkCommandBuffer commandBuffer){
-        if(hasIndexBuffer) vkCmdDrawIndexed(commandBuffer, indexCount, 1, 0, 0, 0);
-        else vkCmdDraw(commandBuffer, vertexCount, 1, 0, 0);
+    void EngineModel::draw(VkCommandBuffer commandBuffer, VkPipelineLayout pipelineLayout){
+        for(const auto& primitive : primitives){
+            uint32_t textureIndex = primitive.textureIndex < 0 ? 0 : static_cast<uint32_t>(primitive.textureIndex + 1);
+            bindTexture(commandBuffer, pipelineLayout, textureDescriptorSets[textureIndex]);
+            if(hasIndexBuffer) vkCmdDrawIndexed(commandBuffer, primitive.indexCount, 1, primitive.firstIndex, 0, 0);
+            else vkCmdDraw(commandBuffer, primitive.vertexCount, 1, primitive.firstVertex, 0);
+        }
     }
     void EngineModel::bind(VkCommandBuffer commandBuffer){
         VkBuffer buffers[] = {vertexBuffer->getBuffer()};
@@ -96,29 +121,30 @@ namespace engine{
         auto& asset = result.get();
         vertices.clear();
         indices.clear();
+        textures.clear();
+        primitives.clear();
         for(auto& mesh : asset.meshes){
             for(auto& primitive : mesh.primitives){
+                Primitive modelPrimitive{};
+                modelPrimitive.firstIndex = static_cast<uint32_t>(indices.size());
+                modelPrimitive.firstVertex = static_cast<uint32_t>(vertices.size());
+                if(primitive.materialIndex.has_value()){
+                    auto& material = asset.materials[*primitive.materialIndex];
+                    if(material.pbrData.baseColorTexture.has_value()){
+                        auto textureIndex = material.pbrData.baseColorTexture->textureIndex;
+                        auto& gltfTexture = asset.textures[textureIndex];
+                        if(gltfTexture.imageIndex.has_value()){
+                            modelPrimitive.textureIndex = static_cast<int>(textures.size());
+                            textures.push_back(DecodeTexture(asset, asset.images[*gltfTexture.imageIndex]));
+                        }
+                    }
+                }
                 auto positionIt = std::find_if(primitive.attributes.begin(),primitive.attributes.end(),[](const auto& attr){return attr.name == "POSITION";});
                 if(positionIt == primitive.attributes.end()) continue;
                 auto baseVertex = static_cast<uint32_t>(vertices.size());
                 auto& positionAccessor = asset.accessors[positionIt->accessorIndex];
                 fastgltf::math::nvec4 color ={1.f, 1.f, 1.f};
-                if(primitive.materialIndex.has_value()){
-                    color = asset.materials[*primitive.materialIndex].pbrData.baseColorFactor;
-                    auto& material = asset.materials[*primitive.materialIndex];
-                    if(material.pbrData.baseColorTexture.has_value()){
-                        std::size_t textureIndex = material.pbrData.baseColorTexture->textureIndex;
-                        std::optional<std::size_t> imageIndex = asset.textures[textureIndex].imageIndex;
-                        DecodedTexture texture = DecodeTexture(asset, asset.images[imageIndex.value()]);
-                        int x = 0, y = 0;
-                        std::size_t index = (y * texture.width + x) * 4;
-                        std::uint8_t r = texture.pixels[index];
-                        std::uint8_t g = texture.pixels[index + 1];
-                        std::uint8_t b = texture.pixels[index + 2];
-                        std::uint8_t a = texture.pixels[index + 3];
-                        textures.push_back(DecodeTexture(asset, asset.images[imageIndex.value()]));
-                    }
-                }
+                if(primitive.materialIndex.has_value()) color = asset.materials[*primitive.materialIndex].pbrData.baseColorFactor;
                 for(std::size_t i = 0; i < positionAccessor.count; i++){
                     vertices.emplace_back();
                     vertices.back().color = {color.x(), color.y(), color.z()};
@@ -160,6 +186,9 @@ namespace engine{
                     fastgltf::iterateAccessor<std::uint32_t>(asset,asset.accessors[*primitive.indicesAccessor],[&](uint32_t index){
                         indices.push_back(baseVertex + index);
                     });
+                modelPrimitive.vertexCount = static_cast<uint32_t>(vertices.size()) - modelPrimitive.firstVertex;
+                modelPrimitive.indexCount = static_cast<uint32_t>(indices.size()) - modelPrimitive.firstIndex;
+                primitives.push_back(modelPrimitive);
             }
         }
     }
@@ -200,5 +229,9 @@ namespace engine{
         texture.pixels.assign(decoded, decoded + texture.width * texture.height * 4);
         stbi_image_free(decoded);
         return texture;
+    }
+    void EngineModel::bindTexture(VkCommandBuffer commandBuffer, VkPipelineLayout pipelineLayout, VkDescriptorSet descriptorSet){
+        vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout,
+             1, 1, &descriptorSet, 0, nullptr);
     }
 }

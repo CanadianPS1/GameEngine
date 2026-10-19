@@ -9,17 +9,18 @@
 namespace engine{
     class SimpleRenderSystem{
         public:
-            SimpleRenderSystem(EngineDevice& device, VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout);
+            SimpleRenderSystem(EngineDevice& device, VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout, VkDescriptorSetLayout textureSetLayout);
             ~SimpleRenderSystem();
             SimpleRenderSystem(const SimpleRenderSystem &) = delete;
             SimpleRenderSystem &operator=(const SimpleRenderSystem &) = delete;
             void renderGameObjects(std::vector<EngineGameObject*> gameObjects, FrameInfo& frameInfo);
         private:
-            void createPipelineLayout(VkDescriptorSetLayout globalSetLayout);
+            void createPipelineLayout(VkDescriptorSetLayout globalSetLayout, VkDescriptorSetLayout textureSetLayout);
             void createPipeline(VkRenderPass renderPass);
             EngineDevice& engineDevice;
             std::unique_ptr<EnginePipeline> engineThreeDPipeline;
             std::unique_ptr<EnginePipeline> engineTwoDPipeline;
             VkPipelineLayout pipelineLayout;
+            VkDescriptorSetLayout textureSetLayout;
     };
 }

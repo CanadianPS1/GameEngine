@@ -195,10 +195,16 @@ CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o: \
  /usr/include/c++/16/pstl/execution_defs.h \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineGameObject.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineModel.hpp \
- /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
- /usr/include/glm/glm.hpp /usr/include/glm/detail/_fixes.hpp \
- /usr/include/c++/16/cmath /usr/include/math.h \
- /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDescriptors.hpp \
+ /usr/include/c++/16/unordered_map \
+ /usr/include/c++/16/bits/unordered_map.h \
+ /usr/include/c++/16/bits/hashtable.h \
+ /usr/include/c++/16/bits/hashtable_policy.h \
+ /usr/include/c++/16/bits/enable_special_members.h \
+ /usr/include/c++/16/bits/node_handle.h /usr/include/glm/glm.hpp \
+ /usr/include/glm/detail/_fixes.hpp /usr/include/c++/16/cmath \
+ /usr/include/math.h /usr/include/bits/math-vector.h \
+ /usr/include/bits/libm-simd-decl-stubs.h \
  /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
  /usr/include/bits/fp-fast.h /usr/include/bits/mathcalls-macros.h \
  /usr/include/bits/mathcalls-helper-functions.h \
@@ -248,13 +254,7 @@ CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o: \
  /usr/include/glm/detail/type_vec3.inl \
  /usr/include/glm/detail/compute_vector_decl.hpp \
  /usr/include/c++/16/functional /usr/include/c++/16/bits/std_function.h \
- /usr/include/c++/16/unordered_map \
- /usr/include/c++/16/bits/unordered_map.h \
- /usr/include/c++/16/bits/hashtable.h \
- /usr/include/c++/16/bits/hashtable_policy.h \
- /usr/include/c++/16/bits/enable_special_members.h \
- /usr/include/c++/16/bits/node_handle.h /usr/include/c++/16/array \
- /usr/include/c++/16/bits/binders.h \
+ /usr/include/c++/16/array /usr/include/c++/16/bits/binders.h \
  /usr/include/glm/detail/_vectorize.hpp \
  /usr/include/glm/ext/vector_bool3_precision.hpp \
  /usr/include/glm/ext/vector_float3.hpp \
@@ -379,6 +379,8 @@ CMakeFiles/Engine.dir/engine_code/SimpleRenderSystem.c++.o: \
  /usr/include/c++/16/bits/std_mutex.h /usr/include/c++/16/span \
  /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/tools.hpp \
  /usr/include/c++/16/iterator /usr/include/c++/16/bits/stream_iterator.h \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineTexture.hpp \
  /usr/include/glm/ext/matrix_transform.hpp \
  /usr/include/glm/gtc/constants.hpp \
  /usr/include/glm/ext/scalar_constants.hpp \

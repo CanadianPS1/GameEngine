@@ -427,6 +427,7 @@ CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o: \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mmintrin.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mm_malloc.h \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineModel.hpp \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDescriptors.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.hpp \
  /usr/include/GLFW/glfw3.h /usr/include/vulkan/vulkan.h \
@@ -437,4 +438,5 @@ CMakeFiles/Engine.dir/engine_code/EngineModel.c++.o: \
  /usr/include/GL/gl.h /usr/include/GL/glext.h \
  /usr/include/KHR/khrplatform.h \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineTexture.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineUtils.hpp

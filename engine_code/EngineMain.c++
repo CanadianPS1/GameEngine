@@ -29,8 +29,9 @@ namespace engine{
     EngineMain::EngineMain(){ 
         instance = GetSelf();
         globalPool = EngineDescriptorPool::Builder(engineDevice)
-            .setMaxSets(EngineSwapChain::MAX_FRAMES_IN_FLIGHT)
+            .setMaxSets(1000)
             .addPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, EngineSwapChain::MAX_FRAMES_IN_FLIGHT)
+            .addPoolSize(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 998)
             .build();
     }
     EngineMain::~EngineMain(){}
@@ -52,7 +53,11 @@ namespace engine{
                 .writeBuffer(0, &bufferInfo)
                 .build(globalDescriptorSets[i]);
         }
-        SimpleRenderSystem simpleRenderSystem{engineDevice, engineRenderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout()};
+        auto textureSetLayout = EngineDescriptorSetLayout::Builder(engineDevice)
+            .addBinding(0, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT)
+            .build();
+        EngineModel::setTextureDescriptors(*textureSetLayout, *globalPool);
+        SimpleRenderSystem simpleRenderSystem{engineDevice, engineRenderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout(), textureSetLayout->getDescriptorSetLayout()};
         KeyboardMovementController cameraController{};
         Sceen::engineDevice = &engineDevice;
         KeyboardMovementController engineController{};

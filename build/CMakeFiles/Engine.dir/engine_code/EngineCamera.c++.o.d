@@ -240,6 +240,7 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: \
  /usr/include/glm/detail/func_integer.inl \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineGameObject.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineModel.hpp \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDescriptors.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineDevice.hpp \
  /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineWindow.hpp \
  /usr/include/GLFW/glfw3.h /usr/include/vulkan/vulkan.h \
@@ -303,9 +304,7 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: \
  /usr/include/linux/errno.h /usr/include/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/bits/types/error_t.h /usr/include/c++/16/bits/charconv.h \
- /usr/include/c++/16/bits/basic_string.tcc \
- /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
- /usr/include/vulkan/vulkan_core.h /usr/include/c++/16/memory \
+ /usr/include/c++/16/bits/basic_string.tcc /usr/include/c++/16/memory \
  /usr/include/c++/16/bits/stl_tempbuf.h \
  /usr/include/c++/16/bits/stl_raw_storage_iter.h \
  /usr/include/c++/16/bits/align.h /usr/include/c++/16/bits/unique_ptr.h \
@@ -346,6 +345,7 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: \
  /usr/include/c++/16/bits/ranges_algobase.h \
  /usr/include/c++/16/pstl/glue_memory_defs.h \
  /usr/include/c++/16/pstl/execution_defs.h \
+ /usr/include/vulkan/vulkan_core.h \
  /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/core.hpp \
  /usr/include/c++/16/fstream /usr/include/c++/16/istream \
  /usr/include/c++/16/ostream /usr/include/c++/16/bits/ostream_print.h \
@@ -378,6 +378,8 @@ CMakeFiles/Engine.dir/engine_code/EngineCamera.c++.o: \
  /usr/include/c++/16/bits/std_mutex.h /usr/include/c++/16/span \
  /home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-src/include/fastgltf/tools.hpp \
  /usr/include/c++/16/iterator /usr/include/c++/16/bits/stream_iterator.h \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineBuffer.hpp \
+ /home/gunch/Documents/GitHub/GameEngine/engine_code/EngineTexture.hpp \
  /usr/include/glm/ext/matrix_transform.hpp \
  /usr/include/glm/gtc/constants.hpp \
  /usr/include/glm/ext/scalar_constants.hpp \

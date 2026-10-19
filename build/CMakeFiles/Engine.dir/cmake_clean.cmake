@@ -24,6 +24,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Engine.dir/engine_code/EngineSceen.c++.o.d"
   "CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o"
   "CMakeFiles/Engine.dir/engine_code/EngineSwapChain.c++.o.d"
+  "CMakeFiles/Engine.dir/engine_code/EngineTexture.c++.o"
+  "CMakeFiles/Engine.dir/engine_code/EngineTexture.c++.o.d"
   "CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o"
   "CMakeFiles/Engine.dir/engine_code/EngineWindow.c++.o.d"
   "CMakeFiles/Engine.dir/engine_code/KeyboardMovementController.c++.o"
