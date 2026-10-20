@@ -1,6 +1,0 @@
-/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/Engine.dir
-/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/edit_cache.dir
-/home/gunch/Documents/GitHub/GameEngine/build/CMakeFiles/rebuild_cache.dir
-/home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-build/CMakeFiles/fastgltf.dir
-/home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-build/CMakeFiles/edit_cache.dir
-/home/gunch/Documents/GitHub/GameEngine/build/_deps/fastgltf-build/CMakeFiles/rebuild_cache.dir
