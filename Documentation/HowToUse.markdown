@@ -14,6 +14,11 @@ inorder for the engine to know what's what you need to declare a innitial method
 although the names of your methods dont matter what does is that they are void with no peramiters
 you can have as many on start or update methods as you would like, if you decide you want no update AND start methods then you must still declare the SetInitialMethods method
 
+You can set the light level in world space by calling in SetInitialMethods SetLightLevel(float level); if you dont then the defult light value will be 0.5 
+
+    engine::EngineMain::SetInitialMethods(){
+        SetLightLevel(6.5f);
+    }
 
 **CREATING 3D OBJECTS**
 

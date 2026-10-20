@@ -20,6 +20,7 @@ namespace engine{
     // void sPressed(){std::cout<<"s pressed"<<std::endl;}
     void EngineMain::SetInitialMethods(){
         MakeMethodOnStart(start);
+        SetLightLevel(6.5f);
         // MakeMethodOnUpdate(update);
         // InputController::SetDownInput(GLFW_KEY_W, wPressed);
         // InputController::SetDownInput(GLFW_KEY_S, sPressed);

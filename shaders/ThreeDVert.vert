@@ -16,7 +16,7 @@ layout(push_constant) uniform Push{
 } push;
 float AMBIENT;
 void main(){
-    if(ubo.defultLight != -1) AMBIENT = ubo.defultLight;
+    if(ubo.defultLight > -1) AMBIENT = ubo.defultLight;
     else AMBIENT = 0.05;
     fragUV = uv;
     gl_Position = ubo.projectionViewMatrix * push.modelMatrix * vec4(position, 1.0);

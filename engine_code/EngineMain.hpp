@@ -41,6 +41,7 @@ namespace engine{
             static void LoadGameObjects(Sceen& sceen);
             static void UnloadGameObjects();
             EngineWindow engineWindow{WIDTH, HEIGHT, "NAME"};
+            void SetLightLevel(float level);
         private:
             EngineDevice engineDevice{engineWindow};
             EngineRenderer engineRenderer{engineWindow, engineDevice};
@@ -48,5 +49,6 @@ namespace engine{
             std::vector<EngineGameObject*> gameObjects;
             static EngineMain* instance;
             EngineMain* GetSelf();
+            static float defultLight;
     };
 }

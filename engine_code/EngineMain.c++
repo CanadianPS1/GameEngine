@@ -22,7 +22,7 @@
 #include "EngineSceen.hpp"
 #include "EngineMain.hpp"
 namespace engine{
-    static int num = 0;
+    float EngineMain::defultLight = -1;
     EngineMain* EngineMain::instance = nullptr;
     EngineDevice* Sceen::engineDevice = nullptr;
     std::vector<EngineGameObject>* EngineMain::*gameObjects = nullptr;
@@ -81,6 +81,7 @@ namespace engine{
                 int frameIndex = engineRenderer.getFrameIndex();
                 FrameInfo frameInfo{frameIndex, frameTime, commandBuffer, *EngineCamera::mainCamera, globalDescriptorSets[frameIndex]};
                 GlobalUbo ubo{};
+                ubo.defultLight = defultLight;
                 if(EngineCamera::mainCamera != nullptr) ubo.projectionView = EngineCamera::mainCamera->getProjection() * EngineCamera::mainCamera->getView();
                 uboBuffers[frameIndex]->writeToBuffer(&ubo);
                 uboBuffers[frameIndex]->flush();
@@ -92,6 +93,7 @@ namespace engine{
         }
         vkDeviceWaitIdle(engineDevice.device());
     }
+    void EngineMain::SetLightLevel(float level){defultLight = level;}
     void EngineMain::LoadGameObjects(Sceen& sceen){instance->gameObjects = sceen.gameObjects;}
     void EngineMain::UnloadGameObjects(){instance->gameObjects.clear();}
     void EngineMain::MakeMethodOnStart(std::function<void()> method){startMethods.push_back(method);}
