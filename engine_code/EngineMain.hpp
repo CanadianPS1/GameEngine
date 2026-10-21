@@ -42,6 +42,8 @@ namespace engine{
             static void UnloadGameObjects();
             EngineWindow engineWindow{WIDTH, HEIGHT, "NAME"};
             void SetLightLevel(float level);
+            static bool fpsLimited;
+            static float fpsMax;
         private:
             EngineDevice engineDevice{engineWindow};
             EngineRenderer engineRenderer{engineWindow, engineDevice};

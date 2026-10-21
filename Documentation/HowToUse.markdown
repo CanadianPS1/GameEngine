@@ -20,6 +20,14 @@ You can set the light level in world space by calling in SetInitialMethods SetLi
         SetLightLevel(6.5f);
     }
 
+If you want to set a max fps then you need to set fpsLimited = true and the fpsMax value, if you dont set the fpsMax the defult is 60, the values are static so you
+can set them anywhere you would like if you call it on the EngineMain class, but for the demo there being set in the SetInitialMethods class
+
+    engine::EngineMain::SetInitialMethods(){
+        fpsLimited = true;
+        fpsMax = 70;
+    }
+
 **CREATING 3D OBJECTS**
 
 Every obejct must be contained in a Sceen, a Sceen is just a collection of game objects that can be 2D or 3D Sceens, Sceens are used to load sets of game objects 

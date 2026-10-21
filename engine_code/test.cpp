@@ -14,13 +14,15 @@ namespace engine{
         EngineCamera::SetMainCamera(camera);
     }
     void update(){
-        //std::cout<<InputController::GetEvent()<<std::endl;
+        std::cout<<InputController::GetEvent()<<std::endl;
     }
     // void wPressed(){std::cout<<"w pressed"<<std::endl;}
     // void sPressed(){std::cout<<"s pressed"<<std::endl;}
     void EngineMain::SetInitialMethods(){
         MakeMethodOnStart(start);
-        SetLightLevel(6.5f);
+        fpsLimited = true;
+        fpsMax = 60;
+        //SetLightLevel(6.5f);
         // MakeMethodOnUpdate(update);
         // InputController::SetDownInput(GLFW_KEY_W, wPressed);
         // InputController::SetDownInput(GLFW_KEY_S, sPressed);

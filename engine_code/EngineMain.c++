@@ -1,4 +1,4 @@
-#include <type_traits>
+#include <thread>
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <memory>
@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <thread>
 #include <vulkan/vulkan_core.h>
 #include <glm/gtc/constants.hpp>
 #include <glm/detail/qualifier.hpp>
@@ -23,6 +24,8 @@
 #include "EngineMain.hpp"
 namespace engine{
     float EngineMain::defultLight = -1;
+    bool EngineMain::fpsLimited = false;
+    float EngineMain::fpsMax = 60;
     EngineMain* EngineMain::instance = nullptr;
     EngineDevice* Sceen::engineDevice = nullptr;
     std::vector<EngineGameObject>* EngineMain::*gameObjects = nullptr;
@@ -65,11 +68,23 @@ namespace engine{
         auto currentTime = std::chrono::high_resolution_clock::now();
         if(startMethods.size() > 0) for(std::function<void()> method : startMethods) method();
         InputController::window = engineWindow.getGLFWwindow();
+        int fps = 0;
+        int framesLeftInSecond;
+        float oldTime;
         while(!engineWindow.shouldClose()){
             glfwPollEvents();
+            fps++;
             auto newTime = std::chrono::high_resolution_clock::now();
             float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
             currentTime = newTime;
+            static auto lastSecond = std::chrono::steady_clock::now();
+            auto newFPSTime = std::chrono::steady_clock::now();
+            if(std::chrono::duration_cast<std::chrono::seconds>(newFPSTime - lastSecond).count() >= 1){
+                lastSecond = newFPSTime;
+                std::cout<<fps<<std::endl;
+                fps = 0;
+                if(fpsLimited) framesLeftInSecond = fpsMax;
+            }
             cameraController.moveInPlaneXZ(engineWindow.getGLFWwindow(), frameTime, *EngineCamera::mainCamera->viewerObject);
             if(updateMethods.size() > 0) for(std::function<void()> method : updateMethods) method();
             InputController::CallKeyMethods();
@@ -87,6 +102,11 @@ namespace engine{
                 uboBuffers[frameIndex]->flush();
                 engineRenderer.beginSwapChainRenderPass(commandBuffer);
                 simpleRenderSystem.renderGameObjects(gameObjects, frameInfo);
+                if(fpsLimited){
+                    framesLeftInSecond--;
+                    int timeToWait =  (1.0f / framesLeftInSecond - frameTime) * 1000;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
+                }
                 engineRenderer.endSwapChainRenderPass(commandBuffer);
                 engineRenderer.endFrame();
             }
