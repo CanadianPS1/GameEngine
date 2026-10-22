@@ -9,10 +9,15 @@ namespace engine{
     EnginePipeline::EnginePipeline(EngineDevice &device, const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo) : engineDevice{device}{
         createGraphicsPipeline(vertFilepath, fragFilepath, configInfo);
     }
+    EnginePipeline::EnginePipeline(EngineDevice& device, const std::string& taskFilepath, const std::string& meshFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo) : engineDevice{device}{
+        createMeshGraphicsPipeline(taskFilepath, meshFilepath, fragFilepath, configInfo);
+    }
     EnginePipeline::~EnginePipeline(){
-        vkDestroyShaderModule(engineDevice.device(), vertShaderModule, nullptr);
-        vkDestroyShaderModule(engineDevice.device(), fragShaderModule, nullptr);
-        vkDestroyPipeline(engineDevice.device(), graphicsPipeline, nullptr);
+        if(graphicsPipeline != VK_NULL_HANDLE) vkDestroyPipeline(engineDevice.device(), graphicsPipeline, nullptr);
+        if(vertShaderModule != VK_NULL_HANDLE) vkDestroyShaderModule(engineDevice.device(), vertShaderModule, nullptr);
+        if(taskShaderModule != VK_NULL_HANDLE) vkDestroyShaderModule(engineDevice.device(), taskShaderModule, nullptr);
+        if(meshShaderModule != VK_NULL_HANDLE) vkDestroyShaderModule(engineDevice.device(), meshShaderModule, nullptr);
+        if(fragShaderModule != VK_NULL_HANDLE) vkDestroyShaderModule(engineDevice.device(), fragShaderModule, nullptr);
     }
     std::vector<char> EnginePipeline::readFile(const std::string& filepath){
         std::ifstream file{filepath, std::ios::ate | std::ios::binary};
@@ -75,6 +80,49 @@ namespace engine{
         pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
         if(vkCreateGraphicsPipelines(engineDevice.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS)
             throw std::runtime_error("failed to create graphics pipeline");
+    }
+    void EnginePipeline::createMeshGraphicsPipeline(const std::string& taskFilepath, const std::string& meshFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo){
+        assert(configInfo.pipelineLayout != VK_NULL_HANDLE && "No pipeline layout provided");
+        assert(configInfo.renderPass != VK_NULL_HANDLE && "No render pass provided");
+        auto taskCode = readFile(taskFilepath);
+        auto meshCode = readFile(meshFilepath);
+        auto fragCode = readFile(fragFilepath);
+        createShaderModule(taskCode, &taskShaderModule);
+        createShaderModule(meshCode, &meshShaderModule);
+        createShaderModule(fragCode, &fragShaderModule);
+        VkPipelineShaderStageCreateInfo shaderStages[3]{};
+        shaderStages[0].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+        shaderStages[0].stage = VK_SHADER_STAGE_TASK_BIT_EXT;
+        shaderStages[0].module = taskShaderModule;
+        shaderStages[0].pName = "main";
+        shaderStages[1].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+        shaderStages[1].stage = VK_SHADER_STAGE_MESH_BIT_EXT;
+        shaderStages[1].module = meshShaderModule;
+        shaderStages[1].pName = "main";
+        shaderStages[2].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+        shaderStages[2].stage = VK_SHADER_STAGE_FRAGMENT_BIT;
+        shaderStages[2].module = fragShaderModule;
+        shaderStages[2].pName = "main";
+        VkGraphicsPipelineCreateInfo pipelineInfo{};
+        pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+        pipelineInfo.stageCount = 3;
+        pipelineInfo.pStages = shaderStages;
+        pipelineInfo.pVertexInputState = nullptr;
+        pipelineInfo.pInputAssemblyState = nullptr;
+        pipelineInfo.pTessellationState = nullptr;
+        pipelineInfo.pViewportState = &configInfo.viewportInfo;
+        pipelineInfo.pRasterizationState = &configInfo.rasterizationInfo;
+        pipelineInfo.pMultisampleState = &configInfo.multisampleInfo;
+        pipelineInfo.pColorBlendState = &configInfo.colorBlendInfo;
+        pipelineInfo.pDepthStencilState = &configInfo.depthStencilInfo;
+        pipelineInfo.pDynamicState = &configInfo.dynamicStateInfo;
+        pipelineInfo.layout = configInfo.pipelineLayout;
+        pipelineInfo.renderPass = configInfo.renderPass;
+        pipelineInfo.subpass = configInfo.subpass;
+        pipelineInfo.basePipelineIndex = -1;
+        pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
+        if(vkCreateGraphicsPipelines(engineDevice.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS)
+            throw std::runtime_error("failed to create mesh graphics pipeline");
     }
     void EnginePipeline::createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule){
         VkShaderModuleCreateInfo createInfo{};
@@ -157,7 +205,6 @@ namespace engine{
         configInfo.dynamicStateInfo.dynamicStateCount = static_cast<uint32_t>(configInfo.dynamicStateEnables.size());
     }
     void EnginePipeline::bind(VkCommandBuffer commandBuffer){
-
         vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
     }
 }

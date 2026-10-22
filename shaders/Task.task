@@ -1,0 +1,49 @@
+#version 460
+#extension GL_EXT_mesh_shader : require
+taskPayloadSharedEXT uint batchIndex;
+layout(set = 2, binding = 2, std430) readonly buffer BatchBoundsBuffer {
+    vec4 bounds[];
+};
+layout(set = 0, binding = 0) uniform GlobalUbo {
+    mat4 projectionViewMatrix;
+    vec3 directionToLight;
+    float defultLight;
+} globalUbo;
+layout(push_constant) uniform Push {
+    mat4 modelMatrix;
+    mat4 normalMatrix;
+    uint firstVertex;
+    uint firstIndex;
+    uint vertexCount;
+    uint indexCount;
+    uint trianglesPerTask;
+    uint firstBatch;
+} push;
+void main(){
+    uint batch = gl_WorkGroupID.x;
+    vec4 localSphere = bounds[push.firstBatch + batch];
+    vec3 center = (push.modelMatrix * vec4(localSphere.xyz, 1.0)).xyz;
+    float scale = max(length(push.modelMatrix[0].xyz),max(length(push.modelMatrix[1].xyz), length(push.modelMatrix[2].xyz)));
+    float radius = localSphere.w * scale;
+    mat4 vp = globalUbo.projectionViewMatrix;
+    vec4 r0 = vec4(vp[0][0], vp[1][0], vp[2][0], vp[3][0]);
+    vec4 r1 = vec4(vp[0][1], vp[1][1], vp[2][1], vp[3][1]);
+    vec4 r2 = vec4(vp[0][2], vp[1][2], vp[2][2], vp[3][2]);
+    vec4 r3 = vec4(vp[0][3], vp[1][3], vp[2][3], vp[3][3]);
+    vec4 planes[6] = vec4[6](
+        r3 + r0,
+        r3 - r0,
+        r3 + r1,
+        r3 - r1,
+        r2,
+        r3 - r2
+    );
+    for(int i = 0; i < 6; i++){
+        float normalLength = length(planes[i].xyz);
+        if(normalLength > 0.0 &&
+        dot(planes[i].xyz, center) + planes[i].w < -radius * normalLength)
+            return;
+    }
+    batchIndex = batch;
+    EmitMeshTasksEXT(1, 1, 1);
+}

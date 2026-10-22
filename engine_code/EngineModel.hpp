@@ -9,7 +9,6 @@
 #include <fastgltf/core.hpp>
 #include <fastgltf/types.hpp>
 #include <fastgltf/tools.hpp>
-#include <cstring>
 #include <memory>
 #include <string>
 #include "EngineDevice.hpp"
@@ -35,12 +34,17 @@ namespace engine{
                     return position == other.position && color == other.color && normal == other.normal && uv == other.uv;
                 }
             };
+            struct BatchBounds{
+                glm::vec4 sphere{};
+            };
             struct Primitive{
                 uint32_t firstIndex = 0;
                 uint32_t indexCount = 0;
                 uint32_t firstVertex = 0;
                 uint32_t vertexCount = 0;
                 int textureIndex = -1;
+                std::vector<BatchBounds> batchBounds{};
+                uint32_t firstBatch = 0;
             };
             struct Builder{
                 std::vector<Vertex> vertices{};
@@ -59,7 +63,14 @@ namespace engine{
             void bindTexture(VkCommandBuffer commandBuffer, VkPipelineLayout pipelineLayout, VkDescriptorSet descriptorSet);
             static std::shared_ptr<EngineModel> createModelFromFile(EngineDevice &device, const std::string &filepath);
             static void setTextureDescriptors(EngineDescriptorSetLayout& layout, EngineDescriptorPool& pool);
+            static void setMeshDescriptors(EngineDescriptorSetLayout&, EngineDescriptorPool&);
+            VkDescriptorSet getMeshDescriptorSet() const {return meshDescriptorSet;}
+            const std::vector<Primitive>& getPrimitives() const{return primitives;}
+            bool hasIndices() const {return hasIndexBuffer;}
+            VkDescriptorSet getTextureDescriptorSet(uint32_t index) const {return textureDescriptorSets.at(index);}
         private:
+            void createBatchBoundsBuffer();
+            std::unique_ptr<EngineBuffer> batchBoundsBuffer;
             void createVertexBuffers(const std::vector<Vertex> &vertices);
             void createIndexBuffers(const std::vector<uint32_t> &indices);
             EngineDevice& engineDevice;
@@ -73,6 +84,9 @@ namespace engine{
             static EngineDescriptorPool* texturePool;
             std::vector<VkDescriptorSet> textureDescriptorSets;
             std::vector<Primitive> primitives;
+            VkDescriptorSet meshDescriptorSet = VK_NULL_HANDLE;
+            static EngineDescriptorSetLayout* meshSetLayout;
+            static EngineDescriptorPool* meshPool;
             
     };
 }

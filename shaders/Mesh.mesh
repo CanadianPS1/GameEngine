@@ -1,0 +1,51 @@
+#version 460
+#extension GL_EXT_mesh_shader : require
+layout(local_size_x = 32) in;
+layout(triangles, max_vertices = 255, max_primitives = 85) out;
+layout(location = 0) out vec3 color[];
+layout(location = 1) out vec2 uv[];
+layout(set = 2, binding = 0, std430) readonly buffer VertexBuffer{float vertexData[];};
+layout(set = 2, binding = 1, std430) readonly buffer IndexBuffer{uint indices[];};
+layout(push_constant) uniform Push {
+    mat4 modelMatrix;
+    mat4 normalMatrix;
+    uint firstVertex;
+    uint firstIndex;
+    uint vertexCount;
+    uint indexCount;
+    uint trianglesPerTask;
+} push;
+layout(set = 0, binding = 0) uniform GlobalUbo {
+    mat4 projectionViewMatrix;
+    vec3 directionToLight;
+    float defultLight;
+} globalUbo;
+taskPayloadSharedEXT uint batchIndex;
+void main(){
+    uint triangleCount = push.indexCount > 0 ? push.indexCount / 3 : push.vertexCount / 3;
+    uint firstTriangle = batchIndex * push.trianglesPerTask;
+    if(firstTriangle >= triangleCount){SetMeshOutputsEXT(0, 0); return;}
+    uint count = min(push.trianglesPerTask, triangleCount - firstTriangle);
+    SetMeshOutputsEXT(count * 3, count);
+    for(uint i = gl_LocalInvocationIndex; i < count; i += gl_WorkGroupSize.x){
+        for(uint j = 0; j < 3; j++){
+            uint vertexIndex = push.indexCount > 0 ? indices[push.firstIndex + (firstTriangle + i) * 3 + j] : push.firstVertex + (firstTriangle + i) * 3 + j;
+            uint base = vertexIndex * 11;
+            vec3 position = vec3(vertexData[base], vertexData[base + 1], vertexData[base + 2]);
+            vec3 normal = vec3(
+                vertexData[base + 6],
+                vertexData[base + 7],
+                vertexData[base + 8]
+            );
+            vec3 vertexColor = vec3(vertexData[base + 3], vertexData[base + 4], vertexData[base + 5]);
+            vec2 texCoord = vec2(vertexData[base + 9], vertexData[base + 10]);
+            vec3 normalWorldSpace = normalize(mat3(push.normalMatrix) * normal);
+            float ambient = globalUbo.defultLight > -1.0 ? globalUbo.defultLight : 0.05;
+            float lightIntensity = ambient + max(dot(normalWorldSpace, globalUbo.directionToLight), 0.0);
+            color[i * 3 + j] = lightIntensity * vertexColor;
+            uv[i * 3 + j] = texCoord;
+            gl_MeshVerticesEXT[i * 3 + j].gl_Position = globalUbo.projectionViewMatrix * push.modelMatrix * vec4(position, 1.0);
+        }
+        gl_PrimitiveTriangleIndicesEXT[i] = uvec3(i * 3, i * 3 + 1, i * 3 + 2);
+    }
+}

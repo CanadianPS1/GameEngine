@@ -62,6 +62,8 @@ Creating an object has many paramiters but the ones needed to create a 3D object
     its scale
     its rotation
 
+If you choose not to provide a file path then the engine will assign it the value of an invisible cube
+
 **ACTIONS WITH 3D OBJECTS**
 
 If you want to change every one of an objects locations in one blow then youll need to provide a glm::vec3 with the x y z as floats
@@ -86,6 +88,17 @@ you can also change just the x y or z of an object
         forest->transform.translation.x = 9.f;
         forest->transform.scale.y = 9.f;
         forest->transform.rotation.z = 9.f;
+    }
+
+You can change a objects visibility by setting its visible attribute
+
+    void start(){
+        engine::Sceen sceen1("sceen1");
+        engine::EngineGameObject* forest = sceen1.CreateObject("../assets/scenes/Forest.obj", "Forest", 
+            glm::vec3{0.0f, 7.0f, 13.f}, glm::vec3{0.5f, 0.5f, 0.5f}, glm::vec3{0.f,0.f,0.f});
+        engine::EngineMain::LoadGameObjects(sceen1);
+        forest->visible = false;
+        forest->visible = true;
     }
 
 **ACTIONS WITH 3D CAMERAS**

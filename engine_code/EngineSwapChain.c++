@@ -4,6 +4,7 @@
 #include <array>
 #include <cstdlib>
 #include <cstring>
+#include <iostream>
 #include <limits>
 #include <memory>
 #include <stdexcept>
@@ -66,9 +67,12 @@ namespace engine{
         submitInfo.signalSemaphoreCount = 1;
         submitInfo.pSignalSemaphores = signalSemaphores;
         vkResetFences(device.device(), 1, &inFlightFences[currentFrame]);
-        if(vkQueueSubmit(device.graphicsQueue(), 1, &submitInfo, inFlightFences[currentFrame]) != VK_SUCCESS) 
-        throw std::runtime_error("failed to submit draw command buffer!");
-    VkPresentInfoKHR presentInfo = {};
+        VkResult result1 = vkQueueSubmit(device.graphicsQueue(), 1, &submitInfo, inFlightFences[currentFrame]);
+        if(result1 != VK_SUCCESS){
+            std::cerr<<result1<<std::endl;
+            throw std::runtime_error("failed to submit draw command buffer!");
+        }
+        VkPresentInfoKHR presentInfo = {};
         presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
         presentInfo.waitSemaphoreCount = 1;
         presentInfo.pWaitSemaphores = signalSemaphores;

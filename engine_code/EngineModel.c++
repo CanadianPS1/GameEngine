@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <filesystem>
-#include <iostream>
 #include <cassert>
 #include <cstddef>
 #include <memory>
@@ -31,11 +30,27 @@ namespace engine{
         textureSetLayout = &layout;
         texturePool = &pool;
     }
+    EngineDescriptorSetLayout* EngineModel::meshSetLayout = nullptr;
+    EngineDescriptorPool* EngineModel::meshPool = nullptr;
     EngineDescriptorSetLayout* EngineModel::textureSetLayout = nullptr;
     EngineDescriptorPool* EngineModel::texturePool = nullptr;
+    static_assert(sizeof(EngineModel::Vertex) == 44);
+    static_assert(offsetof(EngineModel::Vertex, position) == 0);
+    static_assert(offsetof(EngineModel::Vertex, color) == 12);
+    static_assert(offsetof(EngineModel::Vertex, normal) == 24);
+    static_assert(offsetof(EngineModel::Vertex, uv) == 36);
     EngineModel::EngineModel(EngineDevice& device, const Builder& builder) : engineDevice{device}, primitives{builder.primitives}{
         createVertexBuffers(builder.vertices);
         createIndexBuffers(builder.indices);
+        createBatchBoundsBuffer();
+        if(!meshSetLayout || !meshPool) throw std::runtime_error("Mesh descriptors not initialized");
+        auto vertexInfo = vertexBuffer->descriptorInfo(vertexBuffer->getBufferSize());
+        auto indexInfo = hasIndexBuffer ? indexBuffer->descriptorInfo(indexBuffer->getBufferSize()) : vertexBuffer->descriptorInfo(vertexBuffer->getBufferSize());
+        auto boundsInfo = batchBoundsBuffer->descriptorInfo(batchBoundsBuffer->getBufferSize());
+        EngineDescriptorWriter(*meshSetLayout, *meshPool)
+            .writeBuffer(0, &vertexInfo)
+            .writeBuffer(1, &indexInfo)
+            .build(meshDescriptorSet);
         auto createTexture = [&](uint32_t width, uint32_t height, const std::vector<std::uint8_t>& pixels){
             auto texture = std::make_unique<EngineTexture>(engineDevice, width, height, pixels);
             auto imageInfo = texture->descriptorInfo();
@@ -67,7 +82,7 @@ namespace engine{
         EngineBuffer stagingBuffer{engineDevice, vertexSize, vertexCount, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT};
         stagingBuffer.map();
         stagingBuffer.writeToBuffer((void *)vertices.data());
-        vertexBuffer = std::make_unique<EngineBuffer>(engineDevice, vertexSize, vertexCount, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+        vertexBuffer = std::make_unique<EngineBuffer>(engineDevice, vertexSize, vertexCount, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
         engineDevice.copyBuffer(stagingBuffer.getBuffer(), vertexBuffer->getBuffer(), bufferSize);
     }
     void EngineModel::createIndexBuffers(const std::vector<uint32_t> &indices){
@@ -79,7 +94,7 @@ namespace engine{
         EngineBuffer stagingBuffer{engineDevice, indexSize, indexCount, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT};
         stagingBuffer.map();
         stagingBuffer.writeToBuffer((void*) indices.data());
-        indexBuffer = std::make_unique<EngineBuffer>(engineDevice, indexSize, indexCount, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+        indexBuffer = std::make_unique<EngineBuffer>(engineDevice, indexSize, indexCount, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
         engineDevice.copyBuffer(stagingBuffer.getBuffer(), indexBuffer->getBuffer(), bufferSize);
 
     }
@@ -188,9 +203,46 @@ namespace engine{
                     });
                 modelPrimitive.vertexCount = static_cast<uint32_t>(vertices.size()) - modelPrimitive.firstVertex;
                 modelPrimitive.indexCount = static_cast<uint32_t>(indices.size()) - modelPrimitive.firstIndex;
+                constexpr uint32_t trianglesPerBatch = 85;
+                uint32_t triangleCount = modelPrimitive.indexCount > 0 ? modelPrimitive.indexCount / 3 : modelPrimitive.vertexCount / 3;
+                for(uint32_t firstTriangle = 0; firstTriangle < triangleCount; firstTriangle += trianglesPerBatch){
+                    uint32_t count = std::min(trianglesPerBatch, triangleCount - firstTriangle);
+                    glm::vec3 minBounds{std::numeric_limits<float>::max()};
+                    glm::vec3 maxBounds{std::numeric_limits<float>::lowest()};
+                    for(uint32_t i = 0; i < count * 3; i++){
+                        uint32_t vertexIndex = modelPrimitive.indexCount > 0 ? indices[modelPrimitive.firstIndex + firstTriangle * 3 + i] : modelPrimitive.firstVertex + firstTriangle * 3 + i;
+                        const auto& position = vertices[vertexIndex].position;
+                        minBounds = glm::min(minBounds, position);
+                        maxBounds = glm::max(maxBounds, position);
+                    }
+                    glm::vec3 center = (minBounds + maxBounds) * 0.5f;
+                    float radius = glm::length(maxBounds - center);
+                    modelPrimitive.batchBounds.push_back({glm::vec4(center, radius)});
+                }
                 primitives.push_back(modelPrimitive);
             }
         }
+    }
+    void EngineModel::createBatchBoundsBuffer(){
+        std::vector<glm::vec4> bounds;
+        for(auto& primitive : primitives){
+            primitive.firstBatch = static_cast<uint32_t>(bounds.size());
+            for(const auto& batch : primitive.batchBounds)
+                bounds.push_back(batch.sphere);
+        }
+        if(bounds.empty()) bounds.push_back(glm::vec4(0.f));
+        VkDeviceSize bufferSize = sizeof(glm::vec4) * bounds.size();
+        EngineBuffer stagingBuffer{
+            engineDevice, sizeof(glm::vec4), static_cast<uint32_t>(bounds.size()),
+            VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
+        };
+        stagingBuffer.map();
+        stagingBuffer.writeToBuffer(bounds.data());
+        batchBoundsBuffer = std::make_unique<EngineBuffer>(
+            engineDevice, sizeof(glm::vec4), static_cast<uint32_t>(bounds.size()),
+            VK_BUFFER_USAGE_STORAGE_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
+        );
+        engineDevice.copyBuffer(stagingBuffer.getBuffer(), batchBoundsBuffer->getBuffer(), bufferSize);
     }
     EngineModel::DecodedTexture EngineModel::DecodeTexture(const fastgltf::Asset& asset, const fastgltf::Image& image) {
         const std::byte* bytes = nullptr;
@@ -233,5 +285,9 @@ namespace engine{
     void EngineModel::bindTexture(VkCommandBuffer commandBuffer, VkPipelineLayout pipelineLayout, VkDescriptorSet descriptorSet){
         vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout,
              1, 1, &descriptorSet, 0, nullptr);
+    }
+    void EngineModel::setMeshDescriptors(EngineDescriptorSetLayout& layout, EngineDescriptorPool& pool){
+        meshSetLayout = &layout;
+        meshPool = &pool;
     }
 }

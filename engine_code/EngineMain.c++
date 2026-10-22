@@ -35,6 +35,7 @@ namespace engine{
             .setMaxSets(1000)
             .addPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, EngineSwapChain::MAX_FRAMES_IN_FLIGHT)
             .addPoolSize(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 998)
+            .addPoolSize(VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 2000)
             .build();
     }
     EngineMain::~EngineMain(){}
@@ -47,7 +48,7 @@ namespace engine{
             uboBuffers[i]->map();
         }
         auto globalSetLayout = EngineDescriptorSetLayout::Builder(engineDevice)
-            .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT)
+            .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_MESH_BIT_EXT)
             .build();
         std::vector<VkDescriptorSet> globalDescriptorSets(EngineSwapChain::MAX_FRAMES_IN_FLIGHT);
         for(int i = 0; i < globalDescriptorSets.size(); i++){
@@ -61,6 +62,7 @@ namespace engine{
             .build();
         EngineModel::setTextureDescriptors(*textureSetLayout, *globalPool);
         SimpleRenderSystem simpleRenderSystem{engineDevice, engineRenderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout(), textureSetLayout->getDescriptorSetLayout()};
+        simpleRenderSystem.setMeshDescriptorPool(*globalPool);
         KeyboardMovementController cameraController{};
         Sceen::engineDevice = &engineDevice;
         KeyboardMovementController engineController{};

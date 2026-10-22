@@ -29,6 +29,7 @@ namespace engine{
             id_t getId(){return id;}
             std::shared_ptr<EngineModel> model{};
             glm::vec3 color{};
+            bool visible = true;
             TransformComponent transform{};
             std::string name;
             bool twoDementional = false;

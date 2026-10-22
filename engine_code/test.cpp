@@ -20,7 +20,7 @@ namespace engine{
     // void sPressed(){std::cout<<"s pressed"<<std::endl;}
     void EngineMain::SetInitialMethods(){
         MakeMethodOnStart(start);
-        fpsLimited = true;
+        //fpsLimited = true;
         fpsMax = 60;
         //SetLightLevel(6.5f);
         // MakeMethodOnUpdate(update);

@@ -24,6 +24,7 @@ namespace engine{
     class EnginePipeline{
         public:
             EnginePipeline(EngineDevice &device, const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo);
+            EnginePipeline(EngineDevice& device, const std::string& taskFilepath, const std::string& meshFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo);
             ~EnginePipeline();
             EnginePipeline(const EnginePipeline&) = delete;
             EnginePipeline& operator=(const EnginePipeline&) = delete;
@@ -32,10 +33,13 @@ namespace engine{
         private:
         static std::vector<char> readFile(const std::string& filepath);
             void createGraphicsPipeline(const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo);
+            void createMeshGraphicsPipeline(const std::string& taskFilepath, const std::string& meshFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo);
             void createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule);
             EngineDevice& engineDevice;
             VkPipeline graphicsPipeline;
             VkShaderModule vertShaderModule;
             VkShaderModule fragShaderModule;
+            VkShaderModule taskShaderModule = VK_NULL_HANDLE;
+            VkShaderModule meshShaderModule = VK_NULL_HANDLE;
     };
 }

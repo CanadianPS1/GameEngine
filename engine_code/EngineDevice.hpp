@@ -2,6 +2,7 @@
 #include "EngineWindow.hpp"
 // std lib headers
 #include <vector>
+#include <vulkan/vulkan_core.h>
 namespace engine{
     struct SwapChainSupportDetails{
         VkSurfaceCapabilitiesKHR capabilities;
@@ -24,7 +25,6 @@ namespace engine{
             #endif
             EngineDevice(EngineWindow &window);
             ~EngineDevice();
-            // Not copyable or movable
             EngineDevice(const EngineDevice &) = delete;
             EngineDevice operator=(const EngineDevice &) = delete;
             EngineDevice(EngineDevice &&) = delete;
@@ -38,22 +38,22 @@ namespace engine{
             uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
             QueueFamilyIndices findPhysicalQueueFamilies(){return findQueueFamilies(physicalDevice);}
             VkFormat findSupportedFormat(const std::vector<VkFormat> &candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
-            // Buffer Helper Functions
             void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer &buffer, VkDeviceMemory &bufferMemory);
             VkCommandBuffer beginSingleTimeCommands();
             void endSingleTimeCommands(VkCommandBuffer commandBuffer);
             void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
             void copyBufferToImage(VkBuffer buffer, VkImage image, uint32_t width, uint32_t height, uint32_t layerCount);
             void createImageWithInfo(const VkImageCreateInfo &imageInfo, VkMemoryPropertyFlags properties, VkImage &image, VkDeviceMemory &imageMemory);
-            VkPhysicalDeviceProperties properties;
+            VkPhysicalDeviceProperties properties{};
+            const VkPhysicalDeviceMeshShaderPropertiesEXT& getMeshShaderProperties() const{return meshShaderProperties;}
         private:
+            VkPhysicalDeviceMeshShaderPropertiesEXT meshShaderProperties{};
             void createInstance();
             void setupDebugMessenger();
             void createSurface();
             void pickPhysicalDevice();
             void createLogicalDevice();
             void createCommandPool();
-            // helper functions
             bool isDeviceSuitable(VkPhysicalDevice device);
             std::vector<const char *> getRequiredExtensions();
             bool checkValidationLayerSupport();
@@ -72,6 +72,9 @@ namespace engine{
             VkQueue graphicsQueue_;
             VkQueue presentQueue_;
             const std::vector<const char *> validationLayers = {"VK_LAYER_KHRONOS_validation"};
-            const std::vector<const char *> deviceExtensions = {VK_KHR_SWAPCHAIN_EXTENSION_NAME};
+            const std::vector<const char *> deviceExtensions = {
+                VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+                VK_EXT_MESH_SHADER_EXTENSION_NAME
+            };
     };
 }

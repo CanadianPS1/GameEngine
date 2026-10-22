@@ -1,7 +1,4 @@
-#include <cstddef>
 #include <vector>
-#include <algorithm>
-#include <iostream>
 #include <utility>
 #include "EngineSceen.hpp"
 #include "EngineGameObject.hpp"
@@ -13,10 +10,14 @@ namespace engine{
     EngineGameObject* Sceen::CreateObject(std::string modelPath, std::string modelName, std::optional<glm::vec3> threeDementionalTranslation, 
     std::optional<glm::vec3> threeDementionalScale, std::optional<glm::vec3> threeDementionalRotation, std::optional<glm::vec2> twoDementionalTranslation, 
     std::optional<glm::vec2> twoDementionalScale, std::optional<glm::vec2> twoDementionalRotation){
-        std::shared_ptr<EngineModel> engineModel = EngineModel::createModelFromFile(*Sceen::engineDevice, modelPath);
         EngineGameObject* object = EngineGameObject::CreateGameObject();
+        if(modelPath == "") {
+            modelPath = "../assets/scenes/Block.glb";
+            object->visible = false;
+        }
+        std::shared_ptr<EngineModel> engineModel = EngineModel::createModelFromFile(*Sceen::engineDevice, modelPath);
         if(!threeDementionalTranslation) object->twoDementional = true;
-        object->model = engineModel;
+        if(engineModel) object->model = engineModel;
         object->name = modelName;
         if(threeDementionalTranslation) object->transform.translation = *threeDementionalTranslation;
         // else if(twoDementionalTranslation) object.transform.translation = *twoDementionalTranslation;
