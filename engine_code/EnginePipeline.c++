@@ -12,12 +12,17 @@ namespace engine{
     EnginePipeline::EnginePipeline(EngineDevice& device, const std::string& taskFilepath, const std::string& meshFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo) : engineDevice{device}{
         createMeshGraphicsPipeline(taskFilepath, meshFilepath, fragFilepath, configInfo);
     }
+    EnginePipeline::EnginePipeline(EngineDevice& device, const std::string& vertFilepath, const std::string& tescFilepath, const std::string& teseFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo) : engineDevice{device}{
+        createTessellationGraphicsPipeline(vertFilepath, tescFilepath, teseFilepath, fragFilepath, configInfo);
+    }
     EnginePipeline::~EnginePipeline(){
         if(graphicsPipeline != VK_NULL_HANDLE) vkDestroyPipeline(engineDevice.device(), graphicsPipeline, nullptr);
         if(vertShaderModule != VK_NULL_HANDLE) vkDestroyShaderModule(engineDevice.device(), vertShaderModule, nullptr);
         if(taskShaderModule != VK_NULL_HANDLE) vkDestroyShaderModule(engineDevice.device(), taskShaderModule, nullptr);
         if(meshShaderModule != VK_NULL_HANDLE) vkDestroyShaderModule(engineDevice.device(), meshShaderModule, nullptr);
         if(fragShaderModule != VK_NULL_HANDLE) vkDestroyShaderModule(engineDevice.device(), fragShaderModule, nullptr);
+        if(tescShaderModule != VK_NULL_HANDLE) vkDestroyShaderModule(engineDevice.device(), tescShaderModule, nullptr);
+        if(teseShaderModule != VK_NULL_HANDLE) vkDestroyShaderModule(engineDevice.device(), teseShaderModule, nullptr);
     }
     std::vector<char> EnginePipeline::readFile(const std::string& filepath){
         std::ifstream file{filepath, std::ios::ate | std::ios::binary};
@@ -123,6 +128,72 @@ namespace engine{
         pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
         if(vkCreateGraphicsPipelines(engineDevice.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS)
             throw std::runtime_error("failed to create mesh graphics pipeline");
+    }
+    void EnginePipeline::createTessellationGraphicsPipeline(
+        const std::string& vertFilepath,
+        const std::string& tescFilepath,
+        const std::string& teseFilepath,
+        const std::string& fragFilepath,
+        const PipelineConfigInfo& configInfo){
+        assert(configInfo.pipelineLayout != VK_NULL_HANDLE);
+        assert(configInfo.renderPass != VK_NULL_HANDLE);
+        auto vertCode = readFile(vertFilepath);
+        auto tescCode = readFile(tescFilepath);
+        auto teseCode = readFile(teseFilepath);
+        auto fragCode = readFile(fragFilepath);
+        createShaderModule(vertCode, &vertShaderModule);
+        createShaderModule(tescCode, &tescShaderModule);
+        createShaderModule(teseCode, &teseShaderModule);
+        createShaderModule(fragCode, &fragShaderModule);
+        VkPipelineShaderStageCreateInfo shaderStages[4]{};
+        VkShaderStageFlagBits stages[] = {
+            VK_SHADER_STAGE_VERTEX_BIT,
+            VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,
+            VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT,
+            VK_SHADER_STAGE_FRAGMENT_BIT
+        };
+        VkShaderModule modules[] = {vertShaderModule, tescShaderModule, teseShaderModule, fragShaderModule};
+        for(uint32_t i = 0; i < 4; i++){
+            shaderStages[i].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+            shaderStages[i].stage = stages[i];
+            shaderStages[i].module = modules[i];
+            shaderStages[i].pName = "main";
+        }
+        auto bindingDescriptions = EngineModel::Vertex::getBindingDescriptions();
+        auto attributeDescriptions = EngineModel::Vertex::getAttributeDescriptions();
+        VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
+        vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+        vertexInputInfo.vertexBindingDescriptionCount = static_cast<uint32_t>(bindingDescriptions.size());
+        vertexInputInfo.pVertexBindingDescriptions = bindingDescriptions.data();
+        vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
+        vertexInputInfo.pVertexAttributeDescriptions = attributeDescriptions.data();
+        VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
+        inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+        inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST;
+        inputAssembly.primitiveRestartEnable = VK_FALSE;
+        VkPipelineTessellationStateCreateInfo tessellationInfo{};
+        tessellationInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO;
+        tessellationInfo.patchControlPoints = 3;
+        VkGraphicsPipelineCreateInfo pipelineInfo{};
+        pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+        pipelineInfo.stageCount = 4;
+        pipelineInfo.pStages = shaderStages;
+        pipelineInfo.pVertexInputState = &vertexInputInfo;
+        pipelineInfo.pInputAssemblyState = &inputAssembly;
+        pipelineInfo.pTessellationState = &tessellationInfo;
+        pipelineInfo.pViewportState = &configInfo.viewportInfo;
+        pipelineInfo.pRasterizationState = &configInfo.rasterizationInfo;
+        pipelineInfo.pMultisampleState = &configInfo.multisampleInfo;
+        pipelineInfo.pColorBlendState = &configInfo.colorBlendInfo;
+        pipelineInfo.pDepthStencilState = &configInfo.depthStencilInfo;
+        pipelineInfo.pDynamicState = &configInfo.dynamicStateInfo;
+        pipelineInfo.layout = configInfo.pipelineLayout;
+        pipelineInfo.renderPass = configInfo.renderPass;
+        pipelineInfo.subpass = configInfo.subpass;
+        pipelineInfo.basePipelineIndex = -1;
+        pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
+        if(vkCreateGraphicsPipelines(engineDevice.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS)
+            throw std::runtime_error("failed to create tessellation graphics pipeline");
     }
     void EnginePipeline::createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule){
         VkShaderModuleCreateInfo createInfo{};

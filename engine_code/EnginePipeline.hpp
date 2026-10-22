@@ -25,20 +25,26 @@ namespace engine{
         public:
             EnginePipeline(EngineDevice &device, const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo);
             EnginePipeline(EngineDevice& device, const std::string& taskFilepath, const std::string& meshFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo);
+            EnginePipeline(EngineDevice& device, const std::string& vertFilepath,
+            const std::string& tescFilepath, const std::string& teseFilepath,
+            const std::string& fragFilepath, const PipelineConfigInfo& configInfo);
             ~EnginePipeline();
             EnginePipeline(const EnginePipeline&) = delete;
             EnginePipeline& operator=(const EnginePipeline&) = delete;
             void bind(VkCommandBuffer commandBuffer);
             static void defultPipelineConfigInfo(PipelineConfigInfo& configInfo);
         private:
-        static std::vector<char> readFile(const std::string& filepath);
+            static std::vector<char> readFile(const std::string& filepath);
             void createGraphicsPipeline(const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo);
             void createMeshGraphicsPipeline(const std::string& taskFilepath, const std::string& meshFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo);
             void createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule);
+            void createTessellationGraphicsPipeline(const std::string& vertFilepath, const std::string& tescFilepath, const std::string& teseFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo);
+            VkShaderModule tescShaderModule = VK_NULL_HANDLE;
+            VkShaderModule teseShaderModule = VK_NULL_HANDLE;
             EngineDevice& engineDevice;
             VkPipeline graphicsPipeline;
-            VkShaderModule vertShaderModule;
-            VkShaderModule fragShaderModule;
+            VkShaderModule vertShaderModule = VK_NULL_HANDLE;
+            VkShaderModule fragShaderModule = VK_NULL_HANDLE;
             VkShaderModule taskShaderModule = VK_NULL_HANDLE;
             VkShaderModule meshShaderModule = VK_NULL_HANDLE;
     };

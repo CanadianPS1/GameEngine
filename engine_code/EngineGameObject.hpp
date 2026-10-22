@@ -3,6 +3,7 @@
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <memory>
+#include <string>
 namespace engine{
     struct TransformComponent{
         glm::vec3 translation{};
@@ -33,6 +34,7 @@ namespace engine{
             TransformComponent transform{};
             std::string name;
             bool twoDementional = false;
+            std::string renderType;
         private:
             EngineGameObject(id_t objId) : id{objId}{}
             EngineGameObject(id_t objId, bool twoD) : id{objId}, twoDementional{twoD}{}

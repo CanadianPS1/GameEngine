@@ -6,12 +6,13 @@
 namespace engine{
     void start(){
         Sceen sceen1("sceen1");
-        EngineGameObject* forest = sceen1.CreateObject("../assets/scenes/Forest.glb", "Forest", 
+        EngineGameObject* forest = sceen1.CreateObject("twoD", "../assets/scenes/Forest.glb", "Forest", 
             glm::vec3{0.0f, 7.0f, 13.f}, glm::vec3{0.5f, 0.5f, 0.5f}, glm::vec3{0.f,0.f,3.15f});
         EngineMain::LoadGameObjects(sceen1);
         EngineCamera* camera = EngineCamera::CreateCamera(0, glm::vec3(-1.f, -2.f, 2.f), 
         glm::vec3{0.f, 0.f, 2.5f}, glm::vec3{-0.5f, 0.f, 0.f}, 20, 8, 30);
         EngineCamera::SetMainCamera(camera);
+        camera->far = 50;
     }
     void update(){
         std::cout<<InputController::GetEvent()<<std::endl;

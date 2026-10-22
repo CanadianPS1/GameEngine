@@ -23,6 +23,7 @@ namespace engine{
             std::unique_ptr<EnginePipeline> engineThreeDPipeline;
             std::unique_ptr<EnginePipeline> engineTwoDPipeline;
             std::unique_ptr<EnginePipeline> engineMeshPipeline;
+            std::unique_ptr<EnginePipeline> engineTessPipeline;
             VkPipelineLayout pipelineLayout;
             VkDescriptorSetLayout textureSetLayout;
             std::unique_ptr<EngineDescriptorSetLayout> meshSetLayout;

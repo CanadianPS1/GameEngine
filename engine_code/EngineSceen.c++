@@ -7,7 +7,7 @@ namespace engine{
     engine::Sceen::~Sceen(){
         gameObjects.clear();
     }
-    EngineGameObject* Sceen::CreateObject(std::string modelPath, std::string modelName, std::optional<glm::vec3> threeDementionalTranslation, 
+    EngineGameObject* Sceen::CreateObject(std::string renderWith, std::string modelPath, std::string modelName, std::optional<glm::vec3> threeDementionalTranslation, 
     std::optional<glm::vec3> threeDementionalScale, std::optional<glm::vec3> threeDementionalRotation, std::optional<glm::vec2> twoDementionalTranslation, 
     std::optional<glm::vec2> twoDementionalScale, std::optional<glm::vec2> twoDementionalRotation){
         EngineGameObject* object = EngineGameObject::CreateGameObject();
@@ -15,6 +15,7 @@ namespace engine{
             modelPath = "../assets/scenes/Block.glb";
             object->visible = false;
         }
+        object->renderType = renderWith;
         std::shared_ptr<EngineModel> engineModel = EngineModel::createModelFromFile(*Sceen::engineDevice, modelPath);
         if(!threeDementionalTranslation) object->twoDementional = true;
         if(engineModel) object->model = engineModel;

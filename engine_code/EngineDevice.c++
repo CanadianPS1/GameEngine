@@ -103,6 +103,7 @@ namespace engine {
         VkPhysicalDeviceFeatures2 deviceFeatures{};
         deviceFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
         deviceFeatures.features.samplerAnisotropy = VK_TRUE;
+        deviceFeatures.features.tessellationShader = VK_TRUE;
         VkPhysicalDeviceMeshShaderFeaturesEXT meshShaderFeatures{};
         meshShaderFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT;
         meshShaderFeatures.taskShader = VK_TRUE;
@@ -152,7 +153,8 @@ namespace engine {
         features.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
         features.pNext = &meshShaderFeatures;
         vkGetPhysicalDeviceFeatures2(device, &features);
-        return indices.isComplete() && extensionsSupported && swapChainAdequate && features.features.samplerAnisotropy && meshShaderFeatures.meshShader && meshShaderFeatures.taskShader;
+        return indices.isComplete() && extensionsSupported && swapChainAdequate && features.features.samplerAnisotropy 
+            && meshShaderFeatures.meshShader && meshShaderFeatures.taskShader && features.features.tessellationShader;
     }
     void EngineDevice::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo){
         createInfo = {};

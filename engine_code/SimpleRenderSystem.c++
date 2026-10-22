@@ -67,58 +67,93 @@ namespace engine{
             pipelineConfig
         );
         engineMeshPipeline = std::make_unique<EnginePipeline>(
-        engineDevice,
-        "../shaders/Task.task.spv",
-        "../shaders/Mesh.mesh.spv",
-        "../shaders/MeshFrag.frag.spv",
-        pipelineConfig
+            engineDevice,
+            "../shaders/Task.task.spv",
+            "../shaders/Mesh.mesh.spv",
+            "../shaders/MeshFrag.frag.spv",
+            pipelineConfig
+        );
+        engineTessPipeline = std::make_unique<EnginePipeline>(
+            engineDevice,
+            "../shaders/ThreeDVert.vert.spv",
+            "../shaders/TessControl.tesc.spv",
+            "../shaders/TessEval.tese.spv",
+            "../shaders/Frag.frag.spv",
+            pipelineConfig
         );
     }
     void SimpleRenderSystem::renderGameObjects(std::vector<EngineGameObject*> gameObjects, FrameInfo& frameInfo){
-        engineMeshPipeline->bind(frameInfo.commandBuffer);
-        auto drawMeshTasks = reinterpret_cast<PFN_vkCmdDrawMeshTasksEXT>(vkGetDeviceProcAddr(engineDevice.device(), "vkCmdDrawMeshTasksEXT"));
-        if(!drawMeshTasks) throw std::runtime_error("Failed to load vkCmdDrawMeshTasksEXT");
-        vkCmdBindDescriptorSets(frameInfo.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &frameInfo.globalDescriptorSet, 0, nullptr);
         for(auto* obj : gameObjects){
-            if(!obj->visible || !obj->model) continue;
-            VkDescriptorSet meshSet = obj->model->getMeshDescriptorSet();
-            vkCmdBindDescriptorSets(frameInfo.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 2, 1, &meshSet, 0, nullptr);            SimplePushConstantData push{};
-            push.modelMatrix = obj->transform.mat4();
-            push.normalMatrix = obj->transform.normalMatrix();
-            vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_MESH_BIT_EXT, 0, sizeof(SimplePushConstantData), &push);
-            for(const auto& primitive : obj->model->getPrimitives()){
-                push.firstVertex = primitive.firstVertex;
-                push.firstIndex = primitive.firstIndex;
-                push.vertexCount = primitive.vertexCount;
-                push.indexCount = primitive.indexCount;
-                push.firstBatch = primitive.firstBatch;
-                uint32_t textureIndex = primitive.textureIndex < 0 ? 0 : static_cast<uint32_t>(primitive.textureIndex + 1);
-                VkDescriptorSet textureSet = obj->model->getTextureDescriptorSet(textureIndex);
-                vkCmdBindDescriptorSets(frameInfo.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS,
-                    pipelineLayout, 1, 1, &textureSet, 0, nullptr);
-                const auto& limits = engineDevice.getMeshShaderProperties();
-                uint32_t trianglesPerTask = std::min({85u,limits.maxMeshOutputVertices / 3,limits.maxMeshOutputPrimitives});
-                if (trianglesPerTask == 0) throw std::runtime_error("Mesh shader limits are insufficient");
-                push.trianglesPerTask = trianglesPerTask;
-                vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_MESH_BIT_EXT, 0, sizeof(SimplePushConstantData), &push);
-                uint32_t triangleCount = primitive.indexCount > 0 ? primitive.indexCount / 3 : primitive.vertexCount / 3;
-                uint32_t taskCount = (triangleCount + trianglesPerTask - 1) / trianglesPerTask;
-                drawMeshTasks(frameInfo.commandBuffer, taskCount, 1, 1);            
-            }
+            if(obj->renderType == "tess"){
+                engineTessPipeline->bind(frameInfo.commandBuffer);
+                vkCmdBindDescriptorSets(
+                    frameInfo.commandBuffer,
+                    VK_PIPELINE_BIND_POINT_GRAPHICS,
+                    pipelineLayout, 0, 1,
+                    &frameInfo.globalDescriptorSet, 0, nullptr
+                );
+                for(auto* obj : gameObjects){
+                    if(!obj->visible || !obj->model) continue;
+                    obj->model->bind(frameInfo.commandBuffer);
+                    SimplePushConstantData push{};
+                    push.modelMatrix = obj->transform.mat4();
+                    push.normalMatrix = obj->transform.normalMatrix();
+                    vkCmdPushConstants(
+                        frameInfo.commandBuffer,
+                        pipelineLayout,
+                        VK_SHADER_STAGE_VERTEX_BIT,
+                        0, sizeof(SimplePushConstantData), &push
+                    );
+                    obj->model->draw(frameInfo.commandBuffer, pipelineLayout);
+                }
+            }else if(obj->renderType == "mesh"){
+                engineMeshPipeline->bind(frameInfo.commandBuffer);
+                auto drawMeshTasks = reinterpret_cast<PFN_vkCmdDrawMeshTasksEXT>(vkGetDeviceProcAddr(engineDevice.device(), "vkCmdDrawMeshTasksEXT"));
+                if(!drawMeshTasks) throw std::runtime_error("Failed to load vkCmdDrawMeshTasksEXT");
+                vkCmdBindDescriptorSets(frameInfo.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &frameInfo.globalDescriptorSet, 0, nullptr);
+                for(auto* obj : gameObjects){
+                    if(!obj->visible || !obj->model) continue;
+                    VkDescriptorSet meshSet = obj->model->getMeshDescriptorSet();
+                    vkCmdBindDescriptorSets(frameInfo.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 2, 1, &meshSet, 0, nullptr);            SimplePushConstantData push{};
+                    push.modelMatrix = obj->transform.mat4();
+                    push.normalMatrix = obj->transform.normalMatrix();
+                    vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_MESH_BIT_EXT, 0, sizeof(SimplePushConstantData), &push);
+                    for(const auto& primitive : obj->model->getPrimitives()){
+                        push.firstVertex = primitive.firstVertex;
+                        push.firstIndex = primitive.firstIndex;
+                        push.vertexCount = primitive.vertexCount;
+                        push.indexCount = primitive.indexCount;
+                        push.firstBatch = primitive.firstBatch;
+                        uint32_t textureIndex = primitive.textureIndex < 0 ? 0 : static_cast<uint32_t>(primitive.textureIndex + 1);
+                        VkDescriptorSet textureSet = obj->model->getTextureDescriptorSet(textureIndex);
+                        vkCmdBindDescriptorSets(frameInfo.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS,
+                            pipelineLayout, 1, 1, &textureSet, 0, nullptr);
+                        const auto& limits = engineDevice.getMeshShaderProperties();
+                        uint32_t trianglesPerTask = std::min({85u,limits.maxMeshOutputVertices / 3,limits.maxMeshOutputPrimitives});
+                        if (trianglesPerTask == 0) throw std::runtime_error("Mesh shader limits are insufficient");
+                        push.trianglesPerTask = trianglesPerTask;
+                        vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_MESH_BIT_EXT, 0, sizeof(SimplePushConstantData), &push);
+                        uint32_t triangleCount = primitive.indexCount > 0 ? primitive.indexCount / 3 : primitive.vertexCount / 3;
+                        uint32_t taskCount = (triangleCount + trianglesPerTask - 1) / trianglesPerTask;
+                        drawMeshTasks(frameInfo.commandBuffer, taskCount, 1, 1);            
+                    }
+                }
+            }else if(obj->renderType == "twoD"){
+                engineTwoDPipeline->bind(frameInfo.commandBuffer);
+                vkCmdBindDescriptorSets(frameInfo.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &frameInfo.globalDescriptorSet, 0, nullptr);
+                for(auto& obj : gameObjects){
+                    if(!obj->visible) continue;
+                    if(!obj->twoDementional) engineThreeDPipeline->bind(frameInfo.commandBuffer);
+                    else engineTwoDPipeline->bind(frameInfo.commandBuffer);
+                    SimplePushConstantData push{};
+                    push.modelMatrix = obj->transform.mat4();
+                    push.normalMatrix = obj->transform.normalMatrix();
+                    vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_MESH_BIT_EXT | VK_SHADER_STAGE_FRAGMENT_BIT,
+                    0, sizeof(SimplePushConstantData), &push);
+                    obj->model->bind(frameInfo.commandBuffer);
+                    obj->model->draw(frameInfo.commandBuffer, pipelineLayout);
+                }
+            }else continue;
         }
-        // engineTwoDPipeline->bind(frameInfo.commandBuffer);
-        // vkCmdBindDescriptorSets(frameInfo.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &frameInfo.globalDescriptorSet, 0, nullptr);
-        // for(auto& obj : gameObjects){
-        //     if(!obj->visible) continue;
-        //     if(!obj->twoDementional) engineThreeDPipeline->bind(frameInfo.commandBuffer);
-        //     else engineTwoDPipeline->bind(frameInfo.commandBuffer);
-        //     SimplePushConstantData push{};
-        //     push.modelMatrix = obj->transform.mat4();
-        //     push.normalMatrix = obj->transform.normalMatrix();
-        //     vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_MESH_BIT_EXT | VK_SHADER_STAGE_FRAGMENT_BIT,
-        //     0, sizeof(SimplePushConstantData), &push);
-        //     obj->model->bind(frameInfo.commandBuffer);
-        //     obj->model->draw(frameInfo.commandBuffer, pipelineLayout);
-        // }
     }
 }

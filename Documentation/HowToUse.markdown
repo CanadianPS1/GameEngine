@@ -47,7 +47,7 @@ once you have a Sceen you can create a 3D object
     #include "engine_code/EngineGameObject.hpp"
     void start(){
         engine::Sceen sceen1("sceen1");
-        engine::EngineGameObject* forest = sceen1.CreateObejct("../assets/scenes/Forest.obj", "Forest", 
+        engine::EngineGameObject* forest = sceen1.CreateObejct("mesh", "../assets/scenes/Forest.obj", "Forest", 
             glm::vec3{0.0f, 7.0f, 13.f}, glm::vec3{0.5f, 0.5f, 0.5f}, glm::vec3{0.f,0.f,0.f});
         engine::EngineMain::LoadGameObjects(sceen1);
     }
@@ -56,6 +56,7 @@ once you have a Sceen you can create a 3D object
     }
 
 Creating an object has many paramiters but the ones needed to create a 3D object are
+    The type of rendering (ie mesh, tess, or twoD)
     The path to the file
     The name of the object
     its position
