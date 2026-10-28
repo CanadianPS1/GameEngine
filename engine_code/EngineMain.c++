@@ -93,10 +93,10 @@ namespace engine{
             if(EngineCamera::mainCamera != nullptr) EngineCamera::mainCamera->setViewYXZ(EngineCamera::mainCamera->viewerObject->transform.translation, EngineCamera::mainCamera->viewerObject->transform.rotation);
             float aspect = engineRenderer.getAspectRatio();
             if(EngineCamera::mainCamera != nullptr){
-                if(!EngineCamera::mainCamera->twoDementional) EngineCamera::mainCamera->setPerspectiveProjection(glm::radians(
-                    EngineCamera::mainCamera->fov), aspect, EngineCamera::mainCamera->near, EngineCamera::mainCamera->far);
-                else if(EngineCamera::mainCamera->twoDementional) EngineCamera::mainCamera->setOrthographicProjection(EngineCamera::mainCamera->left, 
+                if(EngineCamera::mainCamera->twoDementional) EngineCamera::mainCamera->setOrthographicProjection(EngineCamera::mainCamera->left, 
                     EngineCamera::mainCamera->right, EngineCamera::mainCamera->top, EngineCamera::mainCamera->bottom, 
+                    EngineCamera::mainCamera->near, EngineCamera::mainCamera->far);
+                else EngineCamera::mainCamera->setPerspectiveProjection(glm::radians(EngineCamera::mainCamera->fov), aspect, 
                     EngineCamera::mainCamera->near, EngineCamera::mainCamera->far);
             }
             if(auto commandBuffer = engineRenderer.beginFrame()){
@@ -105,8 +105,8 @@ namespace engine{
                 GlobalUbo ubo{};
                 ubo.defultLight = defultLight;
                 if(EngineCamera::mainCamera != nullptr){
-                    if(EngineCamera::mainCamera->twoDementional) ubo.projectionView = EngineCamera::mainCamera->getProjection() * EngineCamera::mainCamera->getView();
-                    else if(EngineCamera::mainCamera->twoDementional) ubo.projectionView = EngineCamera::mainCamera->getProjection() * EngineCamera::mainCamera->getView();
+                    if(EngineCamera::mainCamera->twoDementional) ubo.projectionView = EngineCamera::mainCamera->getOrthographic() * EngineCamera::mainCamera->getView();
+                    else ubo.projectionView = EngineCamera::mainCamera->getProjection() * EngineCamera::mainCamera->getView();
                 } 
                 uboBuffers[frameIndex]->writeToBuffer(&ubo);
                 uboBuffers[frameIndex]->flush();

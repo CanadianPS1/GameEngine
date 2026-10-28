@@ -6,10 +6,10 @@
 namespace engine{
     void start(){
         Sceen sceen1("sceen1");
-        EngineGameObject* forest = sceen1.CreateObject("twoD", "../assets/scenes/paintingOneInspo.png", "Forest", 
-            glm::vec3{0.0f, 7.0f, 13.f}, glm::vec3{1.f, 1.f, 1.f}, glm::vec3{0.f,3.14159f,3.14159f});
+        EngineGameObject* forest = sceen1.CreateObject("mesh", "../assets/scenes/Forest.glb", "Forest", 
+            glm::vec3{0.0f, 7.0f, 13.f}, glm::vec3{0.5f, 0.5f, 0.5f}, glm::vec3{0.f,0.f,3.14159f});
         EngineMain::LoadGameObjects(sceen1);
-        EngineCamera* camera = EngineCamera::CreateCamera(true, glm::vec3(-1.f, -2.f, 2.f), 
+        EngineCamera* camera = EngineCamera::CreateCamera(0, glm::vec3(-1.f, -2.f, 2.f), 
         glm::vec3{0.f, 0.f, 0.f}, glm::vec3{-0.5f, 0.f, 0.f}, 20, 8, 30);
         EngineCamera::SetMainCamera(camera);
         camera->far = 50;
