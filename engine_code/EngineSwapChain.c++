@@ -39,9 +39,8 @@ namespace engine{
         }
         for(auto framebuffer : swapChainFramebuffers) vkDestroyFramebuffer(device.device(), framebuffer, nullptr);
         vkDestroyRenderPass(device.device(), renderPass, nullptr);
-        // cleanup synchronization objects
+        for(auto semaphore : renderFinishedSemaphores) vkDestroySemaphore(device.device(), semaphore, nullptr);
         for(size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++){
-            vkDestroySemaphore(device.device(), renderFinishedSemaphores[i], nullptr);
             vkDestroySemaphore(device.device(), imageAvailableSemaphores[i], nullptr);
             vkDestroyFence(device.device(), inFlightFences[i], nullptr);
         }
@@ -51,7 +50,7 @@ namespace engine{
         VkResult result = vkAcquireNextImageKHR(device.device(), swapChain, std::numeric_limits<uint64_t>::max(), imageAvailableSemaphores[currentFrame], VK_NULL_HANDLE, imageIndex);
         return result;
     }
-    VkResult EngineSwapChain::submitCommandBuffers(const VkCommandBuffer *buffers, uint32_t *imageIndex) {
+    VkResult EngineSwapChain::submitCommandBuffers(const VkCommandBuffer *buffers, uint32_t *imageIndex){
         if(imagesInFlight[*imageIndex] != VK_NULL_HANDLE) vkWaitForFences(device.device(), 1, &imagesInFlight[*imageIndex], VK_TRUE, UINT64_MAX);
         imagesInFlight[*imageIndex] = inFlightFences[currentFrame];
         VkSubmitInfo submitInfo = {};
@@ -63,7 +62,7 @@ namespace engine{
         submitInfo.pWaitDstStageMask = waitStages;
         submitInfo.commandBufferCount = 1;
         submitInfo.pCommandBuffers = buffers;
-        VkSemaphore signalSemaphores[] = {renderFinishedSemaphores[currentFrame]};
+        VkSemaphore signalSemaphores[] = {renderFinishedSemaphores[*imageIndex]};
         submitInfo.signalSemaphoreCount = 1;
         submitInfo.pSignalSemaphores = signalSemaphores;
         vkResetFences(device.device(), 1, &inFlightFences[currentFrame]);
@@ -252,7 +251,7 @@ namespace engine{
     }
     void EngineSwapChain::createSyncObjects(){
         imageAvailableSemaphores.resize(MAX_FRAMES_IN_FLIGHT);
-        renderFinishedSemaphores.resize(MAX_FRAMES_IN_FLIGHT);
+        renderFinishedSemaphores.resize(imageCount());
         inFlightFences.resize(MAX_FRAMES_IN_FLIGHT);
         imagesInFlight.resize(imageCount(), VK_NULL_HANDLE);
         VkSemaphoreCreateInfo semaphoreInfo = {};
@@ -260,12 +259,14 @@ namespace engine{
         VkFenceCreateInfo fenceInfo = {};
         fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
         fenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
-        for(size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++){
-        if(vkCreateSemaphore(device.device(), &semaphoreInfo, nullptr, &imageAvailableSemaphores[i]) != VK_SUCCESS ||
-            vkCreateSemaphore(device.device(), &semaphoreInfo, nullptr, &renderFinishedSemaphores[i]) != VK_SUCCESS ||
+        for(size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++)
+            if(vkCreateSemaphore(device.device(), &semaphoreInfo, nullptr, &imageAvailableSemaphores[i]) != VK_SUCCESS ||
             vkCreateFence(device.device(), &fenceInfo, nullptr, &inFlightFences[i]) != VK_SUCCESS)
                 throw std::runtime_error("failed to create synchronization objects for a frame!");
-        }
+        for(size_t i = 0; i < renderFinishedSemaphores.size(); i++)
+            if(vkCreateSemaphore(device.device(), &semaphoreInfo, nullptr, &renderFinishedSemaphores[i]) != VK_SUCCESS)
+                throw std::runtime_error("failed to create render-finished semaphore!");
+        
     }
     VkSurfaceFormatKHR EngineSwapChain::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats){
         for(const auto &availableFormat : availableFormats){

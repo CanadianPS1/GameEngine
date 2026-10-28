@@ -25,6 +25,7 @@ namespace engine {
             VkBufferUsageFlags getUsageFlags() const {return usageFlags;}
             VkMemoryPropertyFlags getMemoryPropertyFlags() const {return memoryPropertyFlags;}
             VkDeviceSize getBufferSize() const {return bufferSize;}
+            VkDeviceAddress getDeviceAddress() const;
         private:
             static VkDeviceSize getAlignment(VkDeviceSize instanceSize, VkDeviceSize minOffsetAlignment);
             EngineDevice& engineDevice;

@@ -19,9 +19,9 @@ namespace engine{
     class EngineDevice{
         public:
             #ifdef NDEBUG
-            const bool enableValidationLayers = false;
+            const bool enableValidationLayers = true;
             #else
-            const bool enableValidationLayers = false;
+            const bool enableValidationLayers = true;
             #endif
             EngineDevice(EngineWindow &window);
             ~EngineDevice();
@@ -46,6 +46,7 @@ namespace engine{
             void createImageWithInfo(const VkImageCreateInfo &imageInfo, VkMemoryPropertyFlags properties, VkImage &image, VkDeviceMemory &imageMemory);
             VkPhysicalDeviceProperties properties{};
             const VkPhysicalDeviceMeshShaderPropertiesEXT& getMeshShaderProperties() const{return meshShaderProperties;}
+            VkPhysicalDevice getPhysicalDevice() {return physicalDevice;}
         private:
             VkPhysicalDeviceMeshShaderPropertiesEXT meshShaderProperties{};
             void createInstance();
@@ -74,7 +75,10 @@ namespace engine{
             const std::vector<const char *> validationLayers = {"VK_LAYER_KHRONOS_validation"};
             const std::vector<const char *> deviceExtensions = {
                 VK_KHR_SWAPCHAIN_EXTENSION_NAME,
-                VK_EXT_MESH_SHADER_EXTENSION_NAME
+                VK_EXT_MESH_SHADER_EXTENSION_NAME,
+                VK_KHR_ACCELERATION_STRUCTURE_EXTENSION_NAME,
+                VK_KHR_RAY_TRACING_PIPELINE_EXTENSION_NAME,
+                VK_KHR_DEFERRED_HOST_OPERATIONS_EXTENSION_NAME
             };
     };
 }

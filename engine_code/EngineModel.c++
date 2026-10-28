@@ -4,6 +4,8 @@
 #include <cstddef>
 #include <memory>
 #include <stdexcept>
+#include <algorithm>
+#include <stdexcept>
 #include <vulkan/vulkan_core.h>
 #include <cstring>
 #define GLM_ENABLE_EXPERIMENTAL
@@ -50,6 +52,7 @@ namespace engine{
         EngineDescriptorWriter(*meshSetLayout, *meshPool)
             .writeBuffer(0, &vertexInfo)
             .writeBuffer(1, &indexInfo)
+            .writeBuffer(2, &boundsInfo)
             .build(meshDescriptorSet);
         auto createTexture = [&](uint32_t width, uint32_t height, const std::vector<std::uint8_t>& pixels){
             auto texture = std::make_unique<EngineTexture>(engineDevice, width, height, pixels);
@@ -65,8 +68,15 @@ namespace engine{
         };
         createTexture(1, 1, {255, 255, 255, 255});
         for(const auto& texture : builder.textures) createTexture(texture.width, texture.height, texture.pixels);
+        createBottomLevelAS();
     }
-    EngineModel::~EngineModel(){}
+    EngineModel::~EngineModel(){
+        if(blas != VK_NULL_HANDLE){
+            auto destroyAS =reinterpret_cast<PFN_vkDestroyAccelerationStructureKHR>(vkGetDeviceProcAddr( engineDevice.device(), "vkDestroyAccelerationStructureKHR"));
+            if(destroyAS) destroyAS(engineDevice.device(), blas, nullptr);
+            blas = VK_NULL_HANDLE;
+        }
+    }
     std::shared_ptr<EngineModel> EngineModel::createModelFromFile(EngineDevice &device, const std::string &filepath){
         if(!textureSetLayout || !texturePool)
             throw std::runtime_error("Texture descriptors not initialized");
@@ -79,10 +89,21 @@ namespace engine{
         assert(vertexCount >= 3 && "vertex count must be at least 3");
         VkDeviceSize bufferSize = sizeof(vertices[0]) * vertexCount;
         uint32_t vertexSize = sizeof(vertices[0]);
-        EngineBuffer stagingBuffer{engineDevice, vertexSize, vertexCount, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT};
+        EngineBuffer stagingBuffer{
+            engineDevice, vertexSize, vertexCount, VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
+        };
         stagingBuffer.map();
-        stagingBuffer.writeToBuffer((void *)vertices.data());
-        vertexBuffer = std::make_unique<EngineBuffer>(engineDevice, vertexSize, vertexCount, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+        stagingBuffer.writeToBuffer((void*)vertices.data());
+        vertexBuffer = std::make_unique<EngineBuffer>(
+            engineDevice, vertexSize, vertexCount,
+            VK_BUFFER_USAGE_VERTEX_BUFFER_BIT |
+            VK_BUFFER_USAGE_STORAGE_BUFFER_BIT |
+            VK_BUFFER_USAGE_TRANSFER_DST_BIT |
+            VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR |
+            VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT,
+            VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
+        );
         engineDevice.copyBuffer(stagingBuffer.getBuffer(), vertexBuffer->getBuffer(), bufferSize);
     }
     void EngineModel::createIndexBuffers(const std::vector<uint32_t> &indices){
@@ -91,12 +112,22 @@ namespace engine{
         if(!hasIndexBuffer) return;
         VkDeviceSize bufferSize = sizeof(indices[0]) * indexCount;
         uint32_t indexSize = sizeof(indices[0]);
-        EngineBuffer stagingBuffer{engineDevice, indexSize, indexCount, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT};
+        EngineBuffer stagingBuffer{
+            engineDevice, indexSize, indexCount, VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
+        };
         stagingBuffer.map();
-        stagingBuffer.writeToBuffer((void*) indices.data());
-        indexBuffer = std::make_unique<EngineBuffer>(engineDevice, indexSize, indexCount, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+        stagingBuffer.writeToBuffer((void*)indices.data());
+        indexBuffer = std::make_unique<EngineBuffer>(
+            engineDevice, indexSize, indexCount,
+            VK_BUFFER_USAGE_INDEX_BUFFER_BIT |
+            VK_BUFFER_USAGE_STORAGE_BUFFER_BIT |
+            VK_BUFFER_USAGE_TRANSFER_DST_BIT |
+            VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR |
+            VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT,
+            VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
+        );
         engineDevice.copyBuffer(stagingBuffer.getBuffer(), indexBuffer->getBuffer(), bufferSize);
-
     }
     void EngineModel::draw(VkCommandBuffer commandBuffer, VkPipelineLayout pipelineLayout){
         for(const auto& primitive : primitives){
@@ -128,6 +159,71 @@ namespace engine{
         return attributeDescriptions;
     }
     void EngineModel::Builder::loadModel(const std::string &filepath){
+        auto extension = std::filesystem::path(filepath).extension().string();
+        std::transform(extension.begin(),extension.end(),extension.begin(),[](unsigned char c){return std::tolower(c);});
+        if(std::filesystem::path(filepath).extension() == ".png"){
+            vertices.clear();
+            indices.clear();
+            textures.clear();
+            primitives.clear();
+            int width,height,channels;
+            stbi_uc* pixels = stbi_load(filepath.c_str(),&width,&height,&channels,STBI_rgb_alpha);
+            if(!pixels) throw std::runtime_error("Failed to load PNG");
+            Primitive modelPrimitive{};
+            modelPrimitive.firstVertex = 0;
+            modelPrimitive.firstIndex = 0;
+            for(int y = 0; y < height; y++){
+                for(int x = 0; x < width; x++){
+                    int pixelIndex = (y * width + x) * 4;
+                    float alpha = pixels[pixelIndex + 3] / 255.f;
+                    if(alpha == 0.f) continue;
+                    glm::vec3 color{
+                        pixels[pixelIndex] / 255.f,
+                        pixels[pixelIndex + 1] / 255.f,
+                        pixels[pixelIndex + 2] / 255.f
+                    };
+                    float x0 = static_cast<float>(x) / width - 0.5f;
+                    float x1 = static_cast<float>(x + 1) / width - 0.5f;
+                    float y0 = (static_cast<float>(height) * 0.5f - y) / width;
+                    float y1 = (static_cast<float>(height) * 0.5f - y - 1.f) / width;
+                    uint32_t baseVertex = static_cast<uint32_t>(vertices.size());
+                    vertices.resize(vertices.size() + 4);
+                    vertices[baseVertex].position = {x0,y0,0.f};
+                    vertices[baseVertex + 1].position = {x1,y0,0.f};
+                    vertices[baseVertex + 2].position = {x1,y1,0.f};
+                    vertices[baseVertex + 3].position = {x0,y1,0.f};
+                    for(uint32_t i = 0; i < 4; i++){
+                        vertices[baseVertex + i].color = color;
+                        vertices[baseVertex + i].normal = {0.f,0.f,1.f};
+                    }
+                    indices.insert(indices.end(),{
+                        baseVertex,baseVertex + 1,baseVertex + 2,
+                        baseVertex,baseVertex + 2,baseVertex + 3
+                    });
+                }
+            }
+            stbi_image_free(pixels);
+            modelPrimitive.vertexCount = static_cast<uint32_t>(vertices.size());
+            modelPrimitive.indexCount = static_cast<uint32_t>(indices.size());
+            constexpr uint32_t trianglesPerBatch = 85;
+            uint32_t triangleCount = modelPrimitive.indexCount / 3;
+            for(uint32_t firstTriangle = 0; firstTriangle < triangleCount; firstTriangle += trianglesPerBatch){
+                uint32_t count = std::min(trianglesPerBatch,triangleCount - firstTriangle);
+                glm::vec3 minBounds{std::numeric_limits<float>::max()};
+                glm::vec3 maxBounds{std::numeric_limits<float>::lowest()};
+                for(uint32_t i = 0; i < count * 3; i++){
+                    uint32_t vertexIndex = indices[firstTriangle * 3 + i];
+                    const auto& position = vertices[vertexIndex].position;
+                    minBounds = glm::min(minBounds,position);
+                    maxBounds = glm::max(maxBounds,position);
+                }
+                glm::vec3 center = (minBounds + maxBounds) * 0.5f;
+                float radius = glm::length(maxBounds - center);
+                modelPrimitive.batchBounds.push_back({glm::vec4(center,radius)});
+            }
+            if(modelPrimitive.indexCount > 0) primitives.push_back(modelPrimitive);
+            return;
+        }
         fastgltf::Parser parser;
         auto file = fastgltf::MappedGltfFile::FromPath(filepath);
         if(!file) throw std::runtime_error("Failed to open GLB");
@@ -289,5 +385,83 @@ namespace engine{
     void EngineModel::setMeshDescriptors(EngineDescriptorSetLayout& layout, EngineDescriptorPool& pool){
         meshSetLayout = &layout;
         meshPool = &pool;
+    }
+    void EngineModel::createBottomLevelAS(){
+        if (primitives.empty() || vertexCount == 0) return;
+        VkDevice device = engineDevice.device();
+        auto getBuildSizes = reinterpret_cast<PFN_vkGetAccelerationStructureBuildSizesKHR>(vkGetDeviceProcAddr(device, "vkGetAccelerationStructureBuildSizesKHR"));
+        auto createAS = reinterpret_cast<PFN_vkCreateAccelerationStructureKHR>(vkGetDeviceProcAddr(device, "vkCreateAccelerationStructureKHR"));
+        auto destroyAS = reinterpret_cast<PFN_vkDestroyAccelerationStructureKHR>(vkGetDeviceProcAddr(device, "vkDestroyAccelerationStructureKHR"));
+        auto buildAS = reinterpret_cast<PFN_vkCmdBuildAccelerationStructuresKHR>(vkGetDeviceProcAddr(device, "vkCmdBuildAccelerationStructuresKHR"));
+        if(!getBuildSizes || !createAS || !destroyAS || !buildAS) throw std::runtime_error("Failed to load acceleration structure functions");
+        std::vector<VkAccelerationStructureGeometryKHR> geometries;
+        std::vector<VkAccelerationStructureBuildRangeInfoKHR> ranges;
+        std::vector<uint32_t> maxPrimitiveCounts;
+        for(const auto& primitive : primitives){
+            bool indexed = primitive.indexCount > 0;
+            uint32_t indexCountForPrimitive = indexed ? primitive.indexCount : primitive.vertexCount;
+            uint32_t primitiveCount = indexCountForPrimitive / 3;
+            if(primitiveCount == 0) continue;
+            VkAccelerationStructureGeometryKHR geometry{};
+            geometry.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR;
+            geometry.geometryType = VK_GEOMETRY_TYPE_TRIANGLES_KHR;
+            geometry.flags = VK_GEOMETRY_OPAQUE_BIT_KHR;
+            auto& triangles = geometry.geometry.triangles;
+            triangles.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR;
+            triangles.vertexFormat = VK_FORMAT_R32G32B32_SFLOAT;
+            triangles.vertexStride = sizeof(Vertex);
+            triangles.maxVertex = indexed ? vertexCount - 1 : primitive.vertexCount - 1;
+            triangles.vertexData.deviceAddress = vertexBuffer->getDeviceAddress() + (indexed ? 0 : VkDeviceAddress(primitive.firstVertex) * sizeof(Vertex));
+            if(indexed){
+                triangles.indexType = VK_INDEX_TYPE_UINT32;
+                triangles.indexData.deviceAddress = indexBuffer->getDeviceAddress();
+            }else{
+                triangles.indexType = VK_INDEX_TYPE_NONE_KHR;
+                triangles.indexData.deviceAddress = 0;
+            }
+            VkAccelerationStructureBuildRangeInfoKHR range{};
+            range.primitiveCount = primitiveCount;
+            range.primitiveOffset = indexed ? primitive.firstIndex * sizeof(uint32_t) : 0;
+            range.firstVertex = 0;
+            range.transformOffset = 0;
+            geometries.push_back(geometry);
+            ranges.push_back(range);
+            maxPrimitiveCounts.push_back(primitiveCount);
+        }
+        if(geometries.empty()) return;
+        VkAccelerationStructureBuildGeometryInfoKHR buildInfo{};
+        buildInfo.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR;
+        buildInfo.type = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR;
+        buildInfo.flags = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR;
+        buildInfo.mode = VK_BUILD_ACCELERATION_STRUCTURE_MODE_BUILD_KHR;
+        buildInfo.geometryCount = static_cast<uint32_t>(geometries.size());
+        buildInfo.pGeometries = geometries.data();
+        VkAccelerationStructureBuildSizesInfoKHR sizes{};
+        sizes.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR;
+        getBuildSizes(device, VK_ACCELERATION_STRUCTURE_BUILD_TYPE_DEVICE_KHR, &buildInfo, maxPrimitiveCounts.data(), &sizes);
+        blasBuffer = std::make_unique<EngineBuffer>(engineDevice, sizes.accelerationStructureSize, 1, VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR | VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+        VkAccelerationStructureCreateInfoKHR createInfo{};
+        createInfo.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR;
+        createInfo.buffer = blasBuffer->getBuffer();
+        createInfo.size = sizes.accelerationStructureSize;
+        createInfo.type = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR;
+        if(createAS(device, &createInfo, nullptr, &blas) != VK_SUCCESS) throw std::runtime_error("Failed to create BLAS");
+        VkPhysicalDeviceAccelerationStructurePropertiesKHR asProperties{};
+        asProperties.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR;
+        VkPhysicalDeviceProperties2 properties2{};
+        properties2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
+        properties2.pNext = &asProperties;
+        vkGetPhysicalDeviceProperties2(engineDevice.getPhysicalDevice(), &properties2);
+        VkDeviceSize alignment = std::max<VkDeviceSize>(1, asProperties.minAccelerationStructureScratchOffsetAlignment);
+        EngineBuffer scratchBuffer{engineDevice, sizes.buildScratchSize + alignment, 1, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT | VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT};
+        VkDeviceAddress scratchBase = scratchBuffer.getDeviceAddress();
+        VkDeviceAddress scratchAddress = (scratchBase + alignment - 1) & ~(VkDeviceAddress(alignment) - 1);
+        buildInfo.dstAccelerationStructure = blas;
+        buildInfo.scratchData.deviceAddress = scratchAddress;
+        std::vector<const VkAccelerationStructureBuildRangeInfoKHR*> rangePointers;
+        for(const auto& range : ranges) rangePointers.push_back(&range);
+        VkCommandBuffer commandBuffer = engineDevice.beginSingleTimeCommands();
+        buildAS(commandBuffer, 1, &buildInfo, rangePointers.data());
+        engineDevice.endSingleTimeCommands(commandBuffer);
     }
 }

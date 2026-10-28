@@ -52,6 +52,8 @@ namespace engine {
         auto extensions = getRequiredExtensions();
         createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
         createInfo.ppEnabledExtensionNames = extensions.data();
+        createInfo.enabledLayerCount = 0;
+        createInfo.ppEnabledLayerNames = nullptr;
         VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo;
         if(enableValidationLayers){
             createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
@@ -90,40 +92,50 @@ namespace engine {
     void EngineDevice::createLogicalDevice(){
         QueueFamilyIndices indices = findQueueFamilies(physicalDevice);
         std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
-        std::set<uint32_t> uniqueQueueFamilies = {indices.graphicsFamily, indices.presentFamily};
+        std::set<uint32_t> uniqueQueueFamilies = {
+            indices.graphicsFamily,
+            indices.presentFamily
+        };
         float queuePriority = 1.0f;
         for(uint32_t queueFamily : uniqueQueueFamilies){
-            VkDeviceQueueCreateInfo queueCreateInfo = {};
+            VkDeviceQueueCreateInfo queueCreateInfo{};
             queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
             queueCreateInfo.queueFamilyIndex = queueFamily;
             queueCreateInfo.queueCount = 1;
             queueCreateInfo.pQueuePriorities = &queuePriority;
             queueCreateInfos.push_back(queueCreateInfo);
         }
-        VkPhysicalDeviceFeatures2 deviceFeatures{};
-        deviceFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
-        deviceFeatures.features.samplerAnisotropy = VK_TRUE;
-        deviceFeatures.features.tessellationShader = VK_TRUE;
+        VkPhysicalDeviceRayTracingPipelineFeaturesKHR rayTracingFeatures{};
+        rayTracingFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR;
+        rayTracingFeatures.rayTracingPipeline = VK_TRUE;
+        VkPhysicalDeviceAccelerationStructureFeaturesKHR accelerationFeatures{};
+        accelerationFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR;
+        accelerationFeatures.accelerationStructure = VK_TRUE;
+        accelerationFeatures.pNext = &rayTracingFeatures;
         VkPhysicalDeviceMeshShaderFeaturesEXT meshShaderFeatures{};
         meshShaderFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT;
         meshShaderFeatures.taskShader = VK_TRUE;
         meshShaderFeatures.meshShader = VK_TRUE;
-        deviceFeatures.pNext = &meshShaderFeatures;
-        VkDeviceCreateInfo createInfo = {};
+        meshShaderFeatures.pNext = &accelerationFeatures;
+        VkPhysicalDeviceBufferDeviceAddressFeatures bufferAddressFeatures{};
+        bufferAddressFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES;
+        bufferAddressFeatures.bufferDeviceAddress = VK_TRUE;
+        bufferAddressFeatures.pNext = &meshShaderFeatures;
+        VkPhysicalDeviceFeatures2 deviceFeatures{};
+        deviceFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
+        deviceFeatures.features.samplerAnisotropy = VK_TRUE;
+        deviceFeatures.features.tessellationShader = VK_TRUE;
+        deviceFeatures.pNext = &bufferAddressFeatures;
+        VkDeviceCreateInfo createInfo{};
         createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
         createInfo.pQueueCreateInfos = queueCreateInfos.data();
         createInfo.pNext = &deviceFeatures;
         createInfo.pEnabledFeatures = nullptr;
+        createInfo.enabledLayerCount = 0;
+        createInfo.ppEnabledLayerNames = nullptr;
         createInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
         createInfo.ppEnabledExtensionNames = deviceExtensions.data();
-        // might not really be necessary anymore because device specific validation layers
-        // have been deprecated
-        if(enableValidationLayers){
-            createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
-            createInfo.ppEnabledLayerNames = validationLayers.data();
-        }else createInfo.enabledLayerCount = 0;
-        
         if(vkCreateDevice(physicalDevice, &createInfo, nullptr, &device_) != VK_SUCCESS)
             throw std::runtime_error("failed to create logical device!");
         vkGetDeviceQueue(device_, indices.graphicsFamily, 0, &graphicsQueue_);
@@ -147,25 +159,32 @@ namespace engine {
             SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device);
             swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
         }
+        VkPhysicalDeviceRayTracingPipelineFeaturesKHR rayTracingFeatures{};
+        rayTracingFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR;
+        VkPhysicalDeviceAccelerationStructureFeaturesKHR accelerationFeatures{};
+        accelerationFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR;
+        accelerationFeatures.pNext = &rayTracingFeatures;
         VkPhysicalDeviceMeshShaderFeaturesEXT meshShaderFeatures{};
         meshShaderFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT;
+        meshShaderFeatures.pNext = &accelerationFeatures;
+        VkPhysicalDeviceBufferDeviceAddressFeatures bufferAddressFeatures{};
+        bufferAddressFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES;
+        bufferAddressFeatures.pNext = &meshShaderFeatures;
         VkPhysicalDeviceFeatures2 features{};
         features.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
-        features.pNext = &meshShaderFeatures;
+        features.pNext = &bufferAddressFeatures;
         vkGetPhysicalDeviceFeatures2(device, &features);
-        return indices.isComplete() && extensionsSupported && swapChainAdequate && features.features.samplerAnisotropy 
-            && meshShaderFeatures.meshShader && meshShaderFeatures.taskShader && features.features.tessellationShader;
+        return indices.isComplete() && extensionsSupported && swapChainAdequate && features.features.samplerAnisotropy && features.features.tessellationShader &&
+            bufferAddressFeatures.bufferDeviceAddress && meshShaderFeatures.meshShader && meshShaderFeatures.taskShader && accelerationFeatures.accelerationStructure &&
+            rayTracingFeatures.rayTracingPipeline;
     }
     void EngineDevice::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo){
         createInfo = {};
         createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
-        createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
-                                    VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
-        createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
-                                VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT |
-                                VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
+        createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
+        createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
         createInfo.pfnUserCallback = debugCallback;
-        createInfo.pUserData = nullptr;  // Optional
+        createInfo.pUserData = nullptr;
     }
     void EngineDevice::setupDebugMessenger(){
         if(!enableValidationLayers) return;
@@ -294,12 +313,32 @@ namespace engine {
         if(vkCreateBuffer(device_, &bufferInfo, nullptr, &buffer) != VK_SUCCESS) throw std::runtime_error("failed to create vertex buffer!");
         VkMemoryRequirements memRequirements;
         vkGetBufferMemoryRequirements(device_, buffer, &memRequirements);
+        VkMemoryAllocateFlagsInfo flagsInfo{};
+        flagsInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO;
+        flagsInfo.flags = VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT;
         VkMemoryAllocateInfo allocInfo{};
         allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+        allocInfo.pNext = (usage & VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT) ? &flagsInfo : nullptr;
         allocInfo.allocationSize = memRequirements.size;
-        allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
-        if(vkAllocateMemory(device_, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS) throw std::runtime_error("failed to allocate vertex buffer memory!");
-        vkBindBufferMemory(device_, buffer, bufferMemory, 0);
+        try{ allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
+        }catch(...){
+            vkDestroyBuffer(device_, buffer, nullptr);
+            buffer = VK_NULL_HANDLE;
+            throw;
+        }
+        if(vkAllocateMemory(device_, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS){
+            vkDestroyBuffer(device_, buffer, nullptr);
+            buffer = VK_NULL_HANDLE;
+            throw std::runtime_error("failed to allocate vertex buffer memory!");
+        }
+        if(vkBindBufferMemory(device_, buffer, bufferMemory, 0) != VK_SUCCESS){
+            vkFreeMemory(device_, bufferMemory, nullptr);
+            vkDestroyBuffer(device_, buffer, nullptr);
+            bufferMemory = VK_NULL_HANDLE;
+            buffer = VK_NULL_HANDLE;
+            throw std::runtime_error("failed to bind vertex buffer memory!");
+        }
+        vkGetBufferMemoryRequirements(device_, buffer, &memRequirements);
     }
     VkCommandBuffer EngineDevice::beginSingleTimeCommands(){
         VkCommandBufferAllocateInfo allocInfo{};

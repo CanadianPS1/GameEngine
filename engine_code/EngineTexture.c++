@@ -21,6 +21,10 @@ namespace engine{
             CreateImageView();
             CreateSampler();
         }catch(...){
+            if(sampler != VK_NULL_HANDLE) vkDestroySampler(engineDevice.device(), sampler, nullptr);
+            if(imageView != VK_NULL_HANDLE) vkDestroyImageView(engineDevice.device(), imageView, nullptr);
+            if(image != VK_NULL_HANDLE) vkDestroyImage(engineDevice.device(), image, nullptr);
+            if(imageMemory != VK_NULL_HANDLE) vkFreeMemory(engineDevice.device(), imageMemory, nullptr);
             vkDestroyBuffer(engineDevice.device(), stagingBuffer, nullptr);
             vkFreeMemory(engineDevice.device(), stagingMemory, nullptr);
             throw;

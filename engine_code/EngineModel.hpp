@@ -68,6 +68,11 @@ namespace engine{
             const std::vector<Primitive>& getPrimitives() const{return primitives;}
             bool hasIndices() const {return hasIndexBuffer;}
             VkDescriptorSet getTextureDescriptorSet(uint32_t index) const {return textureDescriptorSets.at(index);}
+            VkBuffer getVertexBuffer() const {return vertexBuffer->getBuffer();}
+            VkBuffer getIndexBuffer() const {return hasIndexBuffer ? indexBuffer->getBuffer() : VK_NULL_HANDLE;}
+            uint32_t getVertexCount() const {return vertexCount;}
+            uint32_t getIndexCount() const {return indexCount;}
+            VkAccelerationStructureKHR getBlas() const {return blas;}
         private:
             void createBatchBoundsBuffer();
             std::unique_ptr<EngineBuffer> batchBoundsBuffer;
@@ -87,6 +92,8 @@ namespace engine{
             VkDescriptorSet meshDescriptorSet = VK_NULL_HANDLE;
             static EngineDescriptorSetLayout* meshSetLayout;
             static EngineDescriptorPool* meshPool;
-            
+            void createBottomLevelAS();
+            VkAccelerationStructureKHR blas = VK_NULL_HANDLE;
+            std::unique_ptr<EngineBuffer> blasBuffer;
     };
 }

@@ -11,6 +11,7 @@ namespace engine{
             void setViewDirection(glm::vec3 position, glm::vec3 direction, glm::vec3 up = glm::vec3{0.f, -1.f, 0.f});
             void setViewTarget(glm::vec3 position, glm::vec3 target, glm::vec3 up = glm::vec3{0.f, -1.f, 0.f});
             void setViewYXZ(glm::vec3 position, glm::vec3 rotation);
+            const glm::mat4& getOrthographic() const {return orthographic;} 
             const glm::mat4& getProjection() const {return projectionMatrix;}
             const glm::mat4& getView() const {return viewMatrix;}
             static EngineCamera* CreateCamera(bool twoDementional, glm::vec3 position, glm::vec3 target, glm::vec3 rotation,
@@ -21,8 +22,13 @@ namespace engine{
             float near;
             float far;
             float fov;
+            float bottom = 1;
+            float top = -1;
+            float right = 1;
+            float left = -1;
             EngineGameObject* viewerObject = EngineGameObject::CreateGameObject();
         private:
+            glm::mat4 orthographic{1.f};
             glm::mat4 projectionMatrix{1.f};
             glm::mat4 viewMatrix{1.f};
             EngineCamera(bool twoD);

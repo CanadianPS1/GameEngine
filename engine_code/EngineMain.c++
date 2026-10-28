@@ -48,7 +48,7 @@ namespace engine{
             uboBuffers[i]->map();
         }
         auto globalSetLayout = EngineDescriptorSetLayout::Builder(engineDevice)
-            .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_MESH_BIT_EXT)
+            .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_TASK_BIT_EXT | VK_SHADER_STAGE_MESH_BIT_EXT | VK_SHADER_STAGE_FRAGMENT_BIT)
             .build();
         std::vector<VkDescriptorSet> globalDescriptorSets(EngineSwapChain::MAX_FRAMES_IN_FLIGHT);
         for(int i = 0; i < globalDescriptorSets.size(); i++){
@@ -92,14 +92,22 @@ namespace engine{
             InputController::CallKeyMethods();
             if(EngineCamera::mainCamera != nullptr) EngineCamera::mainCamera->setViewYXZ(EngineCamera::mainCamera->viewerObject->transform.translation, EngineCamera::mainCamera->viewerObject->transform.rotation);
             float aspect = engineRenderer.getAspectRatio();
-            if(EngineCamera::mainCamera != nullptr) EngineCamera::mainCamera->setPerspectiveProjection(glm::radians(EngineCamera::mainCamera->fov), 
-                aspect, EngineCamera::mainCamera->near, EngineCamera::mainCamera->far);
+            if(EngineCamera::mainCamera != nullptr){
+                if(!EngineCamera::mainCamera->twoDementional) EngineCamera::mainCamera->setPerspectiveProjection(glm::radians(
+                    EngineCamera::mainCamera->fov), aspect, EngineCamera::mainCamera->near, EngineCamera::mainCamera->far);
+                else if(EngineCamera::mainCamera->twoDementional) EngineCamera::mainCamera->setOrthographicProjection(EngineCamera::mainCamera->left, 
+                    EngineCamera::mainCamera->right, EngineCamera::mainCamera->top, EngineCamera::mainCamera->bottom, 
+                    EngineCamera::mainCamera->near, EngineCamera::mainCamera->far);
+            }
             if(auto commandBuffer = engineRenderer.beginFrame()){
                 int frameIndex = engineRenderer.getFrameIndex();
                 FrameInfo frameInfo{frameIndex, frameTime, commandBuffer, *EngineCamera::mainCamera, globalDescriptorSets[frameIndex]};
                 GlobalUbo ubo{};
                 ubo.defultLight = defultLight;
-                if(EngineCamera::mainCamera != nullptr) ubo.projectionView = EngineCamera::mainCamera->getProjection() * EngineCamera::mainCamera->getView();
+                if(EngineCamera::mainCamera != nullptr){
+                    if(EngineCamera::mainCamera->twoDementional) ubo.projectionView = EngineCamera::mainCamera->getProjection() * EngineCamera::mainCamera->getView();
+                    else if(EngineCamera::mainCamera->twoDementional) ubo.projectionView = EngineCamera::mainCamera->getProjection() * EngineCamera::mainCamera->getView();
+                } 
                 uboBuffers[frameIndex]->writeToBuffer(&ubo);
                 uboBuffers[frameIndex]->flush();
                 engineRenderer.beginSwapChainRenderPass(commandBuffer);

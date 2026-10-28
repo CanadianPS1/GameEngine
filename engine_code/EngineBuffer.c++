@@ -52,6 +52,12 @@ namespace engine{
         mappedRange.size = size;
         return vkInvalidateMappedMemoryRanges(engineDevice.device(), 1, &mappedRange);
     }
+    VkDeviceAddress EngineBuffer::getDeviceAddress() const{
+        VkBufferDeviceAddressInfo info{};
+        info.sType = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO;
+        info.buffer = buffer;
+        return vkGetBufferDeviceAddress(engineDevice.device(), &info);
+    }
     VkDescriptorBufferInfo EngineBuffer::descriptorInfo(VkDeviceSize size, VkDeviceSize offset){return VkDescriptorBufferInfo{buffer, offset, size,};}
     void EngineBuffer::writeToIndex(void *data, int index){writeToBuffer(data, instanceSize, index * alignmentSize);}
     VkResult EngineBuffer::flushIndex(int index){return flush(alignmentSize, index * alignmentSize);}
