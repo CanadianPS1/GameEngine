@@ -48,5 +48,18 @@ namespace engine{
             },
         };
     }
-    
+    void EngineGameObject::CreateSphearHitbox(int radius){
+        std::vector<glm::vec3> verticies;
+        for(int x = -radius; x <= radius; x++)
+            for(int y = -radius; y <= radius; y++)
+                for(int z = -radius; z <= radius; z++) if(x * x + y * y + z * z <= radius * radius) verticies.push_back({x, y, z});
+        hitBoxs.push_back(verticies);
+    }
+    void EngineGameObject::CreateSquareHitbox(int x, int y, int z, int height){
+        std::vector<glm::vec3> verticies;
+        for(int i = x; i <= y; i++)
+            for(int j = x; j <= z; j++)
+                for(int k = 0; k <= height; k++) verticies.push_back({i, j, k});
+        hitBoxs.push_back(verticies);
+    }
 }

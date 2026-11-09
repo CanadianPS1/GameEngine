@@ -16,6 +16,7 @@
 #include "SimpleRenderSystem.hpp"
 #include "EngineDescriptors.hpp"
 #include "EngineGameObject.hpp"
+#include "EnginePhysics.hpp"
 #include "EngineFrameInfo.hpp"
 #include "EngineSwapChain.hpp"
 #include "EngineCamera.hpp"
@@ -28,6 +29,7 @@ namespace engine{
     float EngineMain::fpsMax = 60;
     EngineMain* EngineMain::instance = nullptr;
     EngineDevice* Sceen::engineDevice = nullptr;
+    Sceen* EngineMain::currentSceen = nullptr;
     std::vector<EngineGameObject>* EngineMain::*gameObjects = nullptr;
     EngineMain::EngineMain(){ 
         instance = GetSelf();
@@ -71,6 +73,7 @@ namespace engine{
         if(startMethods.size() > 0) for(std::function<void()> method : startMethods) method();
         InputController::window = engineWindow.getGLFWwindow();
         int fps = 0;
+        int oldFps;
         int framesLeftInSecond;
         float oldTime;
         while(!engineWindow.shouldClose()){
@@ -84,6 +87,7 @@ namespace engine{
             if(std::chrono::duration_cast<std::chrono::seconds>(newFPSTime - lastSecond).count() >= 1){
                 lastSecond = newFPSTime;
                 std::cout<<fps<<std::endl;
+                oldFps = fps;
                 fps = 0;
                 if(fpsLimited) framesLeftInSecond = fpsMax;
             }
@@ -107,6 +111,11 @@ namespace engine{
                 if(EngineCamera::mainCamera != nullptr){
                     if(EngineCamera::mainCamera->twoDementional) ubo.projectionView = EngineCamera::mainCamera->getOrthographic() * EngineCamera::mainCamera->getView();
                     else ubo.projectionView = EngineCamera::mainCamera->getProjection() * EngineCamera::mainCamera->getView();
+                }
+                if(gameObjects.size() > 0){
+                    EnginePhysics::DictateGravity(gameObjects);
+                    EnginePhysics::DictateVelocity(gameObjects, oldFps);
+                    EnginePhysics::ApplyVelocity(gameObjects, oldFps);
                 } 
                 uboBuffers[frameIndex]->writeToBuffer(&ubo);
                 uboBuffers[frameIndex]->flush();

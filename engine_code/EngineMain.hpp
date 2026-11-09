@@ -45,6 +45,7 @@ namespace engine{
             static bool fpsLimited;
             static float fpsMax;
         private:
+            static Sceen* currentSceen;
             EngineDevice engineDevice{engineWindow};
             EngineRenderer engineRenderer{engineWindow, engineDevice};
             std::unique_ptr<EngineDescriptorPool> globalPool{};

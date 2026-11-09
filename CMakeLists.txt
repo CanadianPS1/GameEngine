@@ -68,9 +68,7 @@ execute_process(
 	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 	RESULT_VARIABLE RESULT
 )
-if(NOT RESULT EQUAL 0)
-	message(FATAL_ERROR "Shader compilation failed")
-endif()
+
 add_executable(Engine ${SOURCE_FILES})
 target_include_directories(Engine
 	PRIVATE

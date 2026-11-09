@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <algorithm>
 #include <stdexcept>
+#include <iostream>
 #include <vulkan/vulkan_core.h>
 #include <cstring>
 #define GLM_ENABLE_EXPERIMENTAL

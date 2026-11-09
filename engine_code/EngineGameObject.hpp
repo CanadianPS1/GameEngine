@@ -4,6 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <memory>
 #include <string>
+#include <functional>
 namespace engine{
     struct TransformComponent{
         glm::vec3 translation{};
@@ -35,6 +36,21 @@ namespace engine{
             std::string name;
             bool twoDementional = false;
             std::string renderType;
+            bool usesPhysics = false;
+            bool hasHitbox = false;
+            float xAcceleration = 0.f;
+            float yAcceleration = 0.f;
+            float zAcceleration = 0.f;
+            float xVelocity = 0.f;
+            float yVelocity = 0.f;
+            float zVelocity = 0.f;
+            float weight;
+            float dragCoefficient = 1.05;
+            float terminalVelocity = 0.5;
+            std::vector<std::vector<glm::vec3>> hitBoxs;
+            void CreateSquareHitbox(int x, int y, int z, int height);
+            void CreateSphearHitbox(int radius);
+            std::function<void(EngineGameObject colider)>* OnColistion = nullptr;
         private:
             EngineGameObject(id_t objId) : id{objId}{}
             EngineGameObject(id_t objId, bool twoD) : id{objId}, twoDementional{twoD}{}
