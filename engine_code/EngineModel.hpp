@@ -15,6 +15,7 @@
 #include "EngineBuffer.hpp"
 #include "EngineTexture.hpp"
 #include "EngineDescriptors.hpp"
+#include "EngineConvexHull.hpp"
 namespace engine{
     class EngineModel{
         public:
@@ -45,6 +46,7 @@ namespace engine{
                 int textureIndex = -1;
                 std::vector<BatchBounds> batchBounds{};
                 uint32_t firstBatch = 0;
+                ConvexHull convexHull;
             };
             struct Builder{
                 std::vector<Vertex> vertices{};
@@ -73,6 +75,7 @@ namespace engine{
             uint32_t getVertexCount() const {return vertexCount;}
             uint32_t getIndexCount() const {return indexCount;}
             VkAccelerationStructureKHR getBlas() const {return blas;}
+            std::vector<Primitive> primitives;
         private:
             void createBatchBoundsBuffer();
             std::unique_ptr<EngineBuffer> batchBoundsBuffer;
@@ -88,7 +91,6 @@ namespace engine{
             static EngineDescriptorSetLayout* textureSetLayout;
             static EngineDescriptorPool* texturePool;
             std::vector<VkDescriptorSet> textureDescriptorSets;
-            std::vector<Primitive> primitives;
             VkDescriptorSet meshDescriptorSet = VK_NULL_HANDLE;
             static EngineDescriptorSetLayout* meshSetLayout;
             static EngineDescriptorPool* meshPool;

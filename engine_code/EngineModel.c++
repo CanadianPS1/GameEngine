@@ -18,6 +18,7 @@
 #include <stb/stb_image.h>
 #include "EngineModel.hpp"
 #include "EngineUtils.hpp"
+#include "EngineConvexHull.hpp"
 namespace std{
     template<>
     struct hash<engine::EngineModel::Vertex>{
@@ -223,6 +224,11 @@ namespace engine{
                 modelPrimitive.batchBounds.push_back({glm::vec4(center,radius)});
             }
             if(modelPrimitive.indexCount > 0) primitives.push_back(modelPrimitive);
+            std::vector<glm::vec3> positions;
+            positions.reserve(modelPrimitive.vertexCount);
+            for(uint32_t i = modelPrimitive.firstVertex; i < modelPrimitive.firstVertex + modelPrimitive.vertexCount; i++)
+                positions.push_back(vertices[i].position);
+            modelPrimitive.convexHull.Generate(positions);
             return;
         }
         fastgltf::Parser parser;
@@ -317,6 +323,11 @@ namespace engine{
                     modelPrimitive.batchBounds.push_back({glm::vec4(center, radius)});
                 }
                 primitives.push_back(modelPrimitive);
+                std::vector<glm::vec3> positions;
+                positions.reserve(modelPrimitive.vertexCount);
+                for(uint32_t i = modelPrimitive.firstVertex; i < modelPrimitive.firstVertex + modelPrimitive.vertexCount; i++)
+                    positions.push_back(vertices[i].position);
+                modelPrimitive.convexHull.Generate(positions);
             }
         }
     }
